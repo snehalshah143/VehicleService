@@ -30,7 +30,6 @@ public class UserVehicleDetail {
     private @NotBlank String parkingPlace;
     private @NotBlank String pincode;
     private @NotBlank String vehicleNumber;
-    private @NotBlank String vehicleType;
     private @NotBlank String manufacturingCompanyAndModel;
     private VehicleSegment vehicleCategory;
     
@@ -49,22 +48,27 @@ public class UserVehicleDetail {
 
     
     
-	public UserVehicleDetail(Long detailId, String countryCode, String address, String society, String locality,
-			String zone, String parkingPlace, String pincode, String vehicleNumber, String vehicleType,
-			String manufacturingCompanyAndModel) {
+
+
+
+
+	public UserVehicleDetail(@NotBlank String address, @NotBlank String society, @NotBlank String locality,
+			@NotBlank String parkingPlace, @NotBlank String pincode, @NotBlank String vehicleNumber,
+			@NotBlank String manufacturingCompanyAndModel, VehicleSegment vehicleCategory) {
 		super();
-		this.detailId = detailId;
-		this.countryCode = countryCode;
 		this.address = address;
 		this.society = society;
 		this.locality = locality;
-		this.zone = zone;
 		this.parkingPlace = parkingPlace;
 		this.pincode = pincode;
 		this.vehicleNumber = vehicleNumber;
-		this.vehicleType = vehicleType;
 		this.manufacturingCompanyAndModel = manufacturingCompanyAndModel;
+		this.vehicleCategory = vehicleCategory;
 	}
+
+
+
+
 
 
 
@@ -165,15 +169,6 @@ public class UserVehicleDetail {
 		this.vehicleNumber = vehicleNumber;
 	}
 
-
-	public String getVehicleType() {
-		return vehicleType;
-	}
-
-
-	public void setVehicleType(String vehicleType) {
-		this.vehicleType = vehicleType;
-	}
 
 
 	public String getManufacturingCompanyAndModel() {
