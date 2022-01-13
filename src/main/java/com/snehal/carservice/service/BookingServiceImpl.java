@@ -3,11 +3,11 @@ package com.snehal.carservice.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.snehal.carservice.dao.BookingRepository;
+import com.snehal.carservice.dao.OrderRepository;
+import com.snehal.carservice.dao.UserVehicleDetailRepository;
 import com.snehal.carservice.model.Booking;
 import com.snehal.carservice.model.Order;
-import com.snehal.carservice.registration.BookingRepository;
-import com.snehal.carservice.registration.OrderRepository;
-import com.snehal.carservice.registration.UserVehicleDetailRepository;
 
 @Service
 public class BookingServiceImpl implements BookingService{

@@ -1,20 +1,15 @@
 package com.snehal.carservice.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "product")
@@ -22,12 +17,14 @@ public class Product implements Serializable {
 
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="product_sequence_generator")
-	@SequenceGenerator(name="product_sequence_generator" ,sequenceName = "product_seq")
+	@SequenceGenerator(name="product_sequence_generator" ,sequenceName = "product_seq",initialValue = 1)
  	private Long productId;
+
 
 	private @NotBlank ProductType productType;
 	private @NotBlank VehicleSegment vehicleSegment;
 	private @NotBlank TimeSlot timeSlot;
+	private @NotBlank Double price;
 
 //working
 	/*
@@ -41,21 +38,26 @@ public class Product implements Serializable {
 	public Product() {
 	}
 
-	public Product(ProductType productType, VehicleSegment vehicleSegment, TimeSlot timeSlot) {
+	public Product(
+			ProductType productType, VehicleSegment vehicleSegment, TimeSlot timeSlot,Double price) {
 
-		// this.productDetailId = productDetailId;
 		this.productType = productType;
 		this.vehicleSegment = vehicleSegment;
 		this.timeSlot = timeSlot;
-
+		this.price=price;
 	}
 
 	
-	 public Long getProductId() { return productId; }
-	 
-	  
-	 public void setProductId(Long productId) { this.productId = productId; }
+
 	
+
+	public Long getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Long productId) {
+		this.productId = productId;
+	}
 
 	public ProductType getProductType() {
 		return productType;
@@ -79,6 +81,31 @@ public class Product implements Serializable {
 
 	public void setTimeSlot(TimeSlot timeSlot) {
 		this.timeSlot = timeSlot;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(productType, timeSlot, vehicleSegment);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Product other = (Product) obj;
+		return productType == other.productType && timeSlot == other.timeSlot && vehicleSegment == other.vehicleSegment;
 	}
 
 }

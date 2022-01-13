@@ -1,6 +1,6 @@
 package com.snehal.carservice.service;
 
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 
 import com.snehal.carservice.model.Product;
@@ -10,7 +10,7 @@ import com.snehal.carservice.model.VehicleSegment;
 
 public class ProductManagement {
 
-	private static HashMap<Product, Double> productPricing = new HashMap<Product, Double>();
+	private static Set<Product> products = new HashSet<Product>();
 
 	private static ProductManagement productManagement = new ProductManagement();
 	
@@ -18,7 +18,7 @@ public class ProductManagement {
 
 	public static void main(String args[]) {
 		ProductManagement.populateAllProductCombination();
-		System.out.println(productPricing);
+		System.out.println(products);
 	}
 
 	static {
@@ -33,19 +33,14 @@ public class ProductManagement {
 		return productManagement;
 	}
 
+
+
 	public static Set<Product> getProducts() {
-
-		return productPricing.keySet();
+		return products;
 	}
 
-	public static HashMap<Product, Double> getPricingForAllProducts() {
-
-		return productPricing;
-	}
-
-	public static double getPriceForProduct(Product product) {
-
-		return productPricing.get(product);
+	public static void setProducts(Set<Product> products) {
+		ProductManagement.products = products;
 	}
 
 	private static void populateAllProductCombination() {
@@ -66,12 +61,13 @@ public class ProductManagement {
 
 	private static double calculatePrice(ProductType productType, VehicleSegment vehicleCategory, TimeSlot timeSlot) {
 
-		return vehicleCategory.getBasePrice() * productType.getFactor() + timeSlot.getPremium();
+		
+		return ((vehicleCategory.getBasePrice() * productType.getFactor()) + (timeSlot.getPremium()*productType.getFactor()));
 	}
 
 	private static void addProductDetail(ProductType productType, VehicleSegment vehicleCategory, TimeSlot timeSlot,
 			double price) {
-		productPricing.put(new Product(productType, vehicleCategory, timeSlot), Double.valueOf(price));
+		products.add(new Product(productType, vehicleCategory, timeSlot,price));
 
 	}
 

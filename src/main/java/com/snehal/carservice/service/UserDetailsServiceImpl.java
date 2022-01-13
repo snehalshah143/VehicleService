@@ -11,8 +11,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.snehal.carservice.dao.AppUserRepository;
 import com.snehal.carservice.model.AppUser;
-import com.snehal.carservice.registration.AppUserRepository;
 
 
 @Service

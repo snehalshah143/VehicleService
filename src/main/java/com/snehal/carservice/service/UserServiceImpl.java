@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.snehal.carservice.dao.AppUserRepository;
+import com.snehal.carservice.dao.RoleRepository;
+import com.snehal.carservice.dao.UserVehicleDetailRepository;
 import com.snehal.carservice.model.AppUser;
 import com.snehal.carservice.model.UserVehicleDetail;
-import com.snehal.carservice.registration.AppUserRepository;
-import com.snehal.carservice.registration.RoleRepository;
-import com.snehal.carservice.registration.UserVehicleDetailRepository;
 
 
 
