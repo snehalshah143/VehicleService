@@ -1,6 +1,8 @@
 package com.snehal.carservice.model;
 
-public enum VehicleSegment {
+import java.io.Serializable;
+
+public enum VehicleSegment implements Serializable{
 
 	COMPACT(1,"HATCHBACK , COMPACT SEDAN",500),
 	SEDAN_SUV(2,"SEDAN,SUV",600),
@@ -17,6 +19,9 @@ public enum VehicleSegment {
 	    this.basePrice = basePrice;
 	  }
 
+	public String getVehicleSegment() {
+	 return	this.name();
+	}
 	  public String getValue() {
 	    return this.value;
 	  }

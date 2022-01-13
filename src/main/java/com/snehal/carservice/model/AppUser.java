@@ -1,5 +1,6 @@
 package com.snehal.carservice.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "appuser")
-public class AppUser {
+public class AppUser implements Serializable{
     private @Id  @GeneratedValue(strategy = GenerationType.TABLE) Long userId;
     private @NotBlank String username;
     private @NotBlank String password;
@@ -30,18 +31,36 @@ public class AppUser {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "appUser", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("appuser")
     private Set <Booking> bookings = new HashSet<Booking>();
+ /*
+    //dummy
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "appUser", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("appuser")
+    private Set <Order> orders = new HashSet<Order>();
+      
     
-    public AppUser(){
+    public Set<Order> getOrders() {
+		return orders;
+	}
+
+
+
+	public void setOrders(Set<Order> orders) {
+		this.orders = orders;
+	}
+*/
+
+
+	public AppUser(){
     	
     }
 
 
     
-    public AppUser(String username, String password, String passwordConfirm, String email, String mobileNumber,
+    public AppUser(String mobileNumber,String password, String passwordConfirm, String email, 
 		String firstName, String lastName, Date dateOfBirth) {
 	super();
-//	this.userId = userId;
-	this.username = username;
+
+	this.username = "USER"+mobileNumber;
 	this.password = password;
 	this.passwordConfirm = passwordConfirm;
 	this.email = email;

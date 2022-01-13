@@ -1,7 +1,7 @@
 package com.snehal.carservice.model;
 
 
-import java.util.HashSet;
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -20,12 +21,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.snehal.carservice.util.StringSetConverter;
 @Entity
 @Table(name = "booking")
-public class Booking {
+public class Booking implements Serializable{
 	
-    private @Id  @GeneratedValue(strategy = GenerationType.SEQUENCE) Long bookingId;
+	@Id  
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="booking_sequence_generator")
+	@SequenceGenerator(name="booking_sequence_generator" ,sequenceName = "booking_seq")
+    private Long bookingId;
     
     @Convert(converter = StringSetConverter.class)
-    private @NotBlank Set<Order> productCart=new HashSet();
+    private @NotBlank Set<Order> productCart;
     private @NotBlank Double finalAmount;
       
     
@@ -34,6 +38,19 @@ public class Booking {
     @JsonIgnoreProperties("bookings")
     private AppUser appUser;
    
+public Booking(){
+    	
+    }
+	public Booking(@NotBlank Set<Order> productCart, @NotBlank Double finalAmount) {
+	super();
+	this.productCart = productCart;
+	this.finalAmount = finalAmount;
+}
+
+
+
+
+
 	public Long getBookingId() {
 		return bookingId;
 	}

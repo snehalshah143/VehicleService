@@ -1,0 +1,29 @@
+{
+"productCart":[
+                {
+				"userVehicleDetail":{
+									"detailId":2
+									},
+				"product":			  
+									{
+									"productType":"DAILY_WASH",
+									"vehicleSegment":"LUXRY_CARS",
+									"timeSlot":"PEAK_TIME"
+									}
+			    },{
+				"userVehicleDetail":{
+									"detailId":1
+									},
+				"product":			  
+									{
+									"productType":"DAILY_WASH",
+									"vehicleSegment":"LUXRY_CARS",
+									"timeSlot":"PEAK_TIME"
+									}
+			    }
+            ],									
+"finalAmount":1000,
+"appUser":	{
+			"userId":1
+			}
+}

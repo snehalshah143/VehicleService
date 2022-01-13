@@ -4,7 +4,7 @@ import com.snehal.carservice.model.AppUser;
 import com.snehal.carservice.model.UserVehicleDetail;
 
 public interface UserService {
-    void save(AppUser user);
+    Long save(AppUser user);
     
     AppUser findByUsername(String username);
     

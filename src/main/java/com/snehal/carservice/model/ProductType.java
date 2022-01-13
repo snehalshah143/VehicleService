@@ -1,6 +1,8 @@
 package com.snehal.carservice.model;
 
-public enum ProductType {
+import java.io.Serializable;
+
+public enum ProductType implements Serializable{
 
 	DAILY_WASH(1,"Daily Wash",1),
 	ALTERNATE_WASH(2,"Alternate Wash",0.5),

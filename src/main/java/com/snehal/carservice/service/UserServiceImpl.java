@@ -25,11 +25,12 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	public void save(AppUser user) {
+	public Long save(AppUser user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setPasswordConfirm(bCryptPasswordEncoder.encode(user.getPasswordConfirm()));
 //		user.setRoles(new HashSet(roleRepository.findAll()));
-		userRepository.save(user);
+		AppUser savedUser=userRepository.save(user);
+		return savedUser.getId();
 	}
 
 	public AppUser findByUsername(String username) {

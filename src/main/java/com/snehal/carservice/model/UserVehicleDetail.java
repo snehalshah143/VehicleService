@@ -1,7 +1,7 @@
 package com.snehal.carservice.model;
 
-import java.util.HashSet;
-import java.util.Set;
+
+import java.io.Serializable;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,8 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -20,9 +20,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "user_vehicle_detail")
-public class UserVehicleDetail {
-    private @Id  @GeneratedValue(strategy = GenerationType.SEQUENCE) Long detailId;
-    private @NotBlank String countryCode;
+public class UserVehicleDetail implements Serializable{
+	@Id  
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="vehicle_details_sequence_generator")
+	@SequenceGenerator(name="vehicle_details_sequence_generator" ,sequenceName = "vehicle_details_seq") 
+    private Long detailId;
+    private @NotBlank String countryCode="+91";
     private @NotBlank String address;
     private @NotBlank String society;
     private @NotBlank String locality;
@@ -31,7 +34,7 @@ public class UserVehicleDetail {
     private @NotBlank String pincode;
     private @NotBlank String vehicleNumber;
     private @NotBlank String manufacturingCompanyAndModel;
-    private VehicleSegment vehicleCategory;
+    private @NotBlank VehicleSegment vehicleSegment;
     
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "userId")
@@ -46,15 +49,9 @@ public class UserVehicleDetail {
     public UserVehicleDetail(){
     }
 
-    
-    
-
-
-
-
 	public UserVehicleDetail(@NotBlank String address, @NotBlank String society, @NotBlank String locality,
 			@NotBlank String parkingPlace, @NotBlank String pincode, @NotBlank String vehicleNumber,
-			@NotBlank String manufacturingCompanyAndModel, VehicleSegment vehicleCategory) {
+			@NotBlank String manufacturingCompanyAndModel, VehicleSegment vehicleSegment) {
 		super();
 		this.address = address;
 		this.society = society;
@@ -63,7 +60,7 @@ public class UserVehicleDetail {
 		this.pincode = pincode;
 		this.vehicleNumber = vehicleNumber;
 		this.manufacturingCompanyAndModel = manufacturingCompanyAndModel;
-		this.vehicleCategory = vehicleCategory;
+		this.vehicleSegment = vehicleSegment;
 	}
 
 
@@ -193,18 +190,13 @@ public class UserVehicleDetail {
 	}
 
 
-
-	public VehicleSegment getVehicleCategory() {
-		return vehicleCategory;
+	public VehicleSegment getVehicleSegment() {
+		return vehicleSegment;
 	}
 
-
-
-	public void setVehicleCategory(VehicleSegment vehicleCategory) {
-		this.vehicleCategory = vehicleCategory;
+	public void setVehicleSegment(VehicleSegment vehicleSegment) {
+		this.vehicleSegment = vehicleSegment;
 	}
-
-
 
 	public Order getOrder() {
 		return order;
