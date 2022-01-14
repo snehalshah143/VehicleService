@@ -2,14 +2,12 @@ package com.snehal.carservice.controller;
 
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,7 +56,7 @@ public class UserController {
 System.out.println("dateOfBirt::"+user.getDateOfBirth());
        if (bindingResult.hasErrors()) {
     	   System.out.println(bindingResult.getAllErrors().toString());
-           return new ResponseEntity (HttpStatus.PRECONDITION_FAILED);
+           return new ResponseEntity (HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity<Long> (userService.save(user),HttpStatus.OK);
@@ -67,19 +65,20 @@ System.out.println("dateOfBirt::"+user.getDateOfBirth());
     }
 
     @PostMapping(path = "/vehicledetails/add/{userid}",consumes="application/json")
-    public String addVehicleDetails(@RequestBody UserVehicleDetail userVehicleDetail,@PathVariable("userid") Long userId, BindingResult bindingResult) {
+    public ResponseEntity<Long> addVehicleDetails(@RequestBody UserVehicleDetail userVehicleDetail,@PathVariable("userid") Long userId, BindingResult bindingResult) {
 //        userValidator.validate(userVehicleDetail, bindingResult);
 //System.out.println("dateOfBirt::"+user.getDateOfBirth());
     	AppUser appUser=userService.findByUserId(userId);
     	userVehicleDetail.setAppUser(appUser);
        if (bindingResult.hasErrors()) {
     	   System.out.println(bindingResult.getAllErrors().toString());
-            return Status.FAILURE.toString();
+           return new ResponseEntity (HttpStatus.BAD_REQUEST);
+          
         }
 
-        userService.saveVehicleDetail(userVehicleDetail);
+       UserVehicleDetail vehicleDetail=userService.saveVehicleDetail(userVehicleDetail);
 
-        return "redirect:/bookslot";
+        return new ResponseEntity<Long> (vehicleDetail.getDetailId(),HttpStatus.OK);
     }
     
     @PostMapping(path = "/booking/add/{detailid}",consumes="application/json")
@@ -100,48 +99,26 @@ System.out.println("dateOfBirt::"+user.getDateOfBirth());
     }
     
     @PostMapping(path = "/booking/book/{userid}",consumes="application/json")
-    public String createBookingAprocah1(@RequestBody Booking booking,@PathVariable("userid") Long userId, BindingResult bindingResult) {
+    public ResponseEntity<Booking> createBooking(@RequestBody Booking booking,@PathVariable("userid") Long userId, BindingResult bindingResult) {
 //        userValidator.validate(userVehicleDetail, bindingResult);
 
 
        if (bindingResult.hasErrors()) {
     	   System.out.println(bindingResult.getAllErrors().toString());
-            return Status.FAILURE.toString();
+       
+            return new ResponseEntity (HttpStatus.BAD_REQUEST);
         }
       	AppUser appUser=userService.findByUserId(userId);
       	booking.setAppUser(appUser);
 
-//       booking.setProductCart(orderListUpdated);
-       
-      	Booking result=bookingApproach1(booking);
+      	Booking result=bookAndSaveOrders(booking);
 
 //       PaymentResult success=paymentService.makepayment(result.getBookingId(),result.getFinalAmount());
-        return ""+result.getBookingId();
+        return new ResponseEntity (result,HttpStatus.OK);
     }
-    //Save booking with emptycart and then save cart
-    private Booking bookingApproach1(Booking booking) {
-      	Set<Order>productCart=booking.getProductCart();
-      	booking.getProductCart().clear();	
-      	
-        Booking result=bookingService.saveBooking(booking);
-        if(result!=null) {
-    	ArrayList<Order> orderListUpdated=new ArrayList<Order>();
-        for(Order order:productCart) {
-           	UserVehicleDetail userVehicleDetail=userService.getUserVehicleDetail(order.getUserVehicleDetail().getDetailId());
-           	order.setUserVehicleDetail(userVehicleDetail);
-        	   Product product=BootStrapCache.getProductCache().get(order.getProduct().getProductId());
-        	   order.setProduct(product);
-        	   order.setBooking(result);
-        	   orderListUpdated.add(order);
-        }
-        List<Order> resultOrderList=bookingService.saveOrders(orderListUpdated);
-        return result;
-        }
-         return null;
-    }
-    
+     
     //Save booking as usual and then update bookingIDs
-    private Booking bookingApproach2(Booking booking) {
+    private Booking bookAndSaveOrders(Booking booking) {
     	 Booking result=bookingService.saveBooking(booking); 
     	 if(result!=null) {
      	Set<Order>productCart=booking.getProductCart();
@@ -156,19 +133,10 @@ System.out.println("dateOfBirt::"+user.getDateOfBirth());
     	   order.setProduct(product);
     	   orderListUpdated.add(order);
      	 }
+     	bookingService.saveOrders(orderListUpdated);
     	 }
     	 return result;
     	
-    }
-    
-    private Order saveOrder(Order order) {
-    	
-    	UserVehicleDetail userVehicleDetail=userService.getUserVehicleDetail(order.getUserVehicleDetail().getDetailId());
-    	order.setUserVehicleDetail(userVehicleDetail);
-   	   Product product=BootStrapCache.getProductCache().get(order.getProduct().getProductId());
-	   order.setProduct(product);
-//        Order result=bookingService.saveOrder(order);
-        return order;
     }
     
     @RequestMapping(value = "/userlogin", method = RequestMethod.POST)

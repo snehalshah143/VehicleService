@@ -51,34 +51,11 @@ public class Order implements Serializable {
 //  @JsonIgnoreProperties("order")
     private @NotBlank UserVehicleDetail userVehicleDetail;
     
-    //working
-/*    @OneToOne(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("order")
-    private Product product ;*/
-    
-//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinColumn(name = "product_id", referencedColumnName = "productId")
-
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "productId")
     private Product product;
-    /*
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "userId")
-    @JsonIgnoreProperties("orders")
-    private AppUser appUser;
-    
-    
-    
-    public AppUser getAppUser() {
-		return appUser;
-	}
 
-	public void setAppUser(AppUser appUser) {
-		this.appUser = appUser;
-	} */
-
-	public Order(){
+    public Order(){
     }
     
 	public Order(Product product, UserVehicleDetail userVehicleDetail) {
@@ -106,9 +83,5 @@ public class Order implements Serializable {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-
-
-    
-    
-    
+   
 }

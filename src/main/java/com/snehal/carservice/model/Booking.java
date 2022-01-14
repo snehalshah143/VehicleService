@@ -53,20 +53,12 @@ public Booking(){
 	this.finalAmount = finalAmount;
 }
 
-
-
-
-
 	public Long getBookingId() {
 		return bookingId;
 	}
 	public void setBookingId(Long bookingId) {
 		this.bookingId = bookingId;
 	}
-
-
-
-
 	public Set<Order> getProductCart() {
 		return productCart;
 	}
