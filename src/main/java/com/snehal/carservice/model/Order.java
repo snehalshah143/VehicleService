@@ -6,6 +6,7 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,10 +26,28 @@ public class Order implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="order_sequence_generator")
 	@SequenceGenerator(name="order_sequence_generator" ,sequenceName = "order_seq")
 	private Long orderId;
+//new	
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinColumn(name = "booking_id", referencedColumnName = "bookingId")
+    @JsonIgnoreProperties("productCart")
+    private Booking booking;
+    
+    
+//new
 	
+    public Booking getBooking() {
+		return booking;
+	}
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "detail_id", referencedColumnName = "detailId")
+	public void setBooking(Booking booking) {
+		this.booking = booking;
+	}
+
+	
+	//This relationship will become one to one if need to restrict one order for one user detail
+	//@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne
+	@JoinColumn(name = "detail_id", referencedColumnName = "detailId")
 //  @JsonIgnoreProperties("order")
     private @NotBlank UserVehicleDetail userVehicleDetail;
     
@@ -37,7 +56,10 @@ public class Order implements Serializable {
     @JsonIgnoreProperties("order")
     private Product product ;*/
     
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "product_id", referencedColumnName = "productId")
+
+    @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "productId")
     private Product product;
     /*

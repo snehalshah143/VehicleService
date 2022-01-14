@@ -41,10 +41,22 @@ public class UserVehicleDetail implements Serializable{
     @JsonIgnoreProperties("vehicleDetails")
     private AppUser appUser;
     
+ //This case if i want to restrcit one order per user details   
+ //   @OneToOne(fetch = FetchType.LAZY, mappedBy = "userVehicleDetail", cascade = CascadeType.ALL)
+ //   @JsonIgnoreProperties("userVehicleDetail")
+ //   private Order order;
     
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "userVehicleDetail", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("userVehicleDetail")
-    private Order order;
+    /*	
+	public Order getOrder() {
+		return order;
+	}
+
+
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+*/
     
     public UserVehicleDetail(){
     }
@@ -198,15 +210,6 @@ public class UserVehicleDetail implements Serializable{
 		this.vehicleSegment = vehicleSegment;
 	}
 
-	public Order getOrder() {
-		return order;
-	}
-
-
-
-	public void setOrder(Order order) {
-		this.order = order;
-	}
 
 
 

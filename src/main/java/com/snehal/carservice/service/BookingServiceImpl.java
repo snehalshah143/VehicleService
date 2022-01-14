@@ -1,5 +1,7 @@
 package com.snehal.carservice.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,11 +27,19 @@ public class BookingServiceImpl implements BookingService{
 
 	public Booking saveBooking(Booking booking){
 		booking.setFinalAmount(calculateFinalAmount(booking));
-		return bookingRepository.save(booking);
+		return bookingRepository.saveAndFlush(booking);
 	}
 	
 	public Order saveOrder(Order order){
 		return orderRepository.save(order);
+	}
+	
+	public List<Order> getOrders(List<Long> orderIds) {
+		return orderRepository.findAllById(orderIds);
+	}
+	
+	public List<Order> saveOrders(List<Order> orders){
+		return orderRepository.saveAllAndFlush(orders);
 	}
 
 	private double calculateFinalAmount(Booking booking){

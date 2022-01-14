@@ -17,7 +17,7 @@ public class Product implements Serializable {
 
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="product_sequence_generator")
-	@SequenceGenerator(name="product_sequence_generator" ,sequenceName = "product_seq",initialValue = 1)
+	@SequenceGenerator(name="product_sequence_generator" ,sequenceName = "product_seq")
  	private Long productId;
 
 
@@ -25,15 +25,6 @@ public class Product implements Serializable {
 	private @NotBlank VehicleSegment vehicleSegment;
 	private @NotBlank TimeSlot timeSlot;
 	private @NotBlank Double price;
-
-//working
-	/*
-	 * @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	 * 
-	 * @JoinColumn(name = "order_id", referencedColumnName = "orderId")
-	 * 
-	 * @JsonIgnoreProperties("product") private Order order;
-	 */
 
 	public Product() {
 	}
@@ -46,10 +37,6 @@ public class Product implements Serializable {
 		this.timeSlot = timeSlot;
 		this.price=price;
 	}
-
-	
-
-	
 
 	public Long getProductId() {
 		return productId;

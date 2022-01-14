@@ -2,6 +2,7 @@ package com.snehal.carservice.model;
 
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -28,8 +30,12 @@ public class Booking implements Serializable{
 	@SequenceGenerator(name="booking_sequence_generator" ,sequenceName = "booking_seq")
     private Long bookingId;
     
+	//TODO initalize product cart with hash set
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "booking", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("booking")
     @Convert(converter = StringSetConverter.class)
-    private @NotBlank Set<Order> productCart;
+    private @NotBlank Set<Order> productCart=new HashSet<Order>();
+	
     private @NotBlank Double finalAmount;
       
     
