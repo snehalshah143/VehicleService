@@ -18,34 +18,58 @@ public class Vehicle implements Serializable{
 	@SequenceGenerator(name="vehicle_sequence_generator" ,sequenceName = "vehicle_seq")
 	private Long vehicleId;
 	
-	private String manufacturingCompany;
+	private String manufacturer;
 	
-	private String modelNumber;
+	private String model;
 	
 	private VehicleSegment vehicleSegment;
-
-	public Vehicle(String manufacturingCompany, String modelNumber, VehicleSegment vehicleSegment) {
+	public Vehicle() {
+		
+	}
+	public Vehicle(String manufacturer, String model, VehicleSegment vehicleSegment) {
 		super();
-		this.manufacturingCompany = manufacturingCompany;
-		this.modelNumber = modelNumber;
+		this.manufacturer = manufacturer;
+		this.model = model;
 		this.vehicleSegment = vehicleSegment;
 	}
 
-	public String getManufacturingCompany() {
-		return manufacturingCompany;
+
+
+	public Long getVehicleId() {
+		return vehicleId;
 	}
 
-	public void setManufacturingCompany(String manufacturingCompany) {
-		this.manufacturingCompany = manufacturingCompany;
+
+
+	public void setVehicleId(Long vehicleId) {
+		this.vehicleId = vehicleId;
 	}
 
-	public String getModelNumber() {
-		return modelNumber;
+
+
+	public String getManufacturer() {
+		return manufacturer;
 	}
 
-	public void setModelNumber(String modelNumber) {
-		this.modelNumber = modelNumber;
+
+
+	public void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
 	}
+
+
+
+	public String getModel() {
+		return model;
+	}
+
+
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+
 
 	public VehicleSegment getVehicleSegment() {
 		return vehicleSegment;
@@ -55,10 +79,14 @@ public class Vehicle implements Serializable{
 		this.vehicleSegment = vehicleSegment;
 	}
 
+
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(manufacturingCompany, modelNumber, vehicleSegment);
+		return Objects.hash(manufacturer, model, vehicleSegment);
 	}
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -69,9 +97,10 @@ public class Vehicle implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Vehicle other = (Vehicle) obj;
-		return Objects.equals(manufacturingCompany, other.manufacturingCompany)
-				&& Objects.equals(modelNumber, other.modelNumber) && vehicleSegment == other.vehicleSegment;
+		return Objects.equals(manufacturer, other.manufacturer) && Objects.equals(model, other.model)
+				&& vehicleSegment == other.vehicleSegment;
 	}
+
 	
 	
 }

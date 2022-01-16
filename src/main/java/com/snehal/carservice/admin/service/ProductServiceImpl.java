@@ -35,7 +35,7 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public void deleteAllProducts() {
-		 productRepository.deleteAll();;
+		 productRepository.deleteAll();
 	}
 	
 	public void saveAllProductsForFirstTime() {
@@ -57,6 +57,7 @@ public class ProductServiceImpl implements ProductService{
 			productCache.put(p.getProductId(), p);
 		}
 	}
+	
 	@PostConstruct
 	public  void loadProductAndPricingCache() {
 		Map<Product, Double> productPricingCache=BootStrapCache.getProductPricingCache();

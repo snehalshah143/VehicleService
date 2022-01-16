@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.snehal.carservice.admin.service.ProductService;
 import com.snehal.carservice.common.model.Product;
+import com.snehal.carservice.common.model.Vehicle;
 
 public class BootStrapCache {
 
@@ -17,6 +18,7 @@ public class BootStrapCache {
 	
 	private static Map<Long,Product> productCache=new HashMap();
 	
+	private static Map<Long,Vehicle> vehicleCache=new HashMap();
 
 	
 	public static Map<Product, Double> getProductPricingCache() {
@@ -33,6 +35,14 @@ public class BootStrapCache {
 
 	public static void setProductCache(Map<Long, Product> productCache) {
 		BootStrapCache.productCache = productCache;
+	}
+
+	public static Map<Long, Vehicle> getVehicleCache() {
+		return vehicleCache;
+	}
+
+	public static void setVehicleCache(Map<Long, Vehicle> vehicleCache) {
+		BootStrapCache.vehicleCache = vehicleCache;
 	}
 
 }

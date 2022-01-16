@@ -1,9 +1,13 @@
 package com.snehal.carservice.admin.service;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.Set;
 
 import com.snehal.carservice.common.model.Vehicle;
+import com.snehal.carservice.common.model.VehicleSegment;
 
 public class VehicleManagement {
 
@@ -13,8 +17,7 @@ public class VehicleManagement {
 	
 	public static void main(String args[]) {
 		VehicleManagement.populateAllVehicles();
-		System.out.println(vehicles);
-	}
+		}
 
 	static {
 		populateAllVehicles();
@@ -26,7 +29,24 @@ public class VehicleManagement {
 
 	private static void populateAllVehicles() {
 
-		
+//#Manufacturer,Model,VehicleSegment
+			 File file=new File("D:\\SnehalImp\\Wash\\Repo\\carservice\\carservice\\src\\main\\resources\\vehicles.csv");
+       Scanner sc = null;
+	try {
+		sc = new Scanner(file);
+	} catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+             String line;
+             while (sc.hasNextLine()) {
+          
+            	 String str=sc.nextLine();
+            	 String[] array=str.split(",");
+              	 Vehicle v=new Vehicle(array[0], array[1], VehicleSegment.valueOf(array[2]));
+              	vehicles.add(v);
+             }
+		 		
 	}
 
 	public static VehicleManagement getVehicleManagement() {

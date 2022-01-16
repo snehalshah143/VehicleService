@@ -8,12 +8,16 @@ public interface VehicleService {
 
 	Vehicle saveVehicleInfo(Vehicle vehicle);
 
-	List<Vehicle> saveAllVehicleInfo(List<Vehicle> vehicles);
-
-	List<Vehicle> getAllVehicleInfo();
+	List<Vehicle> getAllVehicles();
 
 	List<VehicleRawData> saveAllVehicleRawData(List<VehicleRawData> vehicles);
 
 	List<VehicleRawData> getAllVehicleRawData();
+
+	void saveAllVehiclesForFirstTime();
+
+	void deleteAllVehicles();
+
+	List<Vehicle> saveVehicles(List<Vehicle> vehicles);
 
 }

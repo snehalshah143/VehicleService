@@ -1,6 +1,7 @@
 package com.snehal.carservice.admin.service;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,37 +12,36 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "vehicle_raw_data")
 public class VehicleRawData implements Serializable {
+
 	
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="vehicle_raw_data_sequence_generator")
 	@SequenceGenerator(name="vehicle_raw_data_sequence_generator" ,sequenceName = "vehicle_raw_data_seq")
 	private Long vehicleRawDataId;
 	
+	
  private String createdAt;
  private String Category;
  
- private Integer Year;
+// private Integer Year;
  private String Model;
  
  private String Make;
- private String objectId;
+// private String objectId;
  
- private String updatedAt;
+// private String updatedAt;
 
-public VehicleRawData(String createdAt, String category, Integer year, String model, String make, String objectId,
-		String updatedAt) {
-	super();
-	this.createdAt = createdAt;
-	Category = category;
-	Year = year;
-	Model = model;
-	Make = make;
-	this.objectId = objectId;
-	this.updatedAt = updatedAt;
-}
 
 public String getCreatedAt() {
 	return createdAt;
+}
+
+public VehicleRawData(String createdAt, String category, String model, String make) {
+	super();
+	this.createdAt = createdAt;
+	Category = category;
+	Model = model;
+	Make = make;
 }
 
 public void setCreatedAt(String createdAt) {
@@ -54,14 +54,6 @@ public String getCategory() {
 
 public void setCategory(String category) {
 	Category = category;
-}
-
-public Integer getYear() {
-	return Year;
-}
-
-public void setYear(Integer year) {
-	Year = year;
 }
 
 public String getModel() {
@@ -80,27 +72,35 @@ public void setMake(String make) {
 	Make = make;
 }
 
-public String getObjectId() {
-	return objectId;
+
+
+public Long getVehicleRawDataId() {
+	return vehicleRawDataId;
 }
 
-public void setObjectId(String objectId) {
-	this.objectId = objectId;
-}
-
-public String getUpdatedAt() {
-	return updatedAt;
-}
-
-public void setUpdatedAt(String updatedAt) {
-	this.updatedAt = updatedAt;
+public void setVehicleRawDataId(Long vehicleRawDataId) {
+	this.vehicleRawDataId = vehicleRawDataId;
 }
 
 @Override
-public String toString() {
-	return "VehicleDetails [createdAt=" + createdAt + ", Category=" + Category + ", Year=" + Year + ", Model=" + Model
-			+ ", Make=" + Make + ", objectId=" + objectId + ", updatedAt=" + updatedAt + "]";
+public int hashCode() {
+	return Objects.hash(Category, Make, Model);
 }
+
+@Override
+public boolean equals(Object obj) {
+	if (this == obj)
+		return true;
+	if (obj == null)
+		return false;
+	if (getClass() != obj.getClass())
+		return false;
+	VehicleRawData other = (VehicleRawData) obj;
+	return Objects.equals(Category, other.Category) && Objects.equals(Make, other.Make)
+			&& Objects.equals(Model, other.Model);
+}
+
+
 
 }
 
