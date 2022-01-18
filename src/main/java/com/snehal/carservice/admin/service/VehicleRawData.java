@@ -1,5 +1,7 @@
 package com.snehal.carservice.admin.service;
-
+public class VehicleRawData{
+}
+/*
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -9,8 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-@Entity
-@Table(name = "vehicle_raw_data")
+//@Entity
+//@Table(name = "vehicle_raw_data")
 public class VehicleRawData implements Serializable {
 
 	
@@ -100,7 +102,7 @@ public boolean equals(Object obj) {
 			&& Objects.equals(Model, other.Model);
 }
 
-
-
 }
+*/
+
 

@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.snehal.carservice.admin.dao.VehicleRepository;
-import com.snehal.carservice.common.model.Product;
 import com.snehal.carservice.common.model.Vehicle;
 import com.snehal.carservice.user.cache.BootStrapCache;
 
@@ -20,8 +19,6 @@ public class VehicleServiceImpl implements VehicleService{
 	@Autowired
 	private VehicleRepository vehicleRepository;
 	
-	@Autowired
-	private VehicleRawDataRepository vehicleRawDataRepository;
 	
 	@Override
 	public Vehicle saveVehicleInfo(Vehicle vehicle) {
@@ -35,6 +32,7 @@ public class VehicleServiceImpl implements VehicleService{
 		
 		return vehicleRepository.findAll();
 	}
+/*
 	@Override
 	public List<VehicleRawData> saveAllVehicleRawData(List<VehicleRawData> vehicles) {
 	return vehicleRawDataRepository.saveAll(vehicles);	
@@ -43,7 +41,7 @@ public class VehicleServiceImpl implements VehicleService{
 	public List<VehicleRawData> getAllVehicleRawData() {
 	return vehicleRawDataRepository.findAll();	
 	}
-	
+*/	
 	@Override
 	public void deleteAllVehicles() {
 		 vehicleRepository.deleteAll();

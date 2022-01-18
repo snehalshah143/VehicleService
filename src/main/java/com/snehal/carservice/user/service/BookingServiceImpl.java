@@ -1,10 +1,12 @@
 package com.snehal.carservice.user.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.snehal.carservice.admin.constants.AdminConstants;
 import com.snehal.carservice.admin.service.ProductManagement;
 import com.snehal.carservice.common.model.Booking;
 import com.snehal.carservice.common.model.Order;
@@ -35,8 +37,14 @@ public class BookingServiceImpl implements BookingService{
 		return orderRepository.save(order);
 	}
 	
+
+	
 	public List<Order> getOrders(List<Long> orderIds) {
 		return orderRepository.findAllById(orderIds);
+	}
+	
+	public List<Order> getAllOrders() {
+		return orderRepository.findAll();
 	}
 	
 	public List<Order> saveOrders(List<Order> orders){
@@ -51,6 +59,16 @@ public class BookingServiceImpl implements BookingService{
 		}
 		finalAmount=finalAmount*ProductManagement.getTax();
 		return finalAmount;
+	}
+
+	@Override
+	public void updateOrderStatusToAssigned(List<Order> allorders) {
+		List<Order> updatedOrderWithStatusList=new ArrayList();
+		for(Order o:allorders) {
+		o.setOrderStatus(AdminConstants.ASSIGNED);
+		updatedOrderWithStatusList.add(o);
+		}
+		saveOrders(updatedOrderWithStatusList);
 	}
 
 

@@ -10,9 +10,9 @@ public interface VehicleService {
 
 	List<Vehicle> getAllVehicles();
 
-	List<VehicleRawData> saveAllVehicleRawData(List<VehicleRawData> vehicles);
+//	List<VehicleRawData> saveAllVehicleRawData(List<VehicleRawData> vehicles);
 
-	List<VehicleRawData> getAllVehicleRawData();
+//	List<VehicleRawData> getAllVehicleRawData();
 
 	void saveAllVehiclesForFirstTime();
 

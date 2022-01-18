@@ -33,6 +33,8 @@ public class Order implements Serializable {
     private Booking booking;
     
     
+    private String orderStatus;
+    
 //new
 	
     public Booking getBooking() {
@@ -82,6 +84,14 @@ public class Order implements Serializable {
 
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+
+	public String getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(String orderStatus) {
+		this.orderStatus = orderStatus;
 	}
    
 }

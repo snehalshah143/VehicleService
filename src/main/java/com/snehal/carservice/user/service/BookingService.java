@@ -15,4 +15,8 @@ public interface BookingService {
 	
 	public List<Order> saveOrders(List<Order> orders);
 	
+	public List<Order> getAllOrders();
+
+	public void updateOrderStatusToAssigned(List<Order> allorders);
+	
 }
