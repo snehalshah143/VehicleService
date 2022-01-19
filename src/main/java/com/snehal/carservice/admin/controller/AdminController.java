@@ -1,17 +1,13 @@
 package com.snehal.carservice.admin.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.snehal.carservice.admin.service.AssignmentService;
 import com.snehal.carservice.admin.service.ProductService;
-import com.snehal.carservice.admin.service.VehicleRawData;
-import com.snehal.carservice.admin.service.VehicleRawDataLoading;
 import com.snehal.carservice.admin.service.VehicleService;
 import com.snehal.carservice.common.model.Order;
 import com.snehal.carservice.user.service.BookingService;
@@ -48,7 +44,7 @@ productService.saveAllProductsForFirstTime();
 public void saveAllVehiclesForFirstTime() {
 	vehicleService.saveAllVehiclesForFirstTime();
 }
-
+//Night BatchProcessing
 @PostMapping(path = "/admin/createallassigments")
 public void saveAllAssigments() {
 	List<Order> allorders=bookingService.getAllOrders();

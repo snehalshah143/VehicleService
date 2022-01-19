@@ -21,6 +21,7 @@ import com.snehal.carservice.user.service.BookingService;
 public class AssignmentDashboard {
 
 
+	
 	public static  List<Assignment> createAllAssignments(List<Order> allorders) {
 		List<Assignment> allAssignments=new ArrayList<Assignment>();
 	
