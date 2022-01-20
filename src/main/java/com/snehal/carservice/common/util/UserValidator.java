@@ -25,21 +25,22 @@ public class UserValidator implements Validator {
     public void validate(Object o, Errors errors) {
     	AppUser user = (AppUser) o;
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty");
-        if (user.getUsername().length() < 6 || user.getUsername().length() > 32) {
-            errors.rejectValue("username", "Size.userForm.username");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "mobileNumber", "NotEmpty");
+        if (user.getMobileNumber().length() < 10) {
+            errors.rejectValue("mobileNumber", "Please check your Mobile number");
         }
-        if (userService.findByUsername(user.getUsername()) != null) {
-            errors.rejectValue("username", "Duplicate.userForm.username");
+        
+        if (userService.findByMobileNumber(user.getMobileNumber()) != null) {
+            errors.rejectValue("mobileNumber", "Duplicate Mobile Number, Try with new Mobile Number");
         }
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty");
         if (user.getPassword().length() < 8 || user.getPassword().length() > 32) {
-            errors.rejectValue("password", "Size.userForm.password");
+            errors.rejectValue("password", "Please provide Strong password with atleast 8 characters");
         }
 
         if (!user.getPasswordConfirm().equals(user.getPassword())) {
-            errors.rejectValue("passwordConfirm", "Diff.userForm.passwordConfirm");
+            errors.rejectValue("passwordConfirm", "passwordConfirm Not Matching");
         }
     }
 }

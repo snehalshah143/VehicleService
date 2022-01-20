@@ -30,12 +30,13 @@ public class AssignmentDashboard {
 				switch(productType) {
 				case DAILY_WASH:
 					createDailyWashAssignments(o,allAssignments);
-				
+					break;
 				case ALTERNATE_WASH:
 					createAlternateWashAssignments(o, allAssignments);
-					
+					break;
 				case ON_DEMAND_WASH:	
 					createOnDemandWashAssignments(o, allAssignments);
+					break;
 				}
 		
 		}
@@ -54,7 +55,7 @@ public class AssignmentDashboard {
 			if(!(c.get(Calendar.DAY_OF_WEEK)==1)) {
 			Assignment a=new Assignment();
 			a.setPriority(0);
-			a.setAssignmentStatus(AssignmentStatus.NOT_STARTED);
+			a.setAssignmentStatus(AssignmentStatus.NOT_STARTED.name());
 			a.setOrder(o);
 			a.setAssignmentDate(new java.sql.Date(c.getTimeInMillis()));
 			allAssignments.add(a);
@@ -77,13 +78,13 @@ private static void createAlternateWashAssignments(Order o,List<Assignment> allA
 			if(!(c.get(Calendar.DAY_OF_WEEK)==1)) {
 			Assignment a=new Assignment();
 			a.setPriority(0);
-			a.setAssignmentStatus(AssignmentStatus.NOT_STARTED);
+			a.setAssignmentStatus(AssignmentStatus.NOT_STARTED.name());
 			a.setOrder(o);
 			a.setAssignmentDate(new java.sql.Date(c.getTimeInMillis()));
 			allAssignments.add(a);
 			count--;
 			}
-			c.add(Calendar.DATE, 2);
+			c.add(Calendar.DATE, c.get(Calendar.DAY_OF_WEEK)==1 ?1:2);
 		}	
 	}
 	
@@ -98,7 +99,7 @@ private static void createOnDemandWashAssignments(Order o,List<Assignment> allAs
 		}
 		Assignment a=new Assignment();
 		a.setPriority(4);
-		a.setAssignmentStatus(AssignmentStatus.NOT_STARTED);
+		a.setAssignmentStatus(AssignmentStatus.NOT_STARTED.name());
 		a.setOrder(o);
 		a.setAssignmentDate(new java.sql.Date(c.getTimeInMillis()));
 		allAssignments.add(a);

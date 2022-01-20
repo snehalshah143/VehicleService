@@ -8,4 +8,5 @@ import com.snehal.carservice.common.model.AppUser;
 public interface AppUserRepository extends JpaRepository<AppUser, Long> {
 	AppUser findByUsername(String username);
 	AppUser findByUserId(Long userId);
+	AppUser findByMobileNumber(String mobileNumber);
 }

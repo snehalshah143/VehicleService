@@ -11,4 +11,5 @@ import com.snehal.carservice.common.model.Order;
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
 //List<Order> getOrderListByUserId(Long detailId);
+	
 }

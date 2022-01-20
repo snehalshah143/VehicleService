@@ -35,6 +35,17 @@ public class Order implements Serializable {
     
     private String orderStatus;
     
+	//This relationship will become one to one if need to restrict one order for one user detail
+	//@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne
+	@JoinColumn(name = "detail_id", referencedColumnName = "detailId")
+//  @JsonIgnoreProperties("order")
+    private @NotBlank UserVehicleDetail userVehicleDetail;
+    
+    @ManyToOne
+    @JoinColumn(name = "product_id", referencedColumnName = "productId")
+    private Product product;
+    
 //new
 	
     public Booking getBooking() {
@@ -46,16 +57,7 @@ public class Order implements Serializable {
 	}
 
 	
-	//This relationship will become one to one if need to restrict one order for one user detail
-	//@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@ManyToOne
-	@JoinColumn(name = "detail_id", referencedColumnName = "detailId")
-//  @JsonIgnoreProperties("order")
-    private @NotBlank UserVehicleDetail userVehicleDetail;
-    
-    @ManyToOne
-    @JoinColumn(name = "product_id", referencedColumnName = "productId")
-    private Product product;
+
 
     public Order(){
     }

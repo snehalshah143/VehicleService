@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,11 +48,10 @@ public class UserController {
 
     @PostMapping(path = "/usersignup",consumes="application/json")
     public ResponseEntity<AppUser> userSignUp(@RequestBody AppUser user, BindingResult bindingResult) {
-//        userValidator.validate(user, bindingResult);
-System.out.println("dateOfBirt::"+user.getDateOfBirth());
+        userValidator.validate(user, bindingResult);
        if (bindingResult.hasErrors()) {
     	   System.out.println(bindingResult.getAllErrors().toString());
-           return new ResponseEntity (HttpStatus.BAD_REQUEST);
+           return new ResponseEntity (bindingResult.getAllErrors(),HttpStatus.BAD_REQUEST);
         }
         user.setUsername(user.getMobileNumber());
         return new ResponseEntity<AppUser> (userService.save(user),HttpStatus.OK);
@@ -60,7 +60,7 @@ System.out.println("dateOfBirt::"+user.getDateOfBirth());
     }
 
     @PostMapping(path = "/vehicledetails/add/{userid}",consumes="application/json")
-    public ResponseEntity<Long> addVehicleDetails(@RequestBody UserVehicleDetail userVehicleDetail,@PathVariable("userid") Long userId, BindingResult bindingResult) {
+    public ResponseEntity<UserVehicleDetail> addVehicleDetails(@RequestBody UserVehicleDetail userVehicleDetail,@PathVariable("userid") Long userId, BindingResult bindingResult) {
 //        userValidator.validate(userVehicleDetail, bindingResult);
 //System.out.println("dateOfBirt::"+user.getDateOfBirth());
     	AppUser appUser=userService.findByUserId(userId);
@@ -73,8 +73,16 @@ System.out.println("dateOfBirt::"+user.getDateOfBirth());
 
        UserVehicleDetail vehicleDetail=userService.saveVehicleDetail(userVehicleDetail);
 
-        return new ResponseEntity<Long> (vehicleDetail.getDetailId(),HttpStatus.OK);
+        return new ResponseEntity<UserVehicleDetail> (vehicleDetail,HttpStatus.OK);
     }
+    @GetMapping(path = "/vehicledetails/get/{userid}")
+    public ResponseEntity<List<UserVehicleDetail>> getUserVehicleDetailsForUserId(@PathVariable("userid") Long userId, BindingResult bindingResult){
+    	
+        List<UserVehicleDetail> vehicleDetails=userService.getUserVehicleDetailsForUserId(userId);
+        return new ResponseEntity<List<UserVehicleDetail>> (vehicleDetails,HttpStatus.OK);
+    }
+    
+
     
     @PostMapping(path = "/booking/add/{detailid}",consumes="application/json")
     public String createOrder(@RequestBody Order order,@PathVariable("detailid") Long detailId, BindingResult bindingResult) {

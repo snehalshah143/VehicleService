@@ -3,6 +3,9 @@ package com.snehal.carservice.admin.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,6 +13,7 @@ import com.snehal.carservice.admin.service.AssignmentService;
 import com.snehal.carservice.admin.service.ProductService;
 import com.snehal.carservice.admin.service.VehicleService;
 import com.snehal.carservice.common.model.Order;
+import com.snehal.carservice.common.model.Product;
 import com.snehal.carservice.user.service.BookingService;
 @RestController
 public class AdminController{
@@ -18,13 +22,21 @@ public class AdminController{
 	private ProductService productService;
 
 @Autowired
-private VehicleService vehicleService;
+	private VehicleService vehicleService;
 
 @Autowired
-private AssignmentService assignmentService;
+	private AssignmentService assignmentService;
 
 @Autowired
-private static BookingService bookingService;
+	private BookingService bookingService;
+
+
+@GetMapping(path = "/products/getall/")
+public ResponseEntity<List<Product>> getAllProducts(){
+	
+    List<Product> products=productService.getAllProducts();
+    return new ResponseEntity<List<Product>> (products,HttpStatus.OK);
+}
 
 @PostMapping(path = "/admin/saveproducts")
 public void saveAllProductsForFirstTime() {

@@ -23,7 +23,7 @@ public class Assignment implements Serializable{
 	
 	private Integer priority;
 	
-	private AssignmentStatus assignmentStatus;
+	private String assignmentStatus;
 	
 	private Date assignmentStartTime;
 	private Date assignmentEndTime;
@@ -37,7 +37,7 @@ public class Assignment implements Serializable{
 	
 
 	public Assignment( Date assignmentDate, Integer priority,
-			AssignmentStatus assignmentStatus, Order order) {
+			String assignmentStatus, Order order) {
 		super();
 	
 		this.assignmentDate = assignmentDate;
@@ -60,10 +60,10 @@ public class Assignment implements Serializable{
 	public void setPriority(Integer priority) {
 		this.priority = priority;
 	}
-	public AssignmentStatus getAssignmentStatus() {
+	public String getAssignmentStatus() {
 		return assignmentStatus;
 	}
-	public void setAssignmentStatus(AssignmentStatus assignmentStatus) {
+	public void setAssignmentStatus(String assignmentStatus) {
 		this.assignmentStatus = assignmentStatus;
 	}
 	public Date getAssignmentStartTime() {

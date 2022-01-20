@@ -18,7 +18,7 @@ public class AssignmentServiceImpl implements AssignmentService{
 	
 	
 	public void saveALLAssignments(List<Assignment> assignments) {
-		assignmentRepository.saveAllAndFlush(assignments);
+		assignmentRepository.saveAll(assignments);
 	}
 	
 	public void createAllAssigmentsForOrders(List<Order> orders) {
