@@ -2,6 +2,7 @@ package com.snehal.carservice.user.service;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,9 +55,10 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	public List<UserVehicleDetail> getUserVehicleDetailsForUserId(Long userId) {
-		return vehicleDetailRepository.findAllByUserId(userId);
+		AppUser appUser=  userRepository.findById(userId).get();
 		
 		
+		return new ArrayList(appUser.getVehicleDetails());
 	}
 
 	@Override

@@ -14,7 +14,7 @@ public interface UserVehicleDetailRepository extends JpaRepository<UserVehicleDe
 //	UserVehicleDetail getUserVehicleDetail(Long detailId);
 	UserVehicleDetail findByDetailId(Long detailId);
 	
-	@Query(value="from user_vehicle_detail d join d.appuser u where u.user_id= :user_id", nativeQuery = true )
+//	@Query(value="select d from user_vehicle_detail d join appuser u where u.user_id= :user_id", nativeQuery = true )
 //	@Query("from user_vehicle_detail u where u.user_id = :user_id" )
-	List<UserVehicleDetail> findAllByUserId( @Param("user_id") Long userId);
+//	List<UserVehicleDetail> findAllByUserId( @Param("user_id") Long userId);
 }
