@@ -31,7 +31,7 @@ public class AdminController{
 	private BookingService bookingService;
 
 
-@GetMapping(path = "/products/getall/")
+@GetMapping(path = "/products/getall")
 public ResponseEntity<List<Product>> getAllProducts(){
 	
     List<Product> products=productService.getAllProducts();

@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	public List<UserVehicleDetail> getUserVehicleDetailsForUserId(Long userId) {
-		return vehicleDetailRepository.getUserVehicleDetailsForUserId(userId);
+		return vehicleDetailRepository.findAllByUserId(userId);
 		
 		
 	}

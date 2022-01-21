@@ -76,7 +76,7 @@ public class UserController {
         return new ResponseEntity<UserVehicleDetail> (vehicleDetail,HttpStatus.OK);
     }
     @GetMapping(path = "/vehicledetails/get/{userid}")
-    public ResponseEntity<List<UserVehicleDetail>> getUserVehicleDetailsForUserId(@PathVariable("userid") Long userId, BindingResult bindingResult){
+    public ResponseEntity<List<UserVehicleDetail>> getUserVehicleDetailsForUserId(@PathVariable("userid") Long userId){
     	
         List<UserVehicleDetail> vehicleDetails=userService.getUserVehicleDetailsForUserId(userId);
         return new ResponseEntity<List<UserVehicleDetail>> (vehicleDetails,HttpStatus.OK);
