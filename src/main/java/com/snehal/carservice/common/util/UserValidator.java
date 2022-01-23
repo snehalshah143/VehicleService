@@ -8,8 +8,8 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.snehal.carservice.common.model.AppUser;
-import com.snehal.carservice.user.service.UserService;
+import com.snehal.carservice.model.AppUser;
+import com.snehal.carservice.service.UserService;
 
 
 
