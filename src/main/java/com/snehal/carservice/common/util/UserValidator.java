@@ -9,6 +9,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.snehal.carservice.model.dto.AppUserJsonDto;
+import com.snehal.carservice.model.persistable.AppUserPersistable;
 import com.snehal.carservice.service.UserService;
 
 
@@ -23,7 +24,7 @@ public class UserValidator implements Validator {
     }
 
     public void validate(Object o, Errors errors) {
-    	AppUserJsonDto user = (AppUserJsonDto) o;
+    	AppUserPersistable user = (AppUserPersistable) o;
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "mobileNumber", "NotEmpty");
         if (user.getMobileNumber().length() < 10) {
