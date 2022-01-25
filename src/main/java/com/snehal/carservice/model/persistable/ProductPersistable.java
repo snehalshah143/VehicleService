@@ -1,4 +1,4 @@
-package com.snehal.carservice.model;
+package com.snehal.carservice.model.persistable;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -11,9 +11,13 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import com.snehal.carservice.common.ProductType;
+import com.snehal.carservice.common.TimeSlot;
+import com.snehal.carservice.common.VehicleSegment;
+
 @Entity
 @Table(name = "product")
-public class Product implements Serializable {
+public class ProductPersistable implements Serializable {
 
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="product_sequence_generator")
@@ -26,10 +30,10 @@ public class Product implements Serializable {
 	private @NotBlank TimeSlot timeSlot;
 	private @NotBlank Double price;
 
-	public Product() {
+	public ProductPersistable() {
 	}
 
-	public Product(
+	public ProductPersistable(
 			ProductType productType, VehicleSegment vehicleSegment, TimeSlot timeSlot,Double price) {
 
 		this.productType = productType;
@@ -91,7 +95,7 @@ public class Product implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Product other = (Product) obj;
+		ProductPersistable other = (ProductPersistable) obj;
 		return productType == other.productType && timeSlot == other.timeSlot && vehicleSegment == other.vehicleSegment;
 	}
 

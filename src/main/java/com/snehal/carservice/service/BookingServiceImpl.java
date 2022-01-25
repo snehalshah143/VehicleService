@@ -10,8 +10,8 @@ import com.snehal.carservice.constants.AdminConstants;
 import com.snehal.carservice.dao.BookingRepository;
 import com.snehal.carservice.dao.OrderRepository;
 import com.snehal.carservice.dao.UserVehicleDetailRepository;
-import com.snehal.carservice.model.Booking;
-import com.snehal.carservice.model.Order;
+import com.snehal.carservice.model.persistable.BookingPersistable;
+import com.snehal.carservice.model.persistable.OrderPersistable;
 
 @Service
 public class BookingServiceImpl implements BookingService{
@@ -27,48 +27,55 @@ public class BookingServiceImpl implements BookingService{
 	
 
 
-	public Booking saveBooking(Booking booking){
+	public BookingPersistable saveBooking(BookingPersistable booking){
 		booking.setFinalAmount(calculateFinalAmount(booking));
 		return bookingRepository.saveAndFlush(booking);
 	}
 	
-	public Order saveOrder(Order order){
+	public OrderPersistable saveOrder(OrderPersistable order){
 		return orderRepository.save(order);
 	}
 	
 
 	
-	public List<Order> getOrders(List<Long> orderIds) {
+	public List<OrderPersistable> getOrders(List<Long> orderIds) {
 		return orderRepository.findAllById(orderIds);
 	}
 	
-	public List<Order> getAllOrders() {
+	public List<OrderPersistable> getAllOrders() {
 		return orderRepository.findAll();
 	}
 	
-	public List<Order> saveOrders(List<Order> orders){
-		return orderRepository.saveAllAndFlush(orders);
+	public List<OrderPersistable> saveOrders(List<OrderPersistable> orders){
+		return orderRepository.saveAll(orders);
 	}
 
-	private double calculateFinalAmount(Booking booking){
+	private double calculateFinalAmount(BookingPersistable booking){
 		double finalAmount=0.0;
-		for(Order order: booking.getProductCart() ){
+		for(OrderPersistable order: booking.getProductCart() ){
 			
 //			finalAmount=finalAmount+ProductManagement.getPriceForProduct(order.getProduct());
 		}
-		finalAmount=finalAmount*ProductManagement.getTax();
+		finalAmount=booking.getFinalAmount()+(booking.getFinalAmount()*ProductManagement.getTax());
+		
 		return finalAmount;
 	}
 
 	@Override
-	public void updateOrderStatusToAssigned(List<Order> allorders) {
-		List<Order> updatedOrderWithStatusList=new ArrayList();
-		for(Order o:allorders) {
+	public void updateOrderStatusToAssigned(List<OrderPersistable> allorders) {
+		List<OrderPersistable> updatedOrderWithStatusList=new ArrayList();
+		for(OrderPersistable o:allorders) {
 		o.setOrderStatus(AdminConstants.ASSIGNED);
 		updatedOrderWithStatusList.add(o);
 		}
 		saveOrders(updatedOrderWithStatusList);
 	}
 
+	@Override
+	public void updateOrderStatusToAssigned(OrderPersistable order) {
+
+			order.setOrderStatus(AdminConstants.ASSIGNED);
+			saveOrder(order);
+	}
 
 }

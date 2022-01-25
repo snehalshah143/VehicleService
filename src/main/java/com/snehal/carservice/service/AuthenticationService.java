@@ -1,9 +1,9 @@
 package com.snehal.carservice.service;
 
-import com.snehal.carservice.model.AppUser;
-import com.snehal.carservice.model.LoginModel;
+import com.snehal.carservice.model.domain.LoginModel;
+import com.snehal.carservice.model.persistable.AppUserPersistable;
 
 public interface AuthenticationService {
 
-	AppUser authenticateUser(LoginModel login);
+	AppUserPersistable authenticateUser(LoginModel login);
 }

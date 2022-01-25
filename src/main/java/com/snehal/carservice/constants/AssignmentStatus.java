@@ -1,4 +1,4 @@
-package com.snehal.carservice.model;
+package com.snehal.carservice.constants;
 
 import java.io.Serializable;
 

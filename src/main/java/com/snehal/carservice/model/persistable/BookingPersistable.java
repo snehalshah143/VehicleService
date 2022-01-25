@@ -1,4 +1,4 @@
-package com.snehal.carservice.model;
+package com.snehal.carservice.model.persistable;
 
 
 import java.io.Serializable;
@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.snehal.carservice.common.util.StringSetConverter;
 @Entity
 @Table(name = "booking")
-public class Booking implements Serializable{
+public class BookingPersistable implements Serializable{
 	
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="booking_sequence_generator")
@@ -33,21 +33,19 @@ public class Booking implements Serializable{
 	//TODO initalize product cart with hash set
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "booking", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("booking")
-    @Convert(converter = StringSetConverter.class)
-    private @NotBlank Set<Order> productCart=new HashSet<Order>();
-	
+    private @NotBlank Set<OrderPersistable> productCart;
     private @NotBlank Double finalAmount;
       
     
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "userId")
     @JsonIgnoreProperties("bookings")
-    private AppUser appUser;
+    private AppUserPersistable appUser;
    
-public Booking(){
+public BookingPersistable(){
     	
     }
-	public Booking(@NotBlank Set<Order> productCart, @NotBlank Double finalAmount) {
+	public BookingPersistable(@NotBlank Set<OrderPersistable> productCart, @NotBlank Double finalAmount) {
 	super();
 	this.productCart = productCart;
 	this.finalAmount = finalAmount;
@@ -59,10 +57,10 @@ public Booking(){
 	public void setBookingId(Long bookingId) {
 		this.bookingId = bookingId;
 	}
-	public Set<Order> getProductCart() {
+	public Set<OrderPersistable> getProductCart() {
 		return productCart;
 	}
-	public void setProductCart(Set<Order> productCart) {
+	public void setProductCart(Set<OrderPersistable> productCart) {
 		this.productCart = productCart;
 	}
 	
@@ -72,10 +70,10 @@ public Booking(){
 	public void setFinalAmount(Double finalAmount) {
 		this.finalAmount = finalAmount;
 	}
-	public AppUser getAppUser() {
+	public AppUserPersistable getAppUser() {
 		return appUser;
 	}
-	public void setAppUser(AppUser appUser) {
+	public void setAppUser(AppUserPersistable appUser) {
 		this.appUser = appUser;
 	}
 

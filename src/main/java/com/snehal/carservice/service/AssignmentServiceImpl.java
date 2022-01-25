@@ -6,25 +6,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.snehal.carservice.dao.AssignmentRepository;
-import com.snehal.carservice.model.Assignment;
-import com.snehal.carservice.model.Order;
+import com.snehal.carservice.model.persistable.AssignmentPersistable;
+import com.snehal.carservice.model.persistable.OrderPersistable;
 
 @Service
 public class AssignmentServiceImpl implements AssignmentService{
 
-	
+	@Autowired
+	private BookingService bookingService;
 	@Autowired
 	private AssignmentRepository assignmentRepository;
 	
 	
-	public void saveALLAssignments(List<Assignment> assignments) {
+	public void saveALLAssignments(List<AssignmentPersistable> assignments) {
 		assignmentRepository.saveAll(assignments);
 	}
 	
-	public void createAllAssigmentsForOrders(List<Order> orders) {
+	public void createAssigmentsForOrders(List<OrderPersistable> orders) {
 		
-		List<Assignment> allAssignments=AssignmentDashboard.createAllAssignments(orders);
+		List<AssignmentPersistable> allAssignments=AssignmentDashboard.createAllAssignments(orders);
 		saveALLAssignments(allAssignments);
+		
+	}
+	
+	
+	public void createAssigmentsAndUpdatedStatusForOrders(List<OrderPersistable> orders) {
+		
+		createAssigmentsForOrders(orders);
+		bookingService.updateOrderStatusToAssigned(orders);
+		
 	}
 	
 	

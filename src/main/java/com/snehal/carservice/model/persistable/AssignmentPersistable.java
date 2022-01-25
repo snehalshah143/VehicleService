@@ -1,4 +1,4 @@
-package com.snehal.carservice.model;
+package com.snehal.carservice.model.persistable;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -13,7 +13,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 @Entity
 @Table(name = "assignment")
-public class Assignment implements Serializable{
+public class AssignmentPersistable implements Serializable{
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="assignment_sequence_generator")
 	@SequenceGenerator(name="assignment_sequence_generator" ,sequenceName = "assignment_seq")
@@ -33,11 +33,11 @@ public class Assignment implements Serializable{
 
     @ManyToOne
     @JoinColumn(name = "order_id", referencedColumnName = "orderId")
-    private Order order;
+    private OrderPersistable order;
 	
 
-	public Assignment( Date assignmentDate, Integer priority,
-			String assignmentStatus, Order order) {
+	public AssignmentPersistable( Date assignmentDate, Integer priority,
+			String assignmentStatus, OrderPersistable order) {
 		super();
 	
 		this.assignmentDate = assignmentDate;
@@ -45,7 +45,7 @@ public class Assignment implements Serializable{
 		this.assignmentStatus = assignmentStatus;
 		this.order = order;
 	}
-	public Assignment() {
+	public AssignmentPersistable() {
 		super();
 	}
 	public Long getAssignmentId() {
@@ -97,10 +97,10 @@ public class Assignment implements Serializable{
 	public void setAssignmentDate(Date assignmentDate) {
 		this.assignmentDate = assignmentDate;
 	}
-	public Order getOrder() {
+	public OrderPersistable getOrder() {
 		return order;
 	}
-	public void setOrder(Order order) {
+	public void setOrder(OrderPersistable order) {
 		this.order = order;
 	}
 	

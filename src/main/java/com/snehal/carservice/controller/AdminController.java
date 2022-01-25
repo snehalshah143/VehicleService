@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.snehal.carservice.model.Order;
-import com.snehal.carservice.model.Product;
+import com.snehal.carservice.model.persistable.OrderPersistable;
+import com.snehal.carservice.model.persistable.ProductPersistable;
 import com.snehal.carservice.service.AssignmentService;
 import com.snehal.carservice.service.BookingService;
 import com.snehal.carservice.service.ProductService;
@@ -32,10 +32,10 @@ public class AdminController{
 
 
 @GetMapping(path = "/products/getall")
-public ResponseEntity<List<Product>> getAllProducts(){
+public ResponseEntity<List<ProductPersistable>> getAllProducts(){
 	
-    List<Product> products=productService.getAllProducts();
-    return new ResponseEntity<List<Product>> (products,HttpStatus.OK);
+    List<ProductPersistable> products=productService.getAllProducts();
+    return new ResponseEntity<List<ProductPersistable>> (products,HttpStatus.OK);
 }
 
 @PostMapping(path = "/admin/saveproducts")
@@ -58,10 +58,9 @@ public void saveAllVehiclesForFirstTime() {
 }
 //Night BatchProcessing
 @PostMapping(path = "/admin/createallassigments")
-public void saveAllAssigments() {
-	List<Order> allorders=bookingService.getAllOrders();
-	assignmentService.createAllAssigmentsForOrders(allorders);
-	bookingService.updateOrderStatusToAssigned(allorders);
+public void createAllAssigments() {
+	List<OrderPersistable> allorders=bookingService.getAllOrders();
+	assignmentService.createAssigmentsAndUpdatedStatusForOrders(allorders);
 	
 }
 }

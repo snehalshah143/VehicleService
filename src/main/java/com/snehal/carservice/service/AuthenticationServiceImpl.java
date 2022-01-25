@@ -5,8 +5,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.snehal.carservice.dao.AppUserRepository;
-import com.snehal.carservice.model.AppUser;
-import com.snehal.carservice.model.LoginModel;
+import com.snehal.carservice.model.domain.LoginModel;
+import com.snehal.carservice.model.persistable.AppUserPersistable;
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService{
 
@@ -15,9 +15,9 @@ public class AuthenticationServiceImpl implements AuthenticationService{
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	@Override
-	public AppUser authenticateUser(LoginModel login) {
+	public AppUserPersistable authenticateUser(LoginModel login) {
 
-			AppUser user= userRepository.findByUsername(login.getUsername());
+			AppUserPersistable user= userRepository.findByUsername(login.getUsername());
 		if(user==null) {
 			return user;
 		}

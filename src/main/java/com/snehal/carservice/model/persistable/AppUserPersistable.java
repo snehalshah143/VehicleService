@@ -1,4 +1,4 @@
-package com.snehal.carservice.model;
+package com.snehal.carservice.model.persistable;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "appuser")
-public class AppUser implements Serializable{
+public class AppUserPersistable implements IPerstistable{
     private @Id  @GeneratedValue(strategy = GenerationType.TABLE) Long userId;
     private String username;
     private @NotBlank String password;
@@ -26,19 +26,20 @@ public class AppUser implements Serializable{
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "appUser", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("appuser")
-    private Set <UserVehicleDetail> vehicleDetails = new HashSet<UserVehicleDetail>();
+    private Set <UserVehicleDetailPersistable> vehicleDetails = new HashSet<UserVehicleDetailPersistable>();
 
+    
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "appUser", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("appuser")
-    private Set <Booking> bookings = new HashSet<Booking>();
+    private Set <BookingPersistable> bookings = new HashSet<BookingPersistable>();
 
-	public AppUser(){
+	public AppUserPersistable(){
     	
     }
 
 
     
-    public AppUser(String mobileNumber,String password, String passwordConfirm, String email, 
+    public AppUserPersistable(String mobileNumber,String password, String passwordConfirm, String email, 
 		String firstName, String lastName) {
 	super();
 
@@ -148,22 +149,22 @@ public class AppUser implements Serializable{
 
 
 
-	public Set<UserVehicleDetail> getVehicleDetails() {
+	public Set<UserVehicleDetailPersistable> getVehicleDetails() {
 		return vehicleDetails;
 	}
 
 
 
-	public void setVehicleDetails(Set<UserVehicleDetail> vehicleDetails) {
+	public void setVehicleDetails(Set<UserVehicleDetailPersistable> vehicleDetails) {
 		this.vehicleDetails = vehicleDetails;
 	}
 
 
 
-	public Set<Booking> getBookings() {
+	public Set<BookingPersistable> getBookings() {
 		return bookings;
 	}
-	public void setBookings(Set<Booking> bookings) {
+	public void setBookings(Set<BookingPersistable> bookings) {
 		this.bookings = bookings;
 	}
 

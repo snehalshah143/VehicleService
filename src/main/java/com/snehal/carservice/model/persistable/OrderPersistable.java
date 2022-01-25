@@ -1,7 +1,8 @@
-package com.snehal.carservice.model;
+package com.snehal.carservice.model.persistable;
 
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -20,7 +22,7 @@ import javax.validation.constraints.NotBlank;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "product_order")
-public class Order implements Serializable {
+public class OrderPersistable implements Serializable {
 
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="order_sequence_generator")
@@ -30,7 +32,7 @@ public class Order implements Serializable {
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "booking_id", referencedColumnName = "bookingId")
     @JsonIgnoreProperties("productCart")
-    private Booking booking;
+    private BookingPersistable booking;
     
     
     private String orderStatus;
@@ -40,29 +42,33 @@ public class Order implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "detail_id", referencedColumnName = "detailId")
 //  @JsonIgnoreProperties("order")
-    private @NotBlank UserVehicleDetail userVehicleDetail;
+    private @NotBlank UserVehicleDetailPersistable userVehicleDetail;
     
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "productId")
-    private Product product;
+    private ProductPersistable product;
+    
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("order")
+    private @NotBlank Set<AssignmentPersistable> assignments;
     
 //new
 	
-    public Booking getBooking() {
+    public BookingPersistable getBooking() {
 		return booking;
 	}
 
-	public void setBooking(Booking booking) {
+	public void setBooking(BookingPersistable booking) {
 		this.booking = booking;
 	}
 
 	
 
 
-    public Order(){
+    public OrderPersistable(){
     }
     
-	public Order(Product product, UserVehicleDetail userVehicleDetail) {
+	public OrderPersistable(ProductPersistable product, UserVehicleDetailPersistable userVehicleDetail) {
 		super();
 		this.product = product;
 		this.userVehicleDetail = userVehicleDetail;
@@ -73,18 +79,18 @@ public class Order implements Serializable {
 	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
 	}
-	public UserVehicleDetail getUserVehicleDetail() {
+	public UserVehicleDetailPersistable getUserVehicleDetail() {
 		return userVehicleDetail;
 	}
-	public void setUserVehicleDetail(UserVehicleDetail userVehicleDetail) {
+	public void setUserVehicleDetail(UserVehicleDetailPersistable userVehicleDetail) {
 		this.userVehicleDetail = userVehicleDetail;
 	}
 
-	public Product getProduct() {
+	public ProductPersistable getProduct() {
 		return product;
 	}
 
-	public void setProduct(Product product) {
+	public void setProduct(ProductPersistable product) {
 		this.product = product;
 	}
 
@@ -94,6 +100,14 @@ public class Order implements Serializable {
 
 	public void setOrderStatus(String orderStatus) {
 		this.orderStatus = orderStatus;
+	}
+
+	public Set<AssignmentPersistable> getAssignments() {
+		return assignments;
+	}
+
+	public void setAssignments(Set<AssignmentPersistable> assignments) {
+		this.assignments = assignments;
 	}
    
 }

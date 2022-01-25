@@ -8,40 +8,40 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.snehal.carservice.model.Product;
-import com.snehal.carservice.model.Vehicle;
+import com.snehal.carservice.model.persistable.ProductPersistable;
+import com.snehal.carservice.model.persistable.VehiclePersistable;
 import com.snehal.carservice.service.ProductService;
 
 public class BootStrapCache {
 
-	private static Map<Product, Double> productPricingCache=new HashMap();
+	private static Map<ProductPersistable, Double> productPricingCache=new HashMap();
 	
-	private static Map<Long,Product> productCache=new HashMap();
+	private static Map<Long,ProductPersistable> productCache=new HashMap();
 	
-	private static Map<Long,Vehicle> vehicleCache=new HashMap();
+	private static Map<Long,VehiclePersistable> vehicleCache=new HashMap();
 
 	
-	public static Map<Product, Double> getProductPricingCache() {
+	public static Map<ProductPersistable, Double> getProductPricingCache() {
 		return productPricingCache;
 	}
 
-	public static void setProductPricingCache(Map<Product, Double> productPricingCache) {
+	public static void setProductPricingCache(Map<ProductPersistable, Double> productPricingCache) {
 		BootStrapCache.productPricingCache = productPricingCache;
 	}
 
-	public static Map<Long, Product> getProductCache() {
+	public static Map<Long, ProductPersistable> getProductCache() {
 		return productCache;
 	}
 
-	public static void setProductCache(Map<Long, Product> productCache) {
+	public static void setProductCache(Map<Long, ProductPersistable> productCache) {
 		BootStrapCache.productCache = productCache;
 	}
 
-	public static Map<Long, Vehicle> getVehicleCache() {
+	public static Map<Long, VehiclePersistable> getVehicleCache() {
 		return vehicleCache;
 	}
 
-	public static void setVehicleCache(Map<Long, Vehicle> vehicleCache) {
+	public static void setVehicleCache(Map<Long, VehiclePersistable> vehicleCache) {
 		BootStrapCache.vehicleCache = vehicleCache;
 	}
 

@@ -3,12 +3,12 @@ package com.snehal.carservice.dao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.snehal.carservice.model.Booking;
+import com.snehal.carservice.model.persistable.BookingPersistable;
 
 
 
 @Repository
-public interface BookingRepository extends JpaRepository<Booking, Long> {
+public interface BookingRepository extends JpaRepository<BookingPersistable, Long> {
 	
 //	Booking getUserVehicleDetails(Long detailId);
 	

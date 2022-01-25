@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.snehal.carservice.dao.AppUserRepository;
-import com.snehal.carservice.model.AppUser;
+import com.snehal.carservice.model.persistable.AppUserPersistable;
 
 
 @Service
@@ -23,7 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    	AppUser user = userRepository.findByUsername(username);
+    	AppUserPersistable user = userRepository.findByUsername(username);
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet();
 /*        for (Role role : user.getRoles()){

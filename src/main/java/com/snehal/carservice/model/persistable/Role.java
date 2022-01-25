@@ -1,4 +1,4 @@
-package com.snehal.carservice.model;
+package com.snehal.carservice.model.persistable;
 
 import javax.persistence.*;
 
@@ -9,7 +9,7 @@ import java.util.Set;
 public class Role {
     private Long id;
     private String name;
-    private Set <AppUser> users;
+    private Set <AppUserPersistable> users;
 
 
     @Id

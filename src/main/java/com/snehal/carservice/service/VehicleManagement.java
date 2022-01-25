@@ -6,12 +6,12 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
-import com.snehal.carservice.model.Vehicle;
-import com.snehal.carservice.model.VehicleSegment;
+import com.snehal.carservice.common.VehicleSegment;
+import com.snehal.carservice.model.persistable.VehiclePersistable;
 
 public class VehicleManagement {
 
-	private static Set<Vehicle> vehicles = new HashSet<Vehicle>();
+	private static Set<VehiclePersistable> vehicles = new HashSet<VehiclePersistable>();
 
 	private static VehicleManagement vehicleManagement = new VehicleManagement();
 	
@@ -43,7 +43,7 @@ public class VehicleManagement {
           
             	 String str=sc.nextLine();
             	 String[] array=str.split(",");
-              	 Vehicle v=new Vehicle(array[0], array[1], VehicleSegment.valueOf(array[2]));
+              	 VehiclePersistable v=new VehiclePersistable(array[0], array[1], VehicleSegment.valueOf(array[2]));
               	vehicles.add(v);
              }
 		 		
@@ -53,11 +53,11 @@ public class VehicleManagement {
 		return vehicleManagement;
 	}
 
-	public static Set<Vehicle> getVehicles() {
+	public static Set<VehiclePersistable> getVehicles() {
 		return vehicles;
 	}
 
-	public static void setVehicles(Set<Vehicle> vehicles) {
+	public static void setVehicles(Set<VehiclePersistable> vehicles) {
 		VehicleManagement.vehicles = vehicles;
 	}
 

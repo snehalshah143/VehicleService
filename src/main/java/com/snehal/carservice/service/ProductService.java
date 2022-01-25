@@ -2,15 +2,15 @@ package com.snehal.carservice.service;
 
 import java.util.List;
 
-import com.snehal.carservice.model.Product;
+import com.snehal.carservice.model.persistable.ProductPersistable;
 
 public interface ProductService {
 
-	public Product saveProduct(Product product);
+	public ProductPersistable saveProduct(ProductPersistable product);
 	
-	public List<Product> saveProducts(List<Product> products);
+	public List<ProductPersistable> saveProducts(List<ProductPersistable> products);
 	
-	public List<Product> getAllProducts();
+	public List<ProductPersistable> getAllProducts();
 
 	public void deleteAllProducts();
 	

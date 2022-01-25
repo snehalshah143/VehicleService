@@ -2,13 +2,13 @@ package com.snehal.carservice.service;
 
 import java.util.List;
 
-import com.snehal.carservice.model.Vehicle;
+import com.snehal.carservice.model.persistable.VehiclePersistable;
 
 public interface VehicleService {
 
-	Vehicle saveVehicleInfo(Vehicle vehicle);
+	VehiclePersistable saveVehicleInfo(VehiclePersistable vehicle);
 
-	List<Vehicle> getAllVehicles();
+	List<VehiclePersistable> getAllVehicles();
 
 //	List<VehicleRawData> saveAllVehicleRawData(List<VehicleRawData> vehicles);
 
@@ -18,6 +18,6 @@ public interface VehicleService {
 
 	void deleteAllVehicles();
 
-	List<Vehicle> saveVehicles(List<Vehicle> vehicles);
+	List<VehiclePersistable> saveVehicles(List<VehiclePersistable> vehicles);
 
 }

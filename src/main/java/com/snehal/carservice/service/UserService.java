@@ -2,21 +2,21 @@ package com.snehal.carservice.service;
 
 import java.util.List;
 
-import com.snehal.carservice.model.AppUser;
-import com.snehal.carservice.model.UserVehicleDetail;
+import com.snehal.carservice.model.persistable.AppUserPersistable;
+import com.snehal.carservice.model.persistable.UserVehicleDetailPersistable;
 
 public interface UserService {
-    AppUser save(AppUser user);
+	AppUserPersistable save(AppUserPersistable user);
     
-    AppUser findByUsername(String username);
+	AppUserPersistable findByUsername(String username);
     
-    AppUser findByMobileNumber(String mobileNumber);
+	AppUserPersistable findByMobileNumber(String mobileNumber);
     
-    AppUser findByUserId(Long userId);
+	AppUserPersistable findByUserId(Long userId);
     
-    UserVehicleDetail saveVehicleDetail(UserVehicleDetail userVehicleDetail);
+    UserVehicleDetailPersistable saveVehicleDetail(UserVehicleDetailPersistable userVehicleDetail);
 
-	UserVehicleDetail getUserVehicleDetail(Long detailId);
+    UserVehicleDetailPersistable getUserVehicleDetail(Long detailId);
 	
-	List<UserVehicleDetail> getUserVehicleDetailsForUserId(Long userId);
+	List<UserVehicleDetailPersistable> getUserVehicleDetailsForUserId(Long userId);
 }

@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 import com.snehal.carservice.dao.AppUserRepository;
 import com.snehal.carservice.dao.RoleRepository;
 import com.snehal.carservice.dao.UserVehicleDetailRepository;
-import com.snehal.carservice.model.AppUser;
-import com.snehal.carservice.model.UserVehicleDetail;
+import com.snehal.carservice.model.persistable.AppUserPersistable;
+import com.snehal.carservice.model.persistable.UserVehicleDetailPersistable;
 
 
 
@@ -28,41 +28,41 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	public AppUser save(AppUser user) {
+	public AppUserPersistable save(AppUserPersistable user) {
 //		String password=user.getPassword();
 //		String passwordConfirm=user.getPasswordConfirm();
 //		user.setPassword(bCryptPasswordEncoder.encode(password));
 //		user.setPasswordConfirm(bCryptPasswordEncoder.encode(passwordConfirm));
 //		user.setRoles(new HashSet(roleRepository.findAll()));
-		AppUser savedUser=userRepository.save(user);
+		AppUserPersistable savedUser=userRepository.save(user);
 		return savedUser;
 	}
 
-	public AppUser findByUsername(String username) {
+	public AppUserPersistable findByUsername(String username) {
 		return userRepository.findByUsername(username);
 	}
-	public AppUser findByUserId(Long userId) {
+	public AppUserPersistable findByUserId(Long userId) {
 		return userRepository.findByUserId(userId);
 	}
-	public UserVehicleDetail saveVehicleDetail(UserVehicleDetail userVehicleDetail) {
+	public UserVehicleDetailPersistable saveVehicleDetail(UserVehicleDetailPersistable userVehicleDetail) {
 
 		return vehicleDetailRepository.save(userVehicleDetail);
 	}
 	
-	public UserVehicleDetail getUserVehicleDetail(Long detailId) {
+	public UserVehicleDetailPersistable getUserVehicleDetail(Long detailId) {
 		return vehicleDetailRepository.findByDetailId(detailId);
 		
 		
 	}
-	public List<UserVehicleDetail> getUserVehicleDetailsForUserId(Long userId) {
-		AppUser appUser=  userRepository.findById(userId).get();
+	public List<UserVehicleDetailPersistable> getUserVehicleDetailsForUserId(Long userId) {
+		AppUserPersistable appUser=  userRepository.findById(userId).get();
 		
 		
 		return new ArrayList(appUser.getVehicleDetails());
 	}
 
 	@Override
-	public AppUser findByMobileNumber(String mobileNumber) {
+	public AppUserPersistable findByMobileNumber(String mobileNumber) {
 		return userRepository.findByMobileNumber(mobileNumber);
 	}
 	

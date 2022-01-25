@@ -3,46 +3,44 @@ package com.snehal.carservice.service;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.snehal.carservice.constants.AdminConstants;
-import com.snehal.carservice.model.Assignment;
-import com.snehal.carservice.model.AssignmentStatus;
-import com.snehal.carservice.model.Order;
-import com.snehal.carservice.model.ProductType;
+import com.snehal.carservice.common.ProductType;
+import com.snehal.carservice.constants.AssignmentStatus;
+import com.snehal.carservice.model.persistable.AssignmentPersistable;
+import com.snehal.carservice.model.persistable.OrderPersistable;
 
 
 public class AssignmentDashboard {
 
 
 	
-	public static  List<Assignment> createAllAssignments(List<Order> allorders) {
-		List<Assignment> allAssignments=new ArrayList<Assignment>();
+	public static  List<AssignmentPersistable> createAllAssignments(List<OrderPersistable> allorders) {
+		List<AssignmentPersistable> allAssignments=new ArrayList<AssignmentPersistable>();
 	
-		for(Order o:allorders) {
-				ProductType productType=o.getProduct().getProductType();
-				switch(productType) {
-				case DAILY_WASH:
-					createDailyWashAssignments(o,allAssignments);
-					break;
-				case ALTERNATE_WASH:
-					createAlternateWashAssignments(o, allAssignments);
-					break;
-				case ON_DEMAND_WASH:	
-					createOnDemandWashAssignments(o, allAssignments);
-					break;
-				}
+		for(OrderPersistable o:allorders) {
+				createAssignmentForOrder(allAssignments, o);
 		
 		}
 		return allAssignments;
 	}
+
+	private static void createAssignmentForOrder(List<AssignmentPersistable> allAssignments, OrderPersistable o) {
+		ProductType productType=o.getProduct().getProductType();
+		switch(productType) {
+		case DAILY_WASH:
+			createDailyWashAssignments(o,allAssignments);
+			break;
+		case ALTERNATE_WASH:
+			createAlternateWashAssignments(o, allAssignments);
+			break;
+		case ON_DEMAND_WASH:	
+			createOnDemandWashAssignments(o, allAssignments);
+			break;
+		}
+	}
 	
-	private static void createDailyWashAssignments(Order o,List<Assignment> allAssignments) {
+	private static void createDailyWashAssignments(OrderPersistable o,List<AssignmentPersistable> allAssignments) {
 		
 		int count=24;
 		
@@ -52,7 +50,7 @@ public class AssignmentDashboard {
 		while(count>0) {
 	
 			if(!(c.get(Calendar.DAY_OF_WEEK)==1)) {
-			Assignment a=new Assignment();
+				AssignmentPersistable a=new AssignmentPersistable();
 			a.setPriority(0);
 			a.setAssignmentStatus(AssignmentStatus.NOT_STARTED.name());
 			a.setOrder(o);
@@ -65,7 +63,7 @@ public class AssignmentDashboard {
 	}
 	
 	
-private static void createAlternateWashAssignments(Order o,List<Assignment> allAssignments) {
+private static void createAlternateWashAssignments(OrderPersistable o,List<AssignmentPersistable> allAssignments) {
 		
 		int count=12;
 		
@@ -75,7 +73,7 @@ private static void createAlternateWashAssignments(Order o,List<Assignment> allA
 		while(count>0) {
 	    
 			if(!(c.get(Calendar.DAY_OF_WEEK)==1)) {
-			Assignment a=new Assignment();
+				AssignmentPersistable a=new AssignmentPersistable();
 			a.setPriority(0);
 			a.setAssignmentStatus(AssignmentStatus.NOT_STARTED.name());
 			a.setOrder(o);
@@ -87,7 +85,7 @@ private static void createAlternateWashAssignments(Order o,List<Assignment> allA
 		}	
 	}
 	
-private static void createOnDemandWashAssignments(Order o,List<Assignment> allAssignments) {
+private static void createOnDemandWashAssignments(OrderPersistable o,List<AssignmentPersistable> allAssignments) {
 	
 
 	//should be run before 12 pm on indian server
@@ -96,7 +94,7 @@ private static void createOnDemandWashAssignments(Order o,List<Assignment> allAs
 		if(c.get(Calendar.DAY_OF_WEEK)==1) {
 			c.add(Calendar.DATE, 1);
 		}
-		Assignment a=new Assignment();
+		AssignmentPersistable a=new AssignmentPersistable();
 		a.setPriority(4);
 		a.setAssignmentStatus(AssignmentStatus.NOT_STARTED.name());
 		a.setOrder(o);

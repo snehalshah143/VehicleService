@@ -3,14 +3,14 @@ package com.snehal.carservice.service;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.snehal.carservice.model.Product;
-import com.snehal.carservice.model.ProductType;
-import com.snehal.carservice.model.TimeSlot;
-import com.snehal.carservice.model.VehicleSegment;
+import com.snehal.carservice.common.ProductType;
+import com.snehal.carservice.common.TimeSlot;
+import com.snehal.carservice.common.VehicleSegment;
+import com.snehal.carservice.model.persistable.ProductPersistable;
 
 public class ProductManagement {
 
-	private static Set<Product> products = new HashSet<Product>();
+	private static Set<ProductPersistable> products = new HashSet<ProductPersistable>();
 
 	private static ProductManagement productManagement = new ProductManagement();
 	
@@ -35,11 +35,11 @@ public class ProductManagement {
 
 
 
-	public static Set<Product> getProducts() {
+	public static Set<ProductPersistable> getProducts() {
 		return products;
 	}
 
-	public static void setProducts(Set<Product> products) {
+	public static void setProducts(Set<ProductPersistable> products) {
 		ProductManagement.products = products;
 	}
 
@@ -67,7 +67,7 @@ public class ProductManagement {
 
 	private static void addProductDetail(ProductType productType, VehicleSegment vehicleCategory, TimeSlot timeSlot,
 			double price) {
-		products.add(new Product(productType, vehicleCategory, timeSlot,price));
+		products.add(new ProductPersistable(productType, vehicleCategory, timeSlot,price));
 
 	}
 

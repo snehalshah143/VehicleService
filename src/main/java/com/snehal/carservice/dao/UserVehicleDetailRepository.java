@@ -7,12 +7,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.snehal.carservice.model.UserVehicleDetail;
+import com.snehal.carservice.model.persistable.UserVehicleDetailPersistable;
 @Repository
-public interface UserVehicleDetailRepository extends JpaRepository<UserVehicleDetail, Long> {
+public interface UserVehicleDetailRepository extends JpaRepository<UserVehicleDetailPersistable, Long> {
 
 //	UserVehicleDetail getUserVehicleDetail(Long detailId);
-	UserVehicleDetail findByDetailId(Long detailId);
+	UserVehicleDetailPersistable findByDetailId(Long detailId);
 	
 //	@Query(value="select d from user_vehicle_detail d join appuser u where u.user_id= :user_id", nativeQuery = true )
 //	@Query("from user_vehicle_detail u where u.user_id = :user_id" )

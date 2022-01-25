@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.snehal.carservice.dao.ProductRepository;
-import com.snehal.carservice.model.Product;
+import com.snehal.carservice.model.persistable.ProductPersistable;
 import com.snehal.carservice.cache.BootStrapCache;
 @Service
 public class ProductServiceImpl implements ProductService{
@@ -18,18 +18,18 @@ public class ProductServiceImpl implements ProductService{
 	@Autowired
 	private ProductRepository productRepository;
 	@Override
-	public Product saveProduct(Product product) {
+	public ProductPersistable saveProduct(ProductPersistable product) {
 		
 		return productRepository.save(product);
 	}
 
 	@Override
-	public List<Product> saveProducts(List<Product> products) {
+	public List<ProductPersistable> saveProducts(List<ProductPersistable> products) {
 		return productRepository.saveAll(products);
 	}
 
 	@Override
-	public List<Product> getAllProducts() {
+	public List<ProductPersistable> getAllProducts() {
 		return productRepository.findAll();
 	}
 
@@ -41,18 +41,18 @@ public class ProductServiceImpl implements ProductService{
 	public void saveAllProductsForFirstTime() {
 		deleteAllProducts();
 		ProductManagement productManagement=ProductManagement.getProdctManagement();
-		List<Product> products=saveProducts(new ArrayList(productManagement.getProducts()));
+		List<ProductPersistable> products=saveProducts(new ArrayList(productManagement.getProducts()));
 		pouplateProductAndPricingCache(products);
 	}
 	
-	public void pouplateProductAndPricingCache(List<Product> allProducts) {
+	public void pouplateProductAndPricingCache(List<ProductPersistable> allProducts) {
 
-		Map<Product, Double> productPricingCache=BootStrapCache.getProductPricingCache();
-		Map<Long,Product> productCache=BootStrapCache.getProductCache();
+		Map<ProductPersistable, Double> productPricingCache=BootStrapCache.getProductPricingCache();
+		Map<Long,ProductPersistable> productCache=BootStrapCache.getProductCache();
 		productPricingCache.clear();
 		productCache.clear();
 		
-		for(Product p:allProducts) {
+		for(ProductPersistable p:allProducts) {
 			productPricingCache.put(p, p.getPrice());
 			productCache.put(p.getProductId(), p);
 		}
@@ -60,12 +60,12 @@ public class ProductServiceImpl implements ProductService{
 	
 	@PostConstruct
 	public  void loadProductAndPricingCache() {
-		Map<Product, Double> productPricingCache=BootStrapCache.getProductPricingCache();
-		Map<Long,Product> productCache=BootStrapCache.getProductCache();	
-		List<Product> allProducts=getAllProducts();
+		Map<ProductPersistable, Double> productPricingCache=BootStrapCache.getProductPricingCache();
+		Map<Long,ProductPersistable> productCache=BootStrapCache.getProductCache();	
+		List<ProductPersistable> allProducts=getAllProducts();
 		productPricingCache.clear();
 		productCache.clear();
-		for(Product p:allProducts) {
+		for(ProductPersistable p:allProducts) {
 			productPricingCache.put(p, p.getPrice());
 			productCache.put(p.getProductId(), p);
 		}

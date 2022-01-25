@@ -8,7 +8,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.snehal.carservice.model.AppUser;
+import com.snehal.carservice.model.dto.AppUserJsonDto;
 import com.snehal.carservice.service.UserService;
 
 
@@ -19,11 +19,11 @@ public class UserValidator implements Validator {
     private UserService userService;
 
     public boolean supports(Class<?> aClass) {
-        return AppUser.class.equals(aClass);
+        return AppUserJsonDto.class.equals(aClass);
     }
 
     public void validate(Object o, Errors errors) {
-    	AppUser user = (AppUser) o;
+    	AppUserJsonDto user = (AppUserJsonDto) o;
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "mobileNumber", "NotEmpty");
         if (user.getMobileNumber().length() < 10) {
