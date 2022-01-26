@@ -30,7 +30,7 @@ public class VehicleManagement {
 	private static void populateAllVehicles() {
 
 //#Manufacturer,Model,VehicleSegment
-			 File file=new File("D:\\SnehalImp\\Wash\\Repo\\carservice\\carservice\\src\\main\\resources\\vehicles.csv");
+			 File file=new File("src\\main\\resources\\vehicles.csv");
        Scanner sc = null;
 	try {
 		sc = new Scanner(file);
