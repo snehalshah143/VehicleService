@@ -12,5 +12,15 @@ public class ProductMappers extends AbstarctMapper<ProductJsonDto, Product, Prod
 		return productMappers;
 	}
 
+	public ProductJsonDto  mapPersistableToJsonDto(ProductPersistable persistable) {
+		ProductJsonDto jsonDto=new ProductJsonDto();
+		jsonDto.setProductId(persistable.getProductId());
+		jsonDto.setPrice(persistable.getPrice());
+		jsonDto.setProductType(persistable.getProductType());
+		jsonDto.setTimeSlot(persistable.getTimeSlot());
+		jsonDto.setVehicleSegment(persistable.getVehicleSegment());
+		return jsonDto;
+		
+	}
 
 }

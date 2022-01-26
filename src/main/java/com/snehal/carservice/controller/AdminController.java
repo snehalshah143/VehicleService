@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.snehal.carservice.cache.BootStrapCache;
+import com.snehal.carservice.mapper.ProductMappers;
 import com.snehal.carservice.mapper.VehicleMappers;
+import com.snehal.carservice.model.dto.ProductJsonDto;
 import com.snehal.carservice.model.dto.VehicleJsonDto;
 import com.snehal.carservice.model.persistable.OrderPersistable;
 import com.snehal.carservice.model.persistable.ProductPersistable;
@@ -37,10 +39,12 @@ public class AdminController{
 
 
 @GetMapping(path = "/products/getall")
-public ResponseEntity<List<ProductPersistable>> getAllProducts(){
+public ResponseEntity<List<ProductJsonDto>> getAllProducts(){
 	
     List<ProductPersistable> products=productService.getAllProducts();
-    return new ResponseEntity<List<ProductPersistable>> (products,HttpStatus.OK);
+    List<ProductJsonDto> productsJsonDtoList=products.stream().map(p ->ProductMappers.getProductMappers().mapPersistableToJsonDto(p)).toList();
+
+    return new ResponseEntity<List<ProductJsonDto>> (productsJsonDtoList,HttpStatus.OK);
 }
 
 @GetMapping(path = "/vehicles/getall")

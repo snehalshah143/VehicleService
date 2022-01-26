@@ -27,6 +27,7 @@ import com.snehal.carservice.mapper.BookingMappers;
 import com.snehal.carservice.mapper.UserVehicleDetailMappers;
 import com.snehal.carservice.model.domain.LoginModel;
 import com.snehal.carservice.model.dto.AppUserJsonDto;
+import com.snehal.carservice.model.dto.BookingJsonDto;
 import com.snehal.carservice.model.dto.UserVehicleDetailJsonDto;
 import com.snehal.carservice.model.persistable.AppUserPersistable;
 import com.snehal.carservice.model.persistable.AssignmentPersistable;
@@ -124,7 +125,7 @@ for(UserVehicleDetailPersistable p:vehicleDetails) {
     }
     
     @PostMapping(path = "/booking/book/{userid}",consumes="application/json")
-    public ResponseEntity<BookingPersistable> createBooking(@RequestBody BookingPersistable booking,@PathVariable("userid") Long userId, BindingResult bindingResult) {
+    public ResponseEntity<BookingJsonDto> createBooking(@RequestBody BookingPersistable booking,@PathVariable("userid") Long userId, BindingResult bindingResult) {
 //        userValidator.validate(userVehicleDetail, bindingResult);
 
 
@@ -177,7 +178,7 @@ for(UserVehicleDetailPersistable p:vehicleDetails) {
 	}
     
     @RequestMapping(value = "/userlogin", method = RequestMethod.POST)
-    public ResponseEntity<AppUserPersistable> login(@RequestBody LoginModel loginModel ,  BindingResult bindingResult) {
+    public ResponseEntity<AppUserJsonDto> login(@RequestBody LoginModel loginModel ,  BindingResult bindingResult) {
     	//Populate Message and Response Body
 
     	AppUserPersistable user=authenticationService.authenticateUser(loginModel);
@@ -185,7 +186,7 @@ for(UserVehicleDetailPersistable p:vehicleDetails) {
     	if(user==null) {
     		   return new ResponseEntity (HttpStatus.BAD_REQUEST);
     	}
-        return new ResponseEntity (user,HttpStatus.OK);
+        return new ResponseEntity (AppuserMappers.getAppuserMappers().mapPersistableToJsonDto(user),HttpStatus.OK);
     }
 
     @RequestMapping(value = "/welcome", method = RequestMethod.GET)
