@@ -195,5 +195,12 @@ for(UserVehicleDetailPersistable p:vehicleDetails) {
 
         return "Welcome Washs";
     }
+    
+    @PostMapping(path = "/admin/systemshutdown")
+    public void systemShutdown() {
+System.out.println("Shutting Down System!");
+System.exit(0);
+    }
+
 
 }
