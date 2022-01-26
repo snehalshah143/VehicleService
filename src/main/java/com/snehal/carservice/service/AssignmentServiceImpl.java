@@ -37,5 +37,15 @@ public class AssignmentServiceImpl implements AssignmentService{
 		
 	}
 	
+	public List<AssignmentPersistable> createAssigmentsAndUpdateStatusForOrder(OrderPersistable order) {
+		
+		List<AssignmentPersistable> allAssignments=AssignmentDashboard.createAssignmentForOrder(order);
+		//saveALLAssignments(allAssignments);
+		//bookingService.updateOrderStatusToAssigned(order);
+		return allAssignments;
+	}
+
+
+	
 	
 }

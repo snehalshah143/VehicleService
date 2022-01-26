@@ -26,12 +26,13 @@ public class AppUserPersistable implements IPerstistable{
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "appUser", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("appuser")
-    private Set <UserVehicleDetailPersistable> vehicleDetails = new HashSet<UserVehicleDetailPersistable>();
-
+//    private Set <UserVehicleDetailPersistable> vehicleDetails = new HashSet<UserVehicleDetailPersistable>();
+    private Set <UserVehicleDetailPersistable> vehicleDetails ;
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "appUser", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("appuser")
-    private Set <BookingPersistable> bookings = new HashSet<BookingPersistable>();
+//    private Set <BookingPersistable> bookings = new HashSet<BookingPersistable>();
+    private Set <BookingPersistable> bookings;
 
 	public AppUserPersistable(){
     	

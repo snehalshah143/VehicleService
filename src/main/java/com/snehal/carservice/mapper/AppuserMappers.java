@@ -27,17 +27,20 @@ public class AppuserMappers extends AbstarctMapper<AppUserJsonDto, AppUser, AppU
 		appUserJsonDto.setEmail(persistable.getEmail());
 		appUserJsonDto.setMobileNumber(persistable.getMobileNumber());
 		appUserJsonDto.setUsername(persistable.getUsername());
+		if(persistable.getBookings()!=null) {
 		Set<BookingJsonDto> bookingsJsonDtoSet=new HashSet<BookingJsonDto>();
 		for(BookingPersistable b:persistable.getBookings()) {
 			bookingsJsonDtoSet.add(BookingMappers.getBookingMappers().mapPersistableToJsonDto(b));
 		}
 		appUserJsonDto.setBookings(bookingsJsonDtoSet);
-		
+		}
+		if(persistable.getVehicleDetails()!=null) {
 		Set<UserVehicleDetailJsonDto> userVehicleDetailJsonDtoSet=new HashSet<UserVehicleDetailJsonDto>();
 		for(UserVehicleDetailPersistable u:persistable.getVehicleDetails()) {
 			userVehicleDetailJsonDtoSet.add(UserVehicleDetailMappers.getUserVehicleDetailMappers().mapPersistableToJsonDto(u));
 		}
 		appUserJsonDto.setVehicleDetails(userVehicleDetailJsonDtoSet);
+		}
 		return appUserJsonDto;
 		
 	}

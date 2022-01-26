@@ -25,6 +25,15 @@ public class AssignmentDashboard {
 		return allAssignments;
 	}
 
+	public static  List<AssignmentPersistable> createAssignmentForOrder(OrderPersistable order) {
+		List<AssignmentPersistable> allAssignments=new ArrayList<AssignmentPersistable>();
+	
+	
+				createAssignmentForOrder(allAssignments, order);
+		
+		return allAssignments;
+	}
+	
 	private static void createAssignmentForOrder(List<AssignmentPersistable> allAssignments, OrderPersistable o) {
 		ProductType productType=o.getProduct().getProductType();
 		switch(productType) {

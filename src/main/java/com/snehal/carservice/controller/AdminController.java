@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.snehal.carservice.cache.BootStrapCache;
-import com.snehal.carservice.mapper.AppuserMappers;
 import com.snehal.carservice.mapper.VehicleMappers;
 import com.snehal.carservice.model.dto.VehicleJsonDto;
 import com.snehal.carservice.model.persistable.OrderPersistable;
@@ -61,14 +60,6 @@ public void saveAllProductsForFirstTime() {
 productService.saveAllProductsForFirstTime();
 }
 
-/*
- * @PostMapping(path = "/admin/saveVehicleRawData/{path}") public void
- * saveAllProductsForFirstTime(@PathVariable("path") String path) {
- * 
- * List<VehicleRawData> vehiclesRawDataList=new ArrayList<VehicleRawData>();
- * vehiclesRawDataList.addAll(VehicleRawDataLoading.loadVehicleRawData(path));
- * vehicleService.saveAllVehicleRawData(vehiclesRawDataList); }
- */
 
 @PostMapping(path = "/admin/saveallvehicles")
 public void saveAllVehiclesForFirstTime() {

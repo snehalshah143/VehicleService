@@ -1,0 +1,317 @@
+ALL APIS
+============================================================================================
+1)
+NAME:Register/Signup API
+API TYPE : POST
+PATH:"/usersignup"
+    @PostMapping(path = "/usersignup",consumes="application/json")
+    ResponseEntity<AppUserJsonDto> userSignUp(@RequestBody AppUserPersistable user)
+
+REQUEST PAYLOAD:
+{
+"mobileNumber":"9632359048",
+"password":"Snehal@12345",
+"passwordConfirm":"Snehal@12345",
+"email":"snehal.shah1434@gmail.com",
+"firstName":"Snehal",
+"lastName":"Shah",
+"dateOfBirth":"1990-05-18"
+}
+RESPONSE PAYLOAD:
+{
+    "userId": 16,
+    "username": "9632359048",
+    "email": "snehal.shah1434@gmail.com",
+    "mobileNumber": "9632359048",
+    "firstName": "Snehal",
+    "lastName": "Shah"
+}    
+==============================================================================================    
+2)
+NAME:Add Vehicle Details and Address where vehicle is Located
+API TYPE : POST
+PATH:"/vehicledetails/add/1"
+    @PostMapping(path = "/vehicledetails/add/{userid}",consumes="application/json")
+    ResponseEntity<UserVehicleDetailJsonDto> addVehicleDetails(@RequestBody UserVehicleDetailPersistable userVehicleDetail,@PathVariable("userid") Long userId)
+
+REQUEST PAYLOAD:
+{		
+"address" :"Flat No 10 3rd Floor Building A",
+"society": "Magarpatta Society Trillium",
+"locality" : "Magarpatta",
+"parkingPlace" : "A-10 Basement1",
+"pincode" : "411001",
+"vehicleNumber" : "MH14HD0145",
+"manufacturingCompanyAndModel" : "hyundai i20 Asta Model",
+"vehicleSegment" :"LUXRY_CARS"
+}
+RESPONSE PAYLOAD:
+{
+    "detailId": 552,
+    "address": "Flat No 10 3rd Floor Building A",
+    "society": "Magarpatta Society Trillium",
+    "locality": "Magarpatta",
+    "parkingPlace": "A-10 Basement1",
+    "pincode": "411001",
+    "vehicleNumber": "MH14HD0145",
+    "manufacturingCompanyAndModel": "hyundai i20 Asta Model",
+    "vehicleSegment": "LUXRY_CARS",
+    "appUser": {
+        "userId": 8
+    }
+}
+===================================================================================================
+3)
+NAME:Get Vehicle Details and Address where vehicle is Located
+API TYPE : GET
+PATH:"/vehicledetails/get/1"
+    @GetMapping(path = "/vehicledetails/get/{userid}")
+    ResponseEntity<List<UserVehicleDetailJsonDto>> getUserVehicleDetailsForUserId(@PathVariable("userid") Long userId)
+
+REQUEST PAYLOAD:NO PAYLOAD
+
+RESPONSE PAYLOAD:
+[
+    {
+        "detailId": 103,
+        "address": "Flat No 10 3rd Floor Building A",
+        "society": "Magarpatta Society Trillium",
+        "locality": "Magarpatta",
+        "parkingPlace": "A-10 Basement1",
+        "pincode": "411001",
+        "vehicleNumber": "MH14HD0145",
+        "manufacturingCompanyAndModel": "hyundai i20 Asta Model",
+        "vehicleSegment": "LUXRY_CARS",
+        "appUser": {
+            "userId": 8
+        }
+    },
+    {
+        "detailId": 110,
+        "address": "jjkknj",
+        "society": "Magarpatta Society Trillium",
+        "locality": "Magarpatta",
+        "parkingPlace": "A-10 Basement1",
+        "pincode": "411001",
+        "vehicleNumber": "MH14HD0145",
+        "manufacturingCompanyAndModel": "hyundai i20 Asta Model",
+        "vehicleSegment": "LUXRY_CARS",
+        "appUser": {
+            "userId": 8
+        }
+    }
+ ]
+
+=====================================================================================================
+4)
+NAME:Book the subscription or individual on demand wash
+Description: This APi will generate separate orders added in cart and also generate the assignments.
+API TYPE : POST
+PATH:"/booking/book/1"
+    @PostMapping(path = "/booking/book/{userid}",consumes="application/json")
+    ResponseEntity<BookingPersistable> createBooking(@RequestBody BookingPersistable booking,@PathVariable("userid") Long userId)
+ 
+REQUEST PAYLOAD:
+{
+"productCart":[
+                {
+				"userVehicleDetail":{
+									"detailId":2
+									},
+				"product":			  
+									{"productId":2
+									}
+			    },{
+				"userVehicleDetail":{
+									"detailId":1
+									},
+				"product":			  
+									{"productId":1
+									
+									}
+			    }
+            ],									
+"finalAmount":1000,
+"appUser":	{
+			"userId":1
+			}
+}
+RESPONSE PAYLOAD:
+{
+    "bookingId": 2352,
+    "productCart": [
+        {
+            "orderId": 2353,
+            "userVehicleDetail": {
+                "detailId": 1,
+                "vehicleNumber": "MH14HD0145",
+                "vehicleSegment": "LUXRY_CARS"
+            },
+            "product": {
+                "productId": 1
+            }
+        },
+        {
+            "orderId": 2352,
+            "userVehicleDetail": {
+                "detailId": 2,
+                "vehicleNumber": "MH14HD0145",
+                "vehicleSegment": "SEDAN_SUV"
+            },
+            "product": {
+                "productId": 2
+            }
+        }
+    ],
+    "finalAmount": 1050.0,
+    "appUser": {
+        "userId": 1
+    }
+}
+====================================================================================================
+5)
+NAME: USER Login API
+
+API TYPE:POST
+PATH:"/userlogin"
+
+    @RequestMapping(value = "/userlogin", method = RequestMethod.POST)
+    public ResponseEntity<AppUserPersistable> login(@RequestBody LoginModel loginModel )
+    
+REQUEST PAYLOAD:
+{
+    "username":"9632359040",
+    "password":"Snehal@12345"
+}
+RESPONSE PAYLOAD:
+    {
+    "username": "9632359040",
+    "password": "shree@12345",
+    "passwordConfirm": "shree@12345",
+    "email": "snegal@gmail.com",
+    "mobileNumber": "9632359040",
+    "firstName": "snehal ",
+    "lastName": "patil",
+    "dateOfBirth": null,
+    "loggedIn": false,
+    "vehicleDetails": [],
+    "bookings": [],
+    "id": 9
+}
+============================================================================================
+6)
+NAME: GET All Products availble in DB.
+
+API TYPE:GET
+PATH:"/products/getall"
+
+	@GetMapping(path = "/products/getall")
+	ResponseEntity<List<ProductPersistable>> getAllProducts()
+
+REQUEST PAYLOAD:
+
+RESPONSE PAYLOAD:
+ [
+    {
+        "productId": 1,
+        "productType": "ON_DEMAND_WASH",
+        "vehicleSegment": "LARGE_VEHICLE",
+        "timeSlot": "PEAK_TIME",
+        "price": 85.0
+    },
+    {
+        "productId": 2,
+        "productType": "ALTERNATE_WASH",
+        "vehicleSegment": "LARGE_VEHICLE",
+        "timeSlot": "NORMAL_TIME",
+        "price": 400.0
+    },
+    {
+        "productId": 3,
+        "productType": "ALTERNATE_WASH",
+        "vehicleSegment": "COMPACT",
+        "timeSlot": "FREE_TIME",
+        "price": 225.0
+    }
+ ]   
+ =================================================================================== 
+7)
+NAME: GET All Vehicles available in DB.
+
+API TYPE:GET
+PATH:"/vehicles/getall"
+
+@GetMapping(path = "/vehicles/getall")
+public ResponseEntity<List<VehicleJsonDto>> getAllVehicles()
+
+REQUEST PAYLOAD:NO PAYLOAD
+
+RESPONSE PAYLOAD:  
+[
+    {
+        "vehicleId": 52,
+        "manufacturer": "Hyundai",
+        "model": "I10Grand",
+        "vehicleSegment": "COMPACT"
+    },
+    {
+        "vehicleId": 53,
+        "manufacturer": "Hyundai",
+        "model": "Verna",
+        "vehicleSegment": "COMPACT"
+    },
+    {
+        "vehicleId": 54,
+        "manufacturer": "Hyundai",
+        "model": "I10",
+        "vehicleSegment": "COMPACT"
+    },
+    {
+        "vehicleId": 55,
+        "manufacturer": "Hyundai",
+        "model": "I20",
+        "vehicleSegment": "COMPACT"
+    }
+]
+=================================================================================================     
+8)
+NAME: Trigger API for Saving All Products in DB which are in our java file.
+
+API TYPE:POST
+PATH:"/admin/saveproducts"
+
+@PostMapping(path = "/admin/saveproducts")
+public void saveAllProductsForFirstTime()
+
+REQUEST PAYLOAD:
+
+RESPONSE PAYLOAD:    
+===============================================================================================     
+9)
+NAME: Trigger API for Saving All Vehicles in DB which are in our static file vehicles.csv.
+
+API TYPE:POST
+PATH:"/admin/saveallvehicles"
+
+@PostMapping(path = "/admin/saveallvehicles")
+public void saveAllVehiclesForFirstTime()
+
+REQUEST PAYLOAD:NO PAYLOAD
+
+RESPONSE PAYLOAD:NO PAYLOAD
+     
+==============================================================================================     
+10)
+NAME: Trigger API for creating  All Assignments for each order.
+
+API TYPE:POST
+PATH:"/admin/createallassigments"
+
+@PostMapping(path = "/admin/createallassigments")
+public void createAllAssigments()
+
+REQUEST PAYLOAD:NO PAYLOAD
+
+RESPONSE PAYLOAD:NO PAYLOAD   
+
+=======================================================================================================      

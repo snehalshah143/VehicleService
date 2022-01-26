@@ -2,6 +2,7 @@ package com.snehal.carservice.controller;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -20,11 +21,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.snehal.carservice.cache.BootStrapCache;
 import com.snehal.carservice.common.status.Status;
 import com.snehal.carservice.common.util.UserValidator;
+import com.snehal.carservice.constants.AdminConstants;
+import com.snehal.carservice.mapper.AppuserMappers;
 import com.snehal.carservice.mapper.BookingMappers;
 import com.snehal.carservice.mapper.UserVehicleDetailMappers;
 import com.snehal.carservice.model.domain.LoginModel;
+import com.snehal.carservice.model.dto.AppUserJsonDto;
 import com.snehal.carservice.model.dto.UserVehicleDetailJsonDto;
 import com.snehal.carservice.model.persistable.AppUserPersistable;
+import com.snehal.carservice.model.persistable.AssignmentPersistable;
 import com.snehal.carservice.model.persistable.BookingPersistable;
 import com.snehal.carservice.model.persistable.OrderPersistable;
 import com.snehal.carservice.model.persistable.ProductPersistable;
@@ -56,22 +61,24 @@ public class UserController {
 
 
     @PostMapping(path = "/usersignup",consumes="application/json")
-    public ResponseEntity<AppUserPersistable> userSignUp(@RequestBody AppUserPersistable user, BindingResult bindingResult) {
+    public ResponseEntity<AppUserJsonDto> userSignUp(@RequestBody AppUserPersistable user, BindingResult bindingResult) {
         userValidator.validate(user, bindingResult);
        if (bindingResult.hasErrors()) {
     	   System.out.println(bindingResult.getAllErrors().toString());
            return new ResponseEntity (bindingResult.getAllErrors(),HttpStatus.BAD_REQUEST);
         }
         user.setUsername(user.getMobileNumber());
-        return new ResponseEntity<AppUserPersistable> (userService.save(user),HttpStatus.OK);
+        
+        AppUserPersistable appUser=userService.save(user);
+        AppUserJsonDto jsonDto=AppuserMappers.getAppuserMappers().mapPersistableToJsonDto(appUser);
+        return new ResponseEntity<AppUserJsonDto> (jsonDto,HttpStatus.OK);
 
 
     }
 
     @PostMapping(path = "/vehicledetails/add/{userid}",consumes="application/json")
-    public ResponseEntity<UserVehicleDetailPersistable> addVehicleDetails(@RequestBody UserVehicleDetailPersistable userVehicleDetail,@PathVariable("userid") Long userId, BindingResult bindingResult) {
-//        userValidator.validate(userVehicleDetail, bindingResult);
-//System.out.println("dateOfBirt::"+user.getDateOfBirth());
+    public ResponseEntity<UserVehicleDetailJsonDto> addVehicleDetails(@RequestBody UserVehicleDetailPersistable userVehicleDetail,@PathVariable("userid") Long userId, BindingResult bindingResult) {
+
     	AppUserPersistable appUser=userService.findByUserId(userId);
     	userVehicleDetail.setAppUser(appUser);
        if (bindingResult.hasErrors()) {
@@ -82,7 +89,8 @@ public class UserController {
 
        UserVehicleDetailPersistable vehicleDetail=userService.saveVehicleDetail(userVehicleDetail);
 
-        return new ResponseEntity<UserVehicleDetailPersistable> (vehicleDetail,HttpStatus.OK);
+       UserVehicleDetailJsonDto jsonDto= UserVehicleDetailMappers.getUserVehicleDetailMappers().mapPersistableToJsonDto(vehicleDetail);
+        return new ResponseEntity<UserVehicleDetailJsonDto> (jsonDto,HttpStatus.OK);
     }
     @GetMapping(path = "/vehicledetails/get/{userid}")
     public ResponseEntity<List<UserVehicleDetailJsonDto>> getUserVehicleDetailsForUserId(@PathVariable("userid") Long userId){
@@ -97,7 +105,7 @@ for(UserVehicleDetailPersistable p:vehicleDetails) {
     }
     
 
-    
+//Currently not used    
     @PostMapping(path = "/booking/add/{detailid}",consumes="application/json")
     public String createOrder(@RequestBody OrderPersistable order,@PathVariable("detailid") Long detailId, BindingResult bindingResult) {
 //        userValidator.validate(userVehicleDetail, bindingResult);
@@ -148,6 +156,9 @@ for(UserVehicleDetailPersistable p:vehicleDetails) {
         	order.setUserVehicleDetail(userVehicleDetail);
        	   ProductPersistable product=BootStrapCache.getProductCache().get(order.getProduct().getProductId());
     	   order.setProduct(product);
+//New Part Not working efficientkly Very Slow  will display assigmnets in response
+//    	   createAssignmentsForOrder(order);
+//New Part
     	   orderListUpdated.add(order);
      	 }
      	bookingService.saveOrders(orderListUpdated);
@@ -158,6 +169,12 @@ for(UserVehicleDetailPersistable p:vehicleDetails) {
     	 return result;
     	
     }
+
+	private void createAssignmentsForOrder(OrderPersistable order) {
+		List<AssignmentPersistable> allAssignments=assignmentService.createAssigmentsAndUpdateStatusForOrder(order);
+    	   order.setAssignments(new HashSet(allAssignments));
+   		   order.setOrderStatus(AdminConstants.ASSIGNED);
+	}
     
     @RequestMapping(value = "/userlogin", method = RequestMethod.POST)
     public ResponseEntity<AppUserPersistable> login(@RequestBody LoginModel loginModel ,  BindingResult bindingResult) {

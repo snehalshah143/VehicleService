@@ -1,0 +1,19 @@
+USER _STORIES
+=========================================
+MUST TO DO:
+0)Change pacakge structure
+1)Date and time stamp implementations
+2)Assignments date wise/area wise/
+3)Segregating persitable and publishable
+4)csv file path to classpath
+5)swagger ui api documentation
+6)
+
+GOOD TO HAVE:
+1)JWT Token implementation.
+2)Payments Module Implementation
+3)Assignment dashboard for admin and employee
+4)Caffine cache implementation
+5)Multithreading async implementations like processor passing task from one thread to other
+6)Map implementation using map my india and google
+7)

@@ -12,11 +12,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-public class AssignmentJsonDto {
+@JsonInclude(Include.NON_NULL)
+public class AssignmentJsonDto implements Serializable{
 
 	private Long assignmentId;
 	
