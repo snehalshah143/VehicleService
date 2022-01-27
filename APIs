@@ -302,6 +302,51 @@ REQUEST PAYLOAD:NO PAYLOAD
 RESPONSE PAYLOAD:NO PAYLOAD   
 
 ======================================================================================================= 
+11)
+NAME: Get all munufacturing companies of vehicles
+
+API TYPE:GET 
+PATH:"/vehicles/getallmake"
+
+@GetMapping(path = "/vehicles/getallmake")
+public ResponseEntity<Set<String>> getAllManufacturers(){
+
+
+REQUEST PAYLOAD:NO PAYLOAD
+
+RESPONSE PAYLOAD:
+[
+    "Hyundai",
+    "Tata",
+    "Honda"
+]
+===========================================================================================================
+12)
+NAME: Get all models for specific manufacturer of vehicles
+
+API TYPE:GET 
+PATH:"/vehicles/getallmodels/{make}"
+PATH:http://localhost:8080/vehicles/getallmodels/Hyundai
+
+@GetMapping(path = "/vehicles/getallmodels/{make}")
+ResponseEntity<Set<String>> getAllModelsForManufacturer(@PathVariable("make") String make)
+
+
+REQUEST PAYLOAD:NO PAYLOAD
+
+RESPONSE PAYLOAD:
+[
+    "I20",
+    "I10",
+    "I10Grand",
+    "Verna"
+]
+
+
+
+
+
+=============================================================================================================
 shutting down
     @PostMapping(path = "/admin/systemshutdown")
     
