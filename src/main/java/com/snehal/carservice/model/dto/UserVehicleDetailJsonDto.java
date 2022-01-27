@@ -3,19 +3,8 @@ package com.snehal.carservice.model.dto;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -33,7 +22,7 @@ public class UserVehicleDetailJsonDto implements Serializable{
     private @NotBlank String pincode;
     private @NotBlank String vehicleNumber;
     private @NotBlank String manufacturingCompanyAndModel;
-    private @NotBlank VehicleSegment vehicleSegment;
+    private @NotBlank VehicleJsonDto vehicle;
     
     private String appUser;
 
@@ -107,12 +96,14 @@ public class UserVehicleDetailJsonDto implements Serializable{
 		this.manufacturingCompanyAndModel = manufacturingCompanyAndModel;
 	}
 
-	public VehicleSegment getVehicleSegment() {
-		return vehicleSegment;
+	
+	
+	public VehicleJsonDto getVehicle() {
+		return vehicle;
 	}
 
-	public void setVehicleSegment(VehicleSegment vehicleSegment) {
-		this.vehicleSegment = vehicleSegment;
+	public void setVehicle(VehicleJsonDto vehicle) {
+		this.vehicle = vehicle;
 	}
 
 	public AppUserJsonDto getAppUser() {

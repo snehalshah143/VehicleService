@@ -42,22 +42,25 @@ REQUEST PAYLOAD:
 "parkingPlace" : "A-10 Basement1",
 "pincode" : "411001",
 "vehicleNumber" : "MH14HD0145",
-"manufacturingCompanyAndModel" : "hyundai i20 Asta Model",
-"vehicleSegment" :"LUXRY_CARS"
+"vehicle"   :{"vehicleId":2}
 }
 RESPONSE PAYLOAD:
 {
-    "detailId": 552,
+    "detailId": 153,
     "address": "Flat No 10 3rd Floor Building A",
     "society": "Magarpatta Society Trillium",
     "locality": "Magarpatta",
     "parkingPlace": "A-10 Basement1",
     "pincode": "411001",
     "vehicleNumber": "MH14HD0145",
-    "manufacturingCompanyAndModel": "hyundai i20 Asta Model",
-    "vehicleSegment": "LUXRY_CARS",
+    "vehicle": {
+        "vehicleId": 2,
+        "manufacturer": "Hyundai",
+        "model": "I10Grand",
+        "vehicleSegment": "COMPACT"
+    },
     "appUser": {
-        "userId": 8
+        "userId": 1
     }
 }
 ===================================================================================================

@@ -18,20 +18,18 @@ public class UserVehicleDetailMappers extends AbstarctMapper<UserVehicleDetailJs
 		
 		UserVehicleDetailJsonDto userVehicleDetailJsonDto=new UserVehicleDetailJsonDto();
 		userVehicleDetailJsonDto.setDetailId(persistable.getId());
-		userVehicleDetailJsonDto.setVehicleSegment(persistable.getVehicleSegment());
 		userVehicleDetailJsonDto.setVehicleNumber(persistable.getVehicleNumber());
-		
+		userVehicleDetailJsonDto.setVehicle(VehicleMappers.getVehicleMappers().mapPersistableToJsonDto(persistable.getVehicle()));
 		userVehicleDetailJsonDto.setAddress(persistable.getAddress());
 		AppUserPersistable appUserPersistable=persistable.getAppUser();
 		AppUserJsonDto appUserJsonDto=new AppUserJsonDto();
 		appUserJsonDto.setUserId(appUserPersistable.getId());
 		userVehicleDetailJsonDto.setAppUser(appUserJsonDto);
 		userVehicleDetailJsonDto.setLocality(persistable.getLocality());
-		userVehicleDetailJsonDto.setManufacturingCompanyAndModel(persistable.getManufacturingCompanyAndModel());
+
 		userVehicleDetailJsonDto.setParkingPlace(persistable.getParkingPlace());
 		userVehicleDetailJsonDto.setPincode(persistable.getPincode());
 		userVehicleDetailJsonDto.setSociety(persistable.getSociety());
-		//UserVehicleDetailJsonDto jsonDto= modelMapper.map(persistable, UserVehicleDetailJsonDto.class);
 		return userVehicleDetailJsonDto;
 		
 	}

@@ -1,5 +1,6 @@
 package com.snehal.carservice.common.util;
 
+import java.io.IOException;
 import java.util.Set;
 
 import javax.persistence.AttributeConverter;
@@ -30,7 +31,7 @@ public class StringSetConverter<Order> implements AttributeConverter<Set<Order>,
         try {
             return mapper.readValue(dbJson, new TypeReference<Set<Order>>() {
             });
-        } catch (JsonProcessingException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

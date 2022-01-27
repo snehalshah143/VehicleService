@@ -31,10 +31,22 @@ public class UserVehicleDetailPersistable{
     private @NotBlank String parkingPlace;
     private @NotBlank String pincode;
     private @NotBlank String vehicleNumber;
-    private @NotBlank String manufacturingCompanyAndModel;
-    private @NotBlank VehicleSegment vehicleSegment;
+   
+   
+    @ManyToOne
+    @JoinColumn(name = "vehicle_id", referencedColumnName = "vehicleId")
+    private VehiclePersistable vehicle;
+   
     
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    public VehiclePersistable getVehicle() {
+		return vehicle;
+	}
+
+	public void setVehicle(VehiclePersistable vehicle) {
+		this.vehicle = vehicle;
+	}
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "userId")
     @JsonIgnoreProperties("vehicleDetails")
     private AppUserPersistable appUser;    
@@ -55,7 +67,9 @@ public class UserVehicleDetailPersistable{
 	}
 */
     
-    public UserVehicleDetailPersistable(){
+
+
+	public UserVehicleDetailPersistable(){
     }
 
 	public UserVehicleDetailPersistable(@NotBlank String address, @NotBlank String society, @NotBlank String locality,
@@ -68,8 +82,6 @@ public class UserVehicleDetailPersistable{
 		this.parkingPlace = parkingPlace;
 		this.pincode = pincode;
 		this.vehicleNumber = vehicleNumber;
-		this.manufacturingCompanyAndModel = manufacturingCompanyAndModel;
-		this.vehicleSegment = vehicleSegment;
 	}
 
 
@@ -177,15 +189,6 @@ public class UserVehicleDetailPersistable{
 
 
 
-	public String getManufacturingCompanyAndModel() {
-		return manufacturingCompanyAndModel;
-	}
-
-
-	public void setManufacturingCompanyAndModel(String manufacturingCompanyAndModel) {
-		this.manufacturingCompanyAndModel = manufacturingCompanyAndModel;
-	}
-
 
 
 	public AppUserPersistable getAppUser() {
@@ -197,19 +200,6 @@ public class UserVehicleDetailPersistable{
 	public void setAppUser(AppUserPersistable appUser) {
 		this.appUser = appUser;
 	}
-
-
-	public VehicleSegment getVehicleSegment() {
-		return vehicleSegment;
-	}
-
-	public void setVehicleSegment(VehicleSegment vehicleSegment) {
-		this.vehicleSegment = vehicleSegment;
-	}
-
-
-
-
 
     
 }

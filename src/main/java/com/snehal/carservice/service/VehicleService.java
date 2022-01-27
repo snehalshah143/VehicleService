@@ -20,4 +20,6 @@ public interface VehicleService {
 
 	List<VehiclePersistable> saveVehicles(List<VehiclePersistable> vehicles);
 
+	VehiclePersistable getVehicle(Long vehicleId);
+
 }

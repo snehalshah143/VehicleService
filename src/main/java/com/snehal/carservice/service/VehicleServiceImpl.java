@@ -26,6 +26,12 @@ public class VehicleServiceImpl implements VehicleService{
 		return vehicleRepository.save(vehicle);
 	}
 
+	@Override
+	public VehiclePersistable getVehicle(Long vehicleId) {
+		
+		return vehicleRepository.findById(vehicleId).get();
+	}
+	
 	
 	@Override
 	public List<VehiclePersistable> getAllVehicles() {

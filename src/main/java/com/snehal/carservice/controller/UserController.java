@@ -35,10 +35,12 @@ import com.snehal.carservice.model.persistable.BookingPersistable;
 import com.snehal.carservice.model.persistable.OrderPersistable;
 import com.snehal.carservice.model.persistable.ProductPersistable;
 import com.snehal.carservice.model.persistable.UserVehicleDetailPersistable;
+import com.snehal.carservice.model.persistable.VehiclePersistable;
 import com.snehal.carservice.service.AssignmentService;
 import com.snehal.carservice.service.AuthenticationService;
 import com.snehal.carservice.service.BookingService;
 import com.snehal.carservice.service.UserService;
+import com.snehal.carservice.service.VehicleService;
 
 
 @RestController
@@ -56,6 +58,9 @@ public class UserController {
     
     @Autowired
 	private AssignmentService assignmentService;
+    
+    @Autowired
+    private VehicleService vehicleService;
 
     private UserVehicleDetailMappers userVehicleDetailMapper=UserVehicleDetailMappers.getUserVehicleDetailMappers();
     private BookingMappers bookingMapper=BookingMappers.getBookingMappers();
@@ -82,6 +87,9 @@ public class UserController {
 
     	AppUserPersistable appUser=userService.findByUserId(userId);
     	userVehicleDetail.setAppUser(appUser);
+    	
+    	VehiclePersistable vehicle=vehicleService.getVehicle(userVehicleDetail.getVehicle().getVehicleId());
+    	userVehicleDetail.setVehicle(vehicle);
        if (bindingResult.hasErrors()) {
     	   System.out.println(bindingResult.getAllErrors().toString());
            return new ResponseEntity (HttpStatus.BAD_REQUEST);

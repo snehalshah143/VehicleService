@@ -34,7 +34,7 @@ public class OrderMappers extends AbstarctMapper<OrderJsonDto, Order, OrderPersi
 		
 		UserVehicleDetailJsonDto userVehicleDetailJsonDto=new UserVehicleDetailJsonDto();
 		userVehicleDetailJsonDto.setDetailId(persistable.getUserVehicleDetail().getId());
-		userVehicleDetailJsonDto.setVehicleSegment(persistable.getUserVehicleDetail().getVehicleSegment());
+		userVehicleDetailJsonDto.setVehicle(VehicleMappers.getVehicleMappers().mapPersistableToJsonDto(persistable.getUserVehicleDetail().getVehicle()));
 		userVehicleDetailJsonDto.setVehicleNumber(persistable.getUserVehicleDetail().getVehicleNumber());
 		jsonDto.setUserVehicleDetail(userVehicleDetailJsonDto);
 		
