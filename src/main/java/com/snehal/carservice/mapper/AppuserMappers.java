@@ -6,6 +6,7 @@ import java.util.Set;
 import com.snehal.carservice.model.domain.AppUser;
 import com.snehal.carservice.model.dto.AppUserJsonDto;
 import com.snehal.carservice.model.dto.BookingJsonDto;
+import com.snehal.carservice.model.dto.UserSignUpRequest;
 import com.snehal.carservice.model.dto.UserVehicleDetailJsonDto;
 import com.snehal.carservice.model.persistable.AppUserPersistable;
 import com.snehal.carservice.model.persistable.BookingPersistable;
@@ -43,5 +44,18 @@ public class AppuserMappers extends AbstarctMapper<AppUserJsonDto, AppUser, AppU
 		}
 		return appUserJsonDto;
 		
+	}
+	
+	public AppUserPersistable  mapSignUpRequestToPersistable(UserSignUpRequest request) {
+	
+		AppUserPersistable persistable=new AppUserPersistable();
+		persistable.setEmail(request.getEmail());
+		persistable.setFirstName(request.getFirstName());
+		persistable.setLastName(request.getLastName());
+		persistable.setMobileNumber(request.getMobileNumber());
+		persistable.setPassword(request.getPassword());
+		
+		return persistable;
+	
 	}
 }

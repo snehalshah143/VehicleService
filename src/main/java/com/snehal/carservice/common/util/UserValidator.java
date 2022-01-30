@@ -39,9 +39,5 @@ public class UserValidator implements Validator {
         if (user.getPassword().length() < 8 || user.getPassword().length() > 32) {
             errors.rejectValue("password", "Please provide Strong password with atleast 8 characters");
         }
-
-        if (!user.getPasswordConfirm().equals(user.getPassword())) {
-            errors.rejectValue("passwordConfirm", "passwordConfirm Not Matching");
-        }
     }
 }

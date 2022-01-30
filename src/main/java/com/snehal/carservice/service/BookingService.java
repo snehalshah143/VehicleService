@@ -8,6 +8,8 @@ import com.snehal.carservice.model.persistable.OrderPersistable;
 public interface BookingService {
 	
 	public BookingPersistable saveBooking(BookingPersistable booking);
+	
+	public BookingPersistable getBooking(Long bookingId);
 
 	public OrderPersistable saveOrder(OrderPersistable order);
 		

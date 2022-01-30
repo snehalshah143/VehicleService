@@ -3,6 +3,7 @@ package com.snehal.carservice.model.persistable;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -41,6 +42,10 @@ public class BookingPersistable implements Serializable{
     @JoinColumn(name = "user_id", referencedColumnName = "userId")
     @JsonIgnoreProperties("bookings")
     private AppUserPersistable appUser;
+    
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "booking", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("booking")
+    private List<PaymentPersistable> payments ;
    
 public BookingPersistable(){
     	

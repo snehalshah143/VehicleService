@@ -1,8 +1,10 @@
 package com.snehal.carservice.service;
 
-import com.snehal.carservice.common.status.PaymentResult;
+import com.snehal.carservice.model.persistable.PaymentPersistable;
 
 public interface PaymentService {
 
-	public PaymentResult makepayment(long bookingId, double finalAmount);
+	public PaymentPersistable savePayment(PaymentPersistable persistable);
+	
+	public PaymentPersistable fetchPaymentInfoFromPaymentGateway(String paymentId);
 }

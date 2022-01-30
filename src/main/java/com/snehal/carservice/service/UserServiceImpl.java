@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.snehal.carservice.dao.AppUserRepository;
 import com.snehal.carservice.dao.RoleRepository;
 import com.snehal.carservice.dao.UserVehicleDetailRepository;
+import com.snehal.carservice.model.dto.UserSignUpRequest;
 import com.snehal.carservice.model.persistable.AppUserPersistable;
 import com.snehal.carservice.model.persistable.UserVehicleDetailPersistable;
 
@@ -32,14 +33,18 @@ public class UserServiceImpl implements UserService {
 	@Transactional(rollbackFor = Exception.class)
 	public AppUserPersistable save(AppUserPersistable user) {
 		String password=user.getPassword();
-		String passwordConfirm=user.getPasswordConfirm();
+
 		user.setPassword(bCryptPasswordEncoder.encode(password));
-		user.setPasswordConfirm(bCryptPasswordEncoder.encode(passwordConfirm));
 //		user.setRoles(new HashSet(roleRepository.findAll()));
 		AppUserPersistable savedUser=userRepository.save(user);
 		return savedUser;
 	}
 
+ public boolean verifyPassword(UserSignUpRequest request ){
+	  
+	 return request.getPassword().equals(request.getPasswordConfirm());
+  }
+	
 	public AppUserPersistable findByUsername(String username) {
 		return userRepository.findByUsername(username);
 	}

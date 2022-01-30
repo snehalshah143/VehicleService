@@ -12,11 +12,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "appuser")
-public class AppUserPersistable implements IPerstistable{
+public class AppUserPersistable implements Serializable{
     private @Id  @GeneratedValue(strategy = GenerationType.TABLE) Long userId;
     private String username;
     private @NotBlank String password;
-    private @NotBlank String passwordConfirm;
     private @NotBlank String email;
     private @NotBlank String mobileNumber;
     private @NotBlank String firstName;
@@ -40,13 +39,12 @@ public class AppUserPersistable implements IPerstistable{
 
 
     
-    public AppUserPersistable(String mobileNumber,String password, String passwordConfirm, String email, 
+    public AppUserPersistable(String mobileNumber,String password, String email, 
 		String firstName, String lastName) {
 	super();
 
 	this.username = "USER"+mobileNumber;
 	this.password = password;
-	this.passwordConfirm = passwordConfirm;
 	this.email = email;
 	this.mobileNumber = mobileNumber;
 	this.firstName = firstName;
@@ -106,22 +104,13 @@ public class AppUserPersistable implements IPerstistable{
     public void setUsername(String username) {
         this.username = username;
     }
-
+    @Transient
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @Transient
-    public String getPasswordConfirm() {
-        return passwordConfirm;
-    }
-
-    public void setPasswordConfirm(String passwordConfirm) {
-        this.passwordConfirm = passwordConfirm;
     }
 
 	public String getEmail() {

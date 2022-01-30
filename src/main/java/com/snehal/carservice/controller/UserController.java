@@ -28,17 +28,21 @@ import com.snehal.carservice.mapper.UserVehicleDetailMappers;
 import com.snehal.carservice.model.domain.LoginModel;
 import com.snehal.carservice.model.dto.AppUserJsonDto;
 import com.snehal.carservice.model.dto.BookingJsonDto;
+import com.snehal.carservice.model.dto.PaymentNotifyRequest;
+import com.snehal.carservice.model.dto.UserSignUpRequest;
 import com.snehal.carservice.model.dto.UserVehicleDetailJsonDto;
 import com.snehal.carservice.model.persistable.AppUserPersistable;
 import com.snehal.carservice.model.persistable.AssignmentPersistable;
 import com.snehal.carservice.model.persistable.BookingPersistable;
 import com.snehal.carservice.model.persistable.OrderPersistable;
+import com.snehal.carservice.model.persistable.PaymentPersistable;
 import com.snehal.carservice.model.persistable.ProductPersistable;
 import com.snehal.carservice.model.persistable.UserVehicleDetailPersistable;
 import com.snehal.carservice.model.persistable.VehiclePersistable;
 import com.snehal.carservice.service.AssignmentService;
 import com.snehal.carservice.service.AuthenticationService;
 import com.snehal.carservice.service.BookingService;
+import com.snehal.carservice.service.PaymentService;
 import com.snehal.carservice.service.UserService;
 import com.snehal.carservice.service.VehicleService;
 
@@ -49,8 +53,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private BookingService bookingService;
-//    @Autowired
-//    private PaymentService paymentService;
+    @Autowired
+    private PaymentService paymentService;
     @Autowired
     private UserValidator userValidator;
     @Autowired
@@ -67,17 +71,23 @@ public class UserController {
 
 
     @PostMapping(path = "/usersignup",consumes="application/json")
-    public ResponseEntity<AppUserJsonDto> userSignUp(@RequestBody AppUserPersistable user, BindingResult bindingResult) {
+    public ResponseEntity<?> userSignUp(@RequestBody UserSignUpRequest request, BindingResult bindingResult) {
+    	
+    	   if(!userService.verifyPassword(request)) {
+    		   
+    		     return new ResponseEntity<String> ("Password and Password Confirm Not Matching",HttpStatus.EXPECTATION_FAILED);
+    	   }
+    	   AppUserPersistable user=AppuserMappers.getAppuserMappers().mapSignUpRequestToPersistable(request);
         userValidator.validate(user, bindingResult);
        if (bindingResult.hasErrors()) {
     	   System.out.println(bindingResult.getAllErrors().toString());
            return new ResponseEntity (bindingResult.getAllErrors(),HttpStatus.BAD_REQUEST);
         }
         user.setUsername(user.getMobileNumber());
-        
         AppUserPersistable appUser=userService.save(user);
         AppUserJsonDto jsonDto=AppuserMappers.getAppuserMappers().mapPersistableToJsonDto(appUser);
         return new ResponseEntity<AppUserJsonDto> (jsonDto,HttpStatus.OK);
+   
 
 
     }
@@ -197,6 +207,22 @@ for(UserVehicleDetailPersistable p:vehicleDetails) {
         return new ResponseEntity (AppuserMappers.getAppuserMappers().mapPersistableToJsonDto(user),HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/notifypayment", method = RequestMethod.POST)
+    public ResponseEntity<Boolean> notifyPayment(@RequestBody PaymentNotifyRequest paymentNotifyRequest ,  BindingResult bindingResult) {
+    	//Populate Message and Response Body
+
+
+    	PaymentPersistable persistable=paymentService.fetchPaymentInfoFromPaymentGateway(paymentNotifyRequest.getPaymentId());
+
+    	persistable.setBooking(bookingService.getBooking(paymentNotifyRequest.getBookingId()));
+//    	persistable.setPaymentId(paymentNotifyRequest.getPaymentId());
+    	PaymentPersistable finalPersistable=paymentService.savePayment(persistable);
+    	
+    
+        return new ResponseEntity (finalPersistable==null?false:true,HttpStatus.OK);
+    }
+    
+    
     @RequestMapping(value = "/welcome", method = RequestMethod.GET)
     public String welcome() {
     	//Populate Message and Response Body

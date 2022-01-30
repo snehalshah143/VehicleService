@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @JsonInclude(Include.NON_NULL)
 public class AppUserJsonDto implements IJsonDto {
 
-	    private @NotBlank Long userId;
+	    private Long userId;
 	    private @NotBlank String username;
 	    private @NotBlank String password;
 	    private @NotBlank String passwordConfirm;

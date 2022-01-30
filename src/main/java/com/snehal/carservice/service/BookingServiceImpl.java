@@ -2,6 +2,7 @@ package com.snehal.carservice.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,11 @@ public class BookingServiceImpl implements BookingService{
 	public BookingPersistable saveBooking(BookingPersistable booking){
 		booking.setFinalAmount(calculateFinalAmount(booking));
 		return bookingRepository.saveAndFlush(booking);
+	}
+	
+	public BookingPersistable getBooking(Long bookingId){
+	
+		return bookingRepository.findById(bookingId).get();
 	}
 	
 	public OrderPersistable saveOrder(OrderPersistable order){
