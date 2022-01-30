@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -12,7 +13,10 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "employee")
 public class EmployeePersistable implements Serializable{
 	
-    private @Id  @GeneratedValue(strategy = GenerationType.TABLE) Long empId;
+	@Id  
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="employee_sequence_generator")
+	@SequenceGenerator(name="employee_sequence_generator" ,sequenceName = "employee_seq")
+    private Long empId;
     private String username;
     private @NotBlank String password;
     private @NotBlank String passwordConfirm;

@@ -3,10 +3,7 @@ package com.snehal.carservice.model.dto;
 import java.io.IOException;
 import java.io.Serializable;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -13,7 +13,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "appuser")
 public class AppUserPersistable implements Serializable{
-    private @Id  @GeneratedValue(strategy = GenerationType.TABLE) Long userId;
+	@Id  
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="user_sequence_generator")
+	@SequenceGenerator(name="user_sequence_generator" ,sequenceName = "uder_seq")
+    private Long userId;
     private String username;
     private @NotBlank String password;
     private @NotBlank String email;
