@@ -1,6 +1,7 @@
 package com.snehal.carservice.model.dto;
 
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.validation.constraints.NotBlank;
@@ -116,6 +117,9 @@ public class UserVehicleDetailJsonDto implements Serializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

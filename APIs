@@ -345,6 +345,38 @@ RESPONSE PAYLOAD:
     "Verna"
 ]
 
+================================================================================================================
+13] Authentication API to get jwt token and authenticate
+NAME: Login and Authentication api
+
+API TYPE:GET 
+PATH:"/authenticate"
+PATH:http://localhost:8080/authenticate
+
+@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+ResponseEntity<?> createAuthenticationToken(@RequestBody JwtLoginRequest authenticationRequest) throws Exception 
+
+
+REQUEST PAYLOAD:
+{
+    "username":"9403134978",
+    "password":"Snehal@12345"
+}
+RESPONSE PAYLOAD:
+{
+    "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5NDAzMTM0OTc4IiwiZXhwIjoxNjQzNDg4Nzk2LCJpYXQiOjE2NDM0NzA3OTZ9.Iw9hr69X0zb1Ro7H_j1oa6SxXolTpYJ-xDRTgOS9Sgv7WCKuH6ZiesSaLTv__npeVKqOTw8Z8X0Zo3I5SS999g"
+}
+
+Using This Token:
+If added in Header Add Key =Authorization
+Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5NDAzMTM0OTc4IiwiZXhwIjoxNjQzNDg4Nzk2LCJpYXQiOjE2NDM0NzA3OTZ9.Iw9hr69X0zb1Ro7H_j1oa6SxXolTpYJ-xDRTgOS9Sgv7WCKuH6ZiesSaLTv__npeVKqOTw8Z8X0Zo3I5SS999g
+
+
+And if added in Authorization 
+
+Add only the token 
+eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5NDAzMTM0OTc4IiwiZXhwIjoxNjQzNDg4Nzk2LCJpYXQiOjE2NDM0NzA3OTZ9.Iw9hr69X0zb1Ro7H_j1oa6SxXolTpYJ-xDRTgOS9Sgv7WCKuH6ZiesSaLTv__npeVKqOTw8Z8X0Zo3I5SS999g
+
 
 
 

@@ -1,6 +1,7 @@
 package com.snehal.carservice.model.dto;
 
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -49,6 +50,9 @@ public class BookingJsonDto implements Serializable{
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		}
 		return orderJsonDtoSet;
@@ -85,6 +89,9 @@ public class BookingJsonDto implements Serializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

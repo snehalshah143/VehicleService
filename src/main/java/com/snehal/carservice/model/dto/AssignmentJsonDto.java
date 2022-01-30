@@ -1,5 +1,6 @@
 package com.snehal.carservice.model.dto;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -135,6 +136,9 @@ public class AssignmentJsonDto implements Serializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

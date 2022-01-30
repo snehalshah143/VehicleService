@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.snehal.carservice.dao.AppUserRepository;
 import com.snehal.carservice.dao.RoleRepository;
@@ -28,11 +29,12 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+	@Transactional(rollbackFor = Exception.class)
 	public AppUserPersistable save(AppUserPersistable user) {
-//		String password=user.getPassword();
-//		String passwordConfirm=user.getPasswordConfirm();
-//		user.setPassword(bCryptPasswordEncoder.encode(password));
-//		user.setPasswordConfirm(bCryptPasswordEncoder.encode(passwordConfirm));
+		String password=user.getPassword();
+		String passwordConfirm=user.getPasswordConfirm();
+		user.setPassword(bCryptPasswordEncoder.encode(password));
+		user.setPasswordConfirm(bCryptPasswordEncoder.encode(passwordConfirm));
 //		user.setRoles(new HashSet(roleRepository.findAll()));
 		AppUserPersistable savedUser=userRepository.save(user);
 		return savedUser;
