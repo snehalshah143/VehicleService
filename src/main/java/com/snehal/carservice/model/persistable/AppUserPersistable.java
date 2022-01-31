@@ -23,7 +23,6 @@ public class AppUserPersistable implements Serializable{
     private @NotBlank String mobileNumber;
     private @NotBlank String firstName;
     private @NotBlank String lastName;
-    private Date dateOfBirth;
     private @NotBlank boolean loggedIn;
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "appUser", cascade = CascadeType.ALL)
@@ -77,18 +76,6 @@ public class AppUserPersistable implements Serializable{
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-
-
-
-	public Date getDateOfBirth() {
-		return dateOfBirth;
-	}
-
-
-
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
 	}
 
 
