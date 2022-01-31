@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -86,11 +87,22 @@ public class PaymentPersistable implements Serializable{
     
     @JsonProperty("error_reason")
     private String errorReason;
+    
+    
+    @JsonProperty("bank")
+    private String bank;
+    
+    @Transient
+    @JsonProperty("notes")
+    private String[] notes;
 
     
     @JsonProperty("created_at")
     private Long createdAt;
     
+//    @JsonProperty("acquirer_data")
+//    private JSONObject acquirerDdata;
+        
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "booking_id", referencedColumnName = "bookingId")
@@ -351,6 +363,25 @@ public class PaymentPersistable implements Serializable{
 	public void setBooking(BookingPersistable booking) {
 		this.booking = booking;
 	}
-    
+
+
+	public String[] getNotes() {
+		return notes;
+	}
+
+
+	public void setNotes(String[] notes) {
+		this.notes = notes;
+	}
+
+
+	public String getBank() {
+		return bank;
+	}
+
+
+	public void setBank(String bank) {
+		this.bank = bank;
+	}
     
 }

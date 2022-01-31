@@ -3,6 +3,7 @@ package com.snehal.carservice.model.persistable;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -33,7 +34,7 @@ public class AppUserPersistable implements Serializable{
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "appUser", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("appuser")
 //    private Set <BookingPersistable> bookings = new HashSet<BookingPersistable>();
-    private Set <BookingPersistable> bookings;
+    private List<BookingPersistable> bookings;
 
 	public AppUserPersistable(){
     	
@@ -94,7 +95,7 @@ public class AppUserPersistable implements Serializable{
     public void setUsername(String username) {
         this.username = username;
     }
-    @Transient
+
     public String getPassword() {
         return password;
     }
@@ -141,10 +142,10 @@ public class AppUserPersistable implements Serializable{
 
 
 
-	public Set<BookingPersistable> getBookings() {
+	public List<BookingPersistable> getBookings() {
 		return bookings;
 	}
-	public void setBookings(Set<BookingPersistable> bookings) {
+	public void setBookings(List<BookingPersistable> bookings) {
 		this.bookings = bookings;
 	}
 

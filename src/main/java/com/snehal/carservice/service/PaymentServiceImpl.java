@@ -1,5 +1,7 @@
 package com.snehal.carservice.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,13 @@ public class PaymentServiceImpl implements PaymentService{
 		
 		return paymentGateway.fetchPaymentInfo(paymentId);
 		
+	}
+
+
+	@Override
+	public PaymentPersistable getPaymentInfo(String paymentId) {
+
+		return paymentRepository.findById(paymentId).get();
 	}
 	
 	

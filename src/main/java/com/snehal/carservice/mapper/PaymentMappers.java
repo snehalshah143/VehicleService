@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import org.json.JSONObject;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.snehal.carservice.model.domain.Payment;
 import com.snehal.carservice.model.dto.BookingJsonDto;
@@ -83,6 +84,7 @@ public class PaymentMappers extends AbstarctMapper<PaymentJsonDto, Payment, Paym
 				ObjectMapper mapper = new ObjectMapper();
 				PaymentPersistable persistable = null;
 				try {
+					mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 					persistable = mapper.readValue(data.toString(), PaymentPersistable.class);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block

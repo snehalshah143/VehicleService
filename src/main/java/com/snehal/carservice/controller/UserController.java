@@ -213,14 +213,24 @@ for(UserVehicleDetailPersistable p:vehicleDetails) {
 
 
     	PaymentPersistable persistable=paymentService.fetchPaymentInfoFromPaymentGateway(paymentNotifyRequest.getPaymentId());
-
-    	persistable.setBooking(bookingService.getBooking(paymentNotifyRequest.getBookingId()));
-//    	persistable.setPaymentId(paymentNotifyRequest.getPaymentId());
+    	BookingPersistable booking=bookingService.getBooking(paymentNotifyRequest.getBookingId());
+    	persistable.setBooking(booking);
     	PaymentPersistable finalPersistable=paymentService.savePayment(persistable);
-    	
+    	booking.setPaymentStatus(finalPersistable.getPaymentStatus());
+    	bookingService.saveBooking(booking);
     
         return new ResponseEntity (finalPersistable==null?false:true,HttpStatus.OK);
     }
+
+    @GetMapping(path = "/admin/booking/getall/{userid}")
+    public ResponseEntity<BookingJsonDto> getAllBookingsForUser(@PathVariable("userid") Long userId) {
+
+
+      	List<BookingJsonDto> bookings=bookingService.getAllBookingsForUserId(userId);
+
+        return new ResponseEntity (bookings,HttpStatus.OK);
+    }
+
     
     
     @RequestMapping(value = "/welcome", method = RequestMethod.GET)

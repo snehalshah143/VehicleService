@@ -46,6 +46,9 @@ public class BookingPersistable implements Serializable{
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "booking", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("booking")
     private List<PaymentPersistable> payments ;
+    
+    
+    private String paymentStatus;
    
 public BookingPersistable(){
     	
@@ -81,6 +84,19 @@ public BookingPersistable(){
 	public void setAppUser(AppUserPersistable appUser) {
 		this.appUser = appUser;
 	}
+	public List<PaymentPersistable> getPayments() {
+		return payments;
+	}
+	public void setPayments(List<PaymentPersistable> payments) {
+		this.payments = payments;
+	}
+	public String getPaymentStatus() {
+		return paymentStatus;
+	}
+	public void setPaymentStatus(String paymentStatus) {
+		this.paymentStatus = paymentStatus;
+	}
 
+	
     
 }

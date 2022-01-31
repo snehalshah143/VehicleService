@@ -3,6 +3,7 @@ package com.snehal.carservice.model.dto;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.constraints.NotBlank;
@@ -11,6 +12,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.snehal.carservice.model.persistable.PaymentPersistable;
 
 public class BookingJsonDto implements Serializable{
 	
@@ -22,6 +24,7 @@ public class BookingJsonDto implements Serializable{
 	
     private @NotBlank Double finalAmount;
 
+    private String paymentStatus;
     private String appUser;
 
 	public BookingJsonDto() {
@@ -110,6 +113,14 @@ public class BookingJsonDto implements Serializable{
 			e.printStackTrace();
 		}
 		}
+	}
+
+	public String getPaymentStatus() {
+		return paymentStatus;
+	}
+
+	public void setPaymentStatus(String paymentStatus) {
+		this.paymentStatus = paymentStatus;
 	}
    
     

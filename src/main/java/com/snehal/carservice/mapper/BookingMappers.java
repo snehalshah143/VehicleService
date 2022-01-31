@@ -33,6 +33,9 @@ public class BookingMappers extends AbstarctMapper<BookingJsonDto, Booking, Book
 			orderJsonDtos.add(OrderMappers.getOrderMappers().mapPersistableToJsonDto(o));
 		}
 		jsonDto.setProductCart(orderJsonDtos);
+		jsonDto.setPaymentStatus(persistable.getPaymentStatus());
+		
+		
 		return jsonDto;
 		
 	}

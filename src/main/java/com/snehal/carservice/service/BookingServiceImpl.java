@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.snehal.carservice.constants.AdminConstants;
+import com.snehal.carservice.dao.AppUserRepository;
 import com.snehal.carservice.dao.BookingRepository;
 import com.snehal.carservice.dao.OrderRepository;
 import com.snehal.carservice.dao.UserVehicleDetailRepository;
+import com.snehal.carservice.mapper.BookingMappers;
+import com.snehal.carservice.model.dto.BookingJsonDto;
 import com.snehal.carservice.model.persistable.BookingPersistable;
 import com.snehal.carservice.model.persistable.OrderPersistable;
 
@@ -25,6 +28,9 @@ public class BookingServiceImpl implements BookingService{
 	
 	@Autowired
 	private UserVehicleDetailRepository userVehicleDetailRepository;
+	
+	@Autowired
+	private AppUserRepository appUserRepository;
 	
 
 
@@ -82,6 +88,15 @@ public class BookingServiceImpl implements BookingService{
 
 			order.setOrderStatus(AdminConstants.ASSIGNED);
 			saveOrder(order);
+	}
+
+	@Override
+	public List<BookingJsonDto> getAllBookingsForUserId(Long userId) {
+		// TODO Auto-generated method stub
+		List<BookingPersistable> bookings= appUserRepository.findById(userId).get().getBookings();
+		
+		List<BookingJsonDto> bookingsJsonDtoList=bookings.stream().map(b-> BookingMappers.getBookingMappers().mapPersistableToJsonDto(b)).toList();
+		return bookingsJsonDtoList;
 	}
 
 }
