@@ -196,7 +196,7 @@ for(UserVehicleDetailPersistable p:vehicleDetails) {
    		   order.setOrderStatus(AdminConstants.ASSIGNED);
 	}
     
-    @RequestMapping(value = "/userlogin", method = RequestMethod.POST)
+//    @RequestMapping(value = "/userlogin", method = RequestMethod.POST)
     public ResponseEntity<AppUserJsonDto> login(@RequestBody LoginModel loginModel ,  BindingResult bindingResult) {
     	//Populate Message and Response Body
 

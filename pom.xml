@@ -4,7 +4,7 @@
   <artifactId>carservice</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   	<name>carservice</name>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
@@ -176,11 +176,11 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<plugin>
+	<!--		<plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-war-plugin</artifactId>
     <version>3.3.1</version>
-</plugin>
+</plugin> -->
 		</plugins>
 	</build>
 
