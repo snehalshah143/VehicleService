@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -166,7 +167,7 @@ for(UserVehicleDetailPersistable p:vehicleDetails) {
     	BookingPersistable result=bookingService.saveBooking(booking); 
     	 if(result!=null) {
      	Set<OrderPersistable>productCart=booking.getProductCart();
-     	List<Long> orderIds=productCart.stream().map(OrderPersistable::getOrderId).toList();
+     	List<Long> orderIds=productCart.stream().map(OrderPersistable::getOrderId).collect(Collectors.toList());
      	List<OrderPersistable> orderTobeUpdated=bookingService.getOrders(orderIds);
      	ArrayList<OrderPersistable> orderListUpdated=new ArrayList<OrderPersistable>();
      	 for(OrderPersistable order:orderTobeUpdated) {

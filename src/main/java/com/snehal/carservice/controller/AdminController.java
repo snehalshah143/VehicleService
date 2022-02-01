@@ -45,7 +45,7 @@ public class AdminController{
 public ResponseEntity<List<ProductJsonDto>> getAllProducts(){
 	
     List<ProductPersistable> products=productService.getAllProducts();
-    List<ProductJsonDto> productsJsonDtoList=products.stream().map(p ->ProductMappers.getProductMappers().mapPersistableToJsonDto(p)).toList();
+    List<ProductJsonDto> productsJsonDtoList=products.stream().map(p ->ProductMappers.getProductMappers().mapPersistableToJsonDto(p)).collect(Collectors.toList());;
 
     return new ResponseEntity<List<ProductJsonDto>> (productsJsonDtoList,HttpStatus.OK);
 }

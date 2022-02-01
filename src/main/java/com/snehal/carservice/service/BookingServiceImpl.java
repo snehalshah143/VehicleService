@@ -3,6 +3,7 @@ package com.snehal.carservice.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -95,7 +96,7 @@ public class BookingServiceImpl implements BookingService{
 		// TODO Auto-generated method stub
 		List<BookingPersistable> bookings= appUserRepository.findById(userId).get().getBookings();
 		
-		List<BookingJsonDto> bookingsJsonDtoList=bookings.stream().map(b-> BookingMappers.getBookingMappers().mapPersistableToJsonDto(b)).toList();
+		List<BookingJsonDto> bookingsJsonDtoList=bookings.stream().map(b-> BookingMappers.getBookingMappers().mapPersistableToJsonDto(b)).collect(Collectors.toList());
 		return bookingsJsonDtoList;
 	}
 
