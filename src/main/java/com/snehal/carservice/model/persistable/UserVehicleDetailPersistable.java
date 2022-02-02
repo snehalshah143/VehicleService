@@ -1,6 +1,8 @@
 package com.snehal.carservice.model.persistable;
 
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,7 +20,7 @@ import com.snehal.carservice.common.VehicleSegment;
 
 @Entity
 @Table(name = "user_vehicle_detail")
-public class UserVehicleDetailPersistable{
+public class UserVehicleDetailPersistable extends AbstractPerstistable{
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="vehicle_details_sequence_generator")
 	@SequenceGenerator(name="vehicle_details_sequence_generator" ,sequenceName = "vehicle_details_seq") 
@@ -200,6 +202,6 @@ public class UserVehicleDetailPersistable{
 	public void setAppUser(AppUserPersistable appUser) {
 		this.appUser = appUser;
 	}
-
+  
     
 }

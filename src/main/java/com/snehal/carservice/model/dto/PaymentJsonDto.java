@@ -2,8 +2,10 @@ package com.snehal.carservice.model.dto;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,7 +13,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class PaymentJsonDto implements Serializable{
+public class PaymentJsonDto extends AbstractJsonDto{
 	
 //    private @Id  @GeneratedValue(strategy = GenerationType.TABLE) String paymentId;
     @JsonProperty("id")
@@ -365,6 +367,7 @@ public class PaymentJsonDto implements Serializable{
 		}
 		}
 	   
-    
+
+	
 }
 

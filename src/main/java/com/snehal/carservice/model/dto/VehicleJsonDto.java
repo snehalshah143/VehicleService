@@ -1,6 +1,7 @@
 package com.snehal.carservice.model.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -9,10 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.snehal.carservice.common.VehicleSegment;
 
-public class VehicleJsonDto implements Serializable{
+public class VehicleJsonDto extends AbstractJsonDto{
 
 
 	private Long vehicleId;
@@ -59,4 +61,5 @@ public class VehicleJsonDto implements Serializable{
 		this.vehicleSegment = vehicleSegment;
 	}
 
+	
 }

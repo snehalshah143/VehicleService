@@ -1,6 +1,8 @@
 package com.snehal.carservice.model.persistable;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,7 +13,7 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "employee")
-public class EmployeePersistable implements Serializable{
+public class EmployeePersistable extends AbstractPerstistable{
 	
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="employee_sequence_generator")

@@ -3,6 +3,7 @@ package com.snehal.carservice.model.dto;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -14,7 +15,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.snehal.carservice.model.persistable.PaymentPersistable;
 
-public class BookingJsonDto implements Serializable{
+public class BookingJsonDto extends AbstractJsonDto{
 	
     private Long bookingId;
     
@@ -123,5 +124,6 @@ public class BookingJsonDto implements Serializable{
 		this.paymentStatus = paymentStatus;
 	}
    
-    
+ 
+	  
 }

@@ -3,6 +3,7 @@ package com.snehal.carservice.model.dto;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.validation.constraints.NotBlank;
 
@@ -13,7 +14,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.snehal.carservice.common.VehicleSegment;
 @JsonInclude(Include.NON_NULL)
-public class UserVehicleDetailJsonDto implements Serializable{
+public class UserVehicleDetailJsonDto extends AbstractJsonDto{
  
     private Long detailId;
     private @NotBlank String address;
@@ -156,5 +157,7 @@ public class UserVehicleDetailJsonDto implements Serializable{
 	}
 */
  
+
+	
     
 }

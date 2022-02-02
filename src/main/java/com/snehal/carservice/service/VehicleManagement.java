@@ -2,11 +2,13 @@ package com.snehal.carservice.service;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
 import com.snehal.carservice.common.VehicleSegment;
+import com.snehal.carservice.common.util.DateTimeUtil;
 import com.snehal.carservice.model.persistable.VehiclePersistable;
 
 public class VehicleManagement {
@@ -39,11 +41,16 @@ public class VehicleManagement {
 		e.printStackTrace();
 	}
              String line;
+             Date createdOn=DateTimeUtil.getCurrentDate();
              while (sc.hasNextLine()) {
           
             	 String str=sc.nextLine();
             	 String[] array=str.split(",");
               	 VehiclePersistable v=new VehiclePersistable(array[0], array[1], VehicleSegment.valueOf(array[2]));
+              	 v.setCreatedOn(createdOn);
+              	 v.setCreatedBy("ADMIN");
+              	 v.setRecordStatus("Active");
+              	 
               	vehicles.add(v);
              }
 		 		

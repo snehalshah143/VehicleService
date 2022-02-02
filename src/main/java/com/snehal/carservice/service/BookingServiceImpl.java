@@ -6,8 +6,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchUpdateUtils;
 import org.springframework.stereotype.Service;
 
+import com.snehal.carservice.common.util.DateTimeUtil;
 import com.snehal.carservice.constants.AdminConstants;
 import com.snehal.carservice.dao.AppUserRepository;
 import com.snehal.carservice.dao.BookingRepository;
@@ -37,6 +39,9 @@ public class BookingServiceImpl implements BookingService{
 
 	public BookingPersistable saveBooking(BookingPersistable booking){
 		booking.setFinalAmount(calculateFinalAmount(booking));
+		booking.setCreatedOn(DateTimeUtil.getCurrentDate());
+		booking.setCreatedBy("USER");
+		booking.setRecordStatus("Active");
 		return bookingRepository.saveAndFlush(booking);
 	}
 	

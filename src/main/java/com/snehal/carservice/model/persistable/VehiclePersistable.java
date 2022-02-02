@@ -1,6 +1,7 @@
 package com.snehal.carservice.model.persistable;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -9,11 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.snehal.carservice.common.VehicleSegment;
 @Entity
 @Table(name = "vehicle")
-public class VehiclePersistable implements Serializable{
+public class VehiclePersistable extends AbstractPerstistable{
 
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="vehicle_sequence_generator")
@@ -103,6 +105,6 @@ public class VehiclePersistable implements Serializable{
 				&& vehicleSegment == other.vehicleSegment;
 	}
 
-	
+    
 	
 }

@@ -1,8 +1,11 @@
 package com.snehal.carservice.model.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
-public class PaymentNotifyRequest implements Serializable {
+import javax.validation.constraints.NotBlank;
+
+public class PaymentNotifyRequest extends AbstractJsonDto{
 
 private static final long serialVersionUID = 5926468583005150707L;
 
@@ -35,6 +38,8 @@ public Long getBookingId() {
 public void setBookingId(Long bookingId) {
 	this.bookingId = bookingId;
 }
+
+
 
 
 }

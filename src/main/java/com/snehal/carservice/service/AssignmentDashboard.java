@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.snehal.carservice.common.ProductType;
+import com.snehal.carservice.common.util.DateTimeUtil;
 import com.snehal.carservice.constants.AssignmentStatus;
 import com.snehal.carservice.model.persistable.AssignmentPersistable;
 import com.snehal.carservice.model.persistable.OrderPersistable;
@@ -64,6 +65,9 @@ public class AssignmentDashboard {
 			a.setAssignmentStatus(AssignmentStatus.NOT_STARTED.name());
 			a.setOrder(o);
 			a.setAssignmentDate(new java.sql.Date(c.getTimeInMillis()));
+			a.setCreatedBy("ADMIN");
+			a.setCreatedOn(DateTimeUtil.getCurrentDate());
+			a.setRecordStatus("Active");
 			allAssignments.add(a);
 			count--;
 			}
@@ -87,6 +91,9 @@ private static void createAlternateWashAssignments(OrderPersistable o,List<Assig
 			a.setAssignmentStatus(AssignmentStatus.NOT_STARTED.name());
 			a.setOrder(o);
 			a.setAssignmentDate(new java.sql.Date(c.getTimeInMillis()));
+			a.setCreatedBy("ADMIN");
+			a.setCreatedOn(DateTimeUtil.getCurrentDate());
+			a.setRecordStatus("Active");
 			allAssignments.add(a);
 			count--;
 			}
@@ -108,32 +115,15 @@ private static void createOnDemandWashAssignments(OrderPersistable o,List<Assign
 		a.setAssignmentStatus(AssignmentStatus.NOT_STARTED.name());
 		a.setOrder(o);
 		a.setAssignmentDate(new java.sql.Date(c.getTimeInMillis()));
+		a.setCreatedBy("ADMIN");
+		a.setCreatedOn(DateTimeUtil.getCurrentDate());
+		a.setRecordStatus("Active");
 		allAssignments.add(a);
 
 
 		
 }
-    public static void main(String[] args) throws Exception {
-    	
-    	Date date =new Date();
 
-    	System.out.println(date);
-    	java.sql.Date datesql =new java.sql.Date(date.getTime());
-  
-    	System.out.println(datesql);	
-
-    	Calendar c=Calendar.getInstance();
-    	System.out.println("Calender date::"+c.getTime());
-    	System.out.println("Calender date::"+new java.sql.Date(c.getTimeInMillis()));
-    	System.out.println(c.get(Calendar.DAY_OF_WEEK));
-    	
-    	c.roll(Calendar.DATE, true);
-    	System.out.println("After UpCalender date::"+c.getTime());
-    	System.out.println(c.get(Calendar.DAY_OF_WEEK));
-    	c.add(Calendar.DATE, 2);
-    	System.out.println("ADD UpCalender date::"+c.getTime());
-    	System.out.println(c.get(Calendar.DAY_OF_WEEK));
-    }
 	
 	
 }

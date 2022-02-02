@@ -1,6 +1,7 @@
 package com.snehal.carservice.model.persistable;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,13 +11,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "payment")
-public class PaymentPersistable implements Serializable{
+public class PaymentPersistable extends AbstractPerstistable{
 	
 //    private @Id  @GeneratedValue(strategy = GenerationType.TABLE) String paymentId;
     @JsonProperty("id")
@@ -384,4 +386,5 @@ public class PaymentPersistable implements Serializable{
 		this.bank = bank;
 	}
     
+	
 }

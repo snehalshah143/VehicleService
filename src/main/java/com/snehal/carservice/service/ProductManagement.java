@@ -6,6 +6,7 @@ import java.util.Set;
 import com.snehal.carservice.common.ProductType;
 import com.snehal.carservice.common.TimeSlot;
 import com.snehal.carservice.common.VehicleSegment;
+import com.snehal.carservice.common.util.DateTimeUtil;
 import com.snehal.carservice.model.persistable.ProductPersistable;
 
 public class ProductManagement {
@@ -67,7 +68,7 @@ public class ProductManagement {
 
 	private static void addProductDetail(ProductType productType, VehicleSegment vehicleCategory, TimeSlot timeSlot,
 			double price) {
-		products.add(new ProductPersistable(productType, vehicleCategory, timeSlot,price));
+		products.add(new ProductPersistable(productType, vehicleCategory, timeSlot,price,DateTimeUtil.getCurrentDate(),"ADMIN","Active"));
 
 	}
 

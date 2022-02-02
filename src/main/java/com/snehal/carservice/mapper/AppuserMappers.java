@@ -3,6 +3,7 @@ package com.snehal.carservice.mapper;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.snehal.carservice.common.util.DateTimeUtil;
 import com.snehal.carservice.model.domain.AppUser;
 import com.snehal.carservice.model.dto.AppUserJsonDto;
 import com.snehal.carservice.model.dto.BookingJsonDto;
@@ -28,6 +29,7 @@ public class AppuserMappers extends AbstarctMapper<AppUserJsonDto, AppUser, AppU
 		appUserJsonDto.setEmail(persistable.getEmail());
 		appUserJsonDto.setMobileNumber(persistable.getMobileNumber());
 		appUserJsonDto.setUsername(persistable.getUsername());
+		appUserJsonDto.setUpdatedOn(DateTimeUtil.formatDate(persistable.getCreatedOn()));
 		if(persistable.getBookings()!=null) {
 		Set<BookingJsonDto> bookingsJsonDtoSet=new HashSet<BookingJsonDto>();
 		for(BookingPersistable b:persistable.getBookings()) {
@@ -54,7 +56,9 @@ public class AppuserMappers extends AbstarctMapper<AppUserJsonDto, AppUser, AppU
 		persistable.setLastName(request.getLastName());
 		persistable.setMobileNumber(request.getMobileNumber());
 		persistable.setPassword(request.getPassword());
-		
+		persistable.setCreatedBy("USER");
+		persistable.setCreatedOn(DateTimeUtil.getCurrentDate());
+		persistable.setRecordStatus("Active");
 		return persistable;
 	
 	}

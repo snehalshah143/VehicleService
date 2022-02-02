@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -19,7 +20,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 @JsonInclude(Include.NON_NULL)
-public class AssignmentJsonDto implements Serializable{
+public class AssignmentJsonDto extends AbstractJsonDto{
 
 	private Long assignmentId;
 	
@@ -160,6 +161,5 @@ public class AssignmentJsonDto implements Serializable{
 		}
 		}
 
-	
-	
+
 }

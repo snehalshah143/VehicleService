@@ -13,7 +13,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 @JsonInclude(Include.NON_NULL)
-public class AppUserJsonDto implements IJsonDto {
+public class AppUserJsonDto extends AbstractJsonDto {
 
 	    private Long userId;
 	    private @NotBlank String username;
@@ -23,7 +23,7 @@ public class AppUserJsonDto implements IJsonDto {
 	    private @NotBlank String mobileNumber;
 	    private @NotBlank String firstName;
 	    private @NotBlank String lastName;
-	    private Date dateOfBirth;
+
 //	    private @NotBlank boolean loggedIn;
 	    
 
@@ -95,14 +95,6 @@ public class AppUserJsonDto implements IJsonDto {
 
 		public void setLastName(String lastName) {
 			this.lastName = lastName;
-		}
-
-		public Date getDateOfBirth() {
-			return dateOfBirth;
-		}
-
-		public void setDateOfBirth(Date dateOfBirth) {
-			this.dateOfBirth = dateOfBirth;
 		}
 
 
@@ -182,6 +174,7 @@ public class AppUserJsonDto implements IJsonDto {
 			}
 			}
 		}
+
 	    
 	    
 }

@@ -2,6 +2,7 @@ package com.snehal.carservice.model.persistable;
 
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -22,7 +23,7 @@ import javax.validation.constraints.NotBlank;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "product_order")
-public class OrderPersistable implements Serializable {
+public class OrderPersistable extends AbstractPerstistable{
 
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="order_sequence_generator")
@@ -109,5 +110,6 @@ public class OrderPersistable implements Serializable {
 	public void setAssignments(Set<AssignmentPersistable> assignments) {
 		this.assignments = assignments;
 	}
-   
+    
+	
 }

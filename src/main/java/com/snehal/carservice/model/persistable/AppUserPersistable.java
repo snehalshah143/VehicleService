@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "appuser")
-public class AppUserPersistable implements Serializable{
+public class AppUserPersistable extends AbstractPerstistable{
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="user_sequence_generator")
 	@SequenceGenerator(name="user_sequence_generator" ,sequenceName = "uder_seq")
@@ -25,6 +25,8 @@ public class AppUserPersistable implements Serializable{
     private @NotBlank String firstName;
     private @NotBlank String lastName;
     private @NotBlank boolean loggedIn;
+
+    
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "appUser", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("appuser")
@@ -40,8 +42,6 @@ public class AppUserPersistable implements Serializable{
     	
     }
 
-
-    
     public AppUserPersistable(String mobileNumber,String password, String email, 
 		String firstName, String lastName) {
 	super();
@@ -149,6 +149,15 @@ public class AppUserPersistable implements Serializable{
 		this.bookings = bookings;
 	}
 
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	
 	
 /*    @ManyToMany
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))

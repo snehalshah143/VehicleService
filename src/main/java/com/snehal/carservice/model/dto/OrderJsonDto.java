@@ -3,7 +3,10 @@ package com.snehal.carservice.model.dto;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
+
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -13,7 +16,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 @JsonInclude(Include.NON_NULL)
-public class OrderJsonDto implements Serializable {
+public class OrderJsonDto extends AbstractJsonDto{
 
 
 	private Long orderId;
@@ -176,4 +179,5 @@ public class OrderJsonDto implements Serializable {
 			}
 	
 
+	
 }

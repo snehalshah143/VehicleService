@@ -2,6 +2,7 @@ package com.snehal.carservice.controller;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.snehal.carservice.cache.BootStrapCache;
 import com.snehal.carservice.common.status.Status;
+import com.snehal.carservice.common.util.DateTimeUtil;
 import com.snehal.carservice.common.util.UserValidator;
 import com.snehal.carservice.constants.AdminConstants;
 import com.snehal.carservice.mapper.AppuserMappers;
@@ -101,6 +103,9 @@ public class UserController {
     	
     	VehiclePersistable vehicle=vehicleService.getVehicle(userVehicleDetail.getVehicle().getVehicleId());
     	userVehicleDetail.setVehicle(vehicle);
+    	userVehicleDetail.setCreatedBy("USER");
+    	userVehicleDetail.setCreatedOn(DateTimeUtil.getCurrentDate());
+    	userVehicleDetail.setAddress("Active");
        if (bindingResult.hasErrors()) {
     	   System.out.println(bindingResult.getAllErrors().toString());
            return new ResponseEntity (HttpStatus.BAD_REQUEST);
@@ -170,8 +175,12 @@ for(UserVehicleDetailPersistable p:vehicleDetails) {
      	List<Long> orderIds=productCart.stream().map(OrderPersistable::getOrderId).collect(Collectors.toList());
      	List<OrderPersistable> orderTobeUpdated=bookingService.getOrders(orderIds);
      	ArrayList<OrderPersistable> orderListUpdated=new ArrayList<OrderPersistable>();
+     	Date createdOn=DateTimeUtil.getCurrentDate();
      	 for(OrderPersistable order:orderTobeUpdated) {
      		order.setBooking(booking);
+     		order.setCreatedOn(createdOn);
+     		order.setCreatedBy("USER");
+     		order.setRecordStatus("Active");
      	  	UserVehicleDetailPersistable userVehicleDetail=userService.getUserVehicleDetail(order.getUserVehicleDetail().getDetailId());
         	order.setUserVehicleDetail(userVehicleDetail);
        	   ProductPersistable product=BootStrapCache.getProductCache().get(order.getProduct().getProductId());

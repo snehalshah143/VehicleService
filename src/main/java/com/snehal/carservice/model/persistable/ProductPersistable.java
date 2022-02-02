@@ -1,6 +1,7 @@
 package com.snehal.carservice.model.persistable;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -17,7 +18,7 @@ import com.snehal.carservice.common.VehicleSegment;
 
 @Entity
 @Table(name = "product")
-public class ProductPersistable implements Serializable {
+public class ProductPersistable extends AbstractPerstistable{
 
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="product_sequence_generator")
@@ -30,16 +31,18 @@ public class ProductPersistable implements Serializable {
 	private @NotBlank TimeSlot timeSlot;
 	private @NotBlank Double price;
 
+
 	public ProductPersistable() {
 	}
 
 	public ProductPersistable(
-			ProductType productType, VehicleSegment vehicleSegment, TimeSlot timeSlot,Double price) {
-
+			ProductType productType, VehicleSegment vehicleSegment, TimeSlot timeSlot,Double price,Date createdOn,String createdBy,String recordStatus) {
+super(createdOn,createdBy,recordStatus);
 		this.productType = productType;
 		this.vehicleSegment = vehicleSegment;
 		this.timeSlot = timeSlot;
 		this.price=price;
+
 	}
 
 	public Long getProductId() {
@@ -99,4 +102,8 @@ public class ProductPersistable implements Serializable {
 		return productType == other.productType && timeSlot == other.timeSlot && vehicleSegment == other.vehicleSegment;
 	}
 
+
+
+	
+	
 }

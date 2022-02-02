@@ -1,6 +1,7 @@
 package com.snehal.carservice.model.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -18,7 +19,7 @@ import com.snehal.carservice.common.TimeSlot;
 import com.snehal.carservice.common.VehicleSegment;
 
 @JsonInclude(Include.NON_NULL)
-public class ProductJsonDto implements Serializable {
+public class ProductJsonDto extends AbstractJsonDto{
 
 
  	private Long productId;

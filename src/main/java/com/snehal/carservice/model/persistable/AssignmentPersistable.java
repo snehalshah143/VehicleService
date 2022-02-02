@@ -11,9 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 @Entity
 @Table(name = "assignment")
-public class AssignmentPersistable implements Serializable{
+public class AssignmentPersistable extends AbstractPerstistable{
 	@Id  
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="assignment_sequence_generator")
 	@SequenceGenerator(name="assignment_sequence_generator" ,sequenceName = "assignment_seq")
@@ -31,6 +32,11 @@ public class AssignmentPersistable implements Serializable{
 	private byte[] imageBefore;
 	private byte[] imageAfter;
 
+
+    @ManyToOne
+    @JoinColumn(name = "emp_id", referencedColumnName = "empId")
+    private EmployeePersistable employee;
+	
     @ManyToOne
     @JoinColumn(name = "order_id", referencedColumnName = "orderId")
     private OrderPersistable order;
@@ -104,5 +110,5 @@ public class AssignmentPersistable implements Serializable{
 		this.order = order;
 	}
 	
-	
+   
 }
