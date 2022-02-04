@@ -37,11 +37,14 @@ public class ProductPersistable extends AbstractPerstistable{
 
 	public ProductPersistable(
 			ProductType productType, VehicleSegment vehicleSegment, TimeSlot timeSlot,Double price,Date createdOn,String createdBy,String recordStatus) {
-super(createdOn,createdBy,recordStatus);
+
 		this.productType = productType;
 		this.vehicleSegment = vehicleSegment;
 		this.timeSlot = timeSlot;
 		this.price=price;
+		this.setCreatedOn(createdOn);
+		this.setCreatedBy(createdBy);
+		this.setRecordStatus(recordStatus);
 
 	}
 

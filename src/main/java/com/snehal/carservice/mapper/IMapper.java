@@ -1,16 +1,16 @@
 package com.snehal.carservice.mapper;
 
 import com.snehal.carservice.model.domain.IDomain;
-import com.snehal.carservice.model.dto.IJsonDto;
-import com.snehal.carservice.model.persistable.IPerstistable;
+import com.snehal.carservice.model.dto.AbstractJsonDto;
+import com.snehal.carservice.model.persistable.AbstractPerstistable;
 //<J extends IJsonDto,D extends IDomain,P extends IPerstistable>
 public interface IMapper{ 
 
-	IDomain mapJsonDtoToDomainObject(IJsonDto jsonDto); 
+	IDomain mapJsonDtoToDomainObject(AbstractJsonDto jsonDto); 
 	
-	IPerstistable mapDomainToPersistableObject(IDomain domain);
+	AbstractPerstistable mapDomainToPersistableObject(IDomain domain);
 	
-	IDomain mapPersistableToDomainObject(IPerstistable persistable) ;
+	IDomain mapPersistableToDomainObject(AbstractPerstistable persistable) ;
 	
-	IJsonDto mapDomainJsonDtoObject(IDomain domain) ;
+	AbstractJsonDto mapDomainJsonDtoObject(IDomain domain) ;
 }
