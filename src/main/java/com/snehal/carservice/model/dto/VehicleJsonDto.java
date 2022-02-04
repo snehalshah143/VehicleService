@@ -12,8 +12,10 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.snehal.carservice.common.VehicleSegment;
-
+@JsonInclude(Include.NON_NULL)
 public class VehicleJsonDto extends AbstractJsonDto{
 
 
