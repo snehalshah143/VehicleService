@@ -1,0 +1,417 @@
+ALL APIS
+============================================================================================
+1)
+NAME:Register/Signup API
+API TYPE : POST
+PATH:"/usersignup"
+http://localhost:8080/usersignup
+
+
+REQUEST PAYLOAD:
+{
+"mobileNumber":"9999999999",
+"password":"Snehal@12345",
+"passwordConfirm":"Snehal@12345",
+"email":"snehal.shah1434@gmail.com",
+"firstName":"Snehal",
+"lastName":"Shah"
+}
+RESPONSE PAYLOAD:
+{
+    "updatedOn": "05-02-2022 14:31:03",
+    "userId": 2,
+    "username": "9999999990",
+    "email": "snehal.shah1434@gmail.com",
+    "mobileNumber": "9999999990",
+    "firstName": "Snehal",
+    "lastName": "Shah"
+}   
+==============================================================================================    
+2)
+NAME:Add Vehicle Details and Address where vehicle is Located
+API TYPE : POST
+PATH:"/vehicledetails/add/1"
+    @PostMapping(path = "/vehicledetails/add/{userid}",consumes="application/json")
+
+http://localhost:8080/vehicledetails/add/1
+
+REQUEST PAYLOAD:
+{		
+"address" :"Flat No 10 3rd Floor Building A",
+"society": "Magarpatta Society Trillium",
+"locality" : "Magarpatta",
+"parkingPlace" : "A-11 Basement1",
+"pincode" : "411001",
+"vehicleNumber" : "MH14HD0150",
+"vehicle"   :{"vehicleId":3}
+}
+RESPONSE PAYLOAD:
+{
+    "detailId": 1,
+    "address": "Active",
+    "society": "Magarpatta Society Trillium",
+    "locality": "Magarpatta",
+    "parkingPlace": "A-11 Basement1",
+    "pincode": "411001",
+    "vehicleNumber": "MH14HD0150",
+    "vehicle": {
+        "vehicleId": 3,
+        "manufacturer": "Hyundai",
+        "model": "I10",
+        "vehicleSegment": "COMPACT"
+    },
+    "appUser": {
+        "userId": 1
+    }
+}
+===================================================================================================
+3)
+NAME:Get Vehicle Details and Address where vehicle is Located
+API TYPE : GET
+PATH:"/vehicledetails/get/1"
+    @GetMapping(path = "/vehicledetails/get/{userid}")
+http://localhost:8080/vehicledetails/get/1
+
+REQUEST PAYLOAD:NO PAYLOAD
+
+RESPONSE PAYLOAD:
+[
+    {
+        "detailId": 2,
+        "address": "Active",
+        "society": "Magarpatta Society Trillium",
+        "locality": "Magarpatta",
+        "parkingPlace": "A-10 Basement1",
+        "pincode": "411002",
+        "vehicleNumber": "MH14HD0146",
+        "vehicle": {
+            "vehicleId": 4,
+            "manufacturer": "Tata",
+            "model": "Tigor",
+            "vehicleSegment": "COMPACT"
+        },
+        "appUser": {
+            "userId": 1
+        }
+    },
+    {
+        "detailId": 1,
+        "address": "Active",
+        "society": "Magarpatta Society Trillium",
+        "locality": "Magarpatta",
+        "parkingPlace": "A-11 Basement1",
+        "pincode": "411001",
+        "vehicleNumber": "MH14HD0150",
+        "vehicle": {
+            "vehicleId": 3,
+            "manufacturer": "Hyundai",
+            "model": "I10",
+            "vehicleSegment": "COMPACT"
+        },
+        "appUser": {
+            "userId": 1
+        }
+    }
+]
+
+=====================================================================================================
+4)
+NAME:Book the subscription or individual on demand wash
+Description: This APi will generate separate orders added in cart and also generate the assignments.
+API TYPE : POST
+PATH:"/booking/book/1"
+    @PostMapping(path = "/booking/book/{userid}",consumes="application/json")
+http://localhost:8080/booking/book/1
+ 
+REQUEST PAYLOAD:
+{
+"productCart":[
+                {
+				"userVehicleDetail":{
+									"detailId":1
+									},
+				"product":			  
+									{"productId":1
+									}
+			    },{
+				"userVehicleDetail":{
+									"detailId":2
+									},
+				"product":			  
+									{"productId":2
+									
+									}
+			    }
+            ],									
+"finalAmount":2000,
+"appUser":	{
+			"userId":1
+			}
+}
+
+RESPONSE PAYLOAD:
+{
+    "bookingId": 1,
+    "productCart": [
+        {
+            "orderId": 2,
+            "userVehicleDetail": {
+                "detailId": 2,
+                "vehicleNumber": "MH14HD0146",
+                "vehicle": {
+                    "vehicleId": 4,
+                    "manufacturer": "Tata",
+                    "model": "Tigor",
+                    "vehicleSegment": "COMPACT"
+                }
+            },
+            "product": {
+                "productId": 2
+            }
+        },
+        {
+            "orderId": 1,
+            "userVehicleDetail": {
+                "detailId": 1,
+                "vehicleNumber": "MH14HD0150",
+                "vehicle": {
+                    "vehicleId": 3,
+                    "manufacturer": "Hyundai",
+                    "model": "I10",
+                    "vehicleSegment": "COMPACT"
+                }
+            },
+            "product": {
+                "productId": 1
+            }
+        }
+    ],
+    "finalAmount": 2100.0,
+    "appUser": {
+        "userId": 1
+    }
+}
+====================================================================================================
+5)
+NAME: USER Login API
+
+API TYPE:POST
+PATH:"/userlogin"
+
+    @RequestMapping(value = "/userlogin", method = RequestMethod.POST)
+http://localhost:8080/userlogin
+    
+REQUEST PAYLOAD:
+{
+    "username":"9999999999",
+    "password":"Snehal@12345"
+}
+RESPONSE PAYLOAD:
+{
+    "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5OTk5OTk5OTk5IiwiZXhwIjoxNjQ0MDY5MjU4LCJpYXQiOjE2NDQwNTEyNTh9.9AbHJuOxAa65vnZPhW1cJZzrOtIUCkkMWTxCsY6OJx2j6n95nf6CNh8g8j48SX-ogTKz-yYHA_K-SvJcCeNm6g"
+}
+============================================================================================
+6)
+NAME: GET All Products availble in DB.
+
+API TYPE:GET
+PATH:"/products/getall"
+
+	@GetMapping(path = "/products/getall")
+
+
+REQUEST PAYLOAD:
+
+RESPONSE PAYLOAD:
+ [
+    {
+        "productId": 1,
+        "productType": "DAILY_WASH",
+        "vehicleSegment": "COMPACT",
+        "timeSlot": "NORMAL_TIME",
+        "price": 500.0
+    },
+    {
+        "productId": 2,
+        "productType": "DAILY_WASH",
+        "vehicleSegment": "COMPACT",
+        "timeSlot": "PEAK_TIME",
+        "price": 550.0
+    },
+    {
+        "productId": 3,
+        "productType": "ALTERNATE_WASH",
+        "vehicleSegment": "LARGE_VEHICLE",
+        "timeSlot": "NORMAL_TIME",
+        "price": 400.0
+    }
+ ]   
+ =================================================================================== 
+7)
+NAME: GET All Vehicles available in DB.
+
+API TYPE:GET
+PATH:"/vehicles/getall"
+
+@GetMapping(path = "/vehicles/getall")
+
+
+REQUEST PAYLOAD:NO PAYLOAD
+
+RESPONSE PAYLOAD:  
+[
+    {
+        "vehicleId": 52,
+        "manufacturer": "Hyundai",
+        "model": "I10Grand",
+        "vehicleSegment": "COMPACT"
+    },
+    {
+        "vehicleId": 53,
+        "manufacturer": "Hyundai",
+        "model": "Verna",
+        "vehicleSegment": "COMPACT"
+    },
+    {
+        "vehicleId": 54,
+        "manufacturer": "Hyundai",
+        "model": "I10",
+        "vehicleSegment": "COMPACT"
+    },
+    {
+        "vehicleId": 55,
+        "manufacturer": "Hyundai",
+        "model": "I20",
+        "vehicleSegment": "COMPACT"
+    }
+]
+=================================================================================================     
+8)
+NAME: Trigger API for Saving All Products in DB which are in our java file.
+
+API TYPE:POST
+PATH:"/admin/saveproducts"
+
+@PostMapping(path = "/admin/saveproducts")
+public void saveAllProductsForFirstTime()
+
+REQUEST PAYLOAD:
+
+RESPONSE PAYLOAD:    
+===============================================================================================     
+9)
+NAME: Trigger API for Saving All Vehicles in DB which are in our static file vehicles.csv.
+
+API TYPE:POST
+PATH:"/admin/saveallvehicles"
+
+@PostMapping(path = "/admin/saveallvehicles")
+public void saveAllVehiclesForFirstTime()
+
+REQUEST PAYLOAD:NO PAYLOAD
+
+RESPONSE PAYLOAD:NO PAYLOAD
+     
+==============================================================================================     
+10)
+NAME: Trigger API for creating  All Assignments for each order.
+
+API TYPE:POST
+PATH:"/admin/createallassigments"
+
+@PostMapping(path = "/admin/createallassigments")
+public void createAllAssigments()
+
+REQUEST PAYLOAD:NO PAYLOAD
+
+RESPONSE PAYLOAD:NO PAYLOAD   
+
+======================================================================================================= 
+11)
+NAME: Get all munufacturing companies of vehicles
+
+API TYPE:GET 
+PATH:"/vehicles/getallmake"
+
+@GetMapping(path = "/vehicles/getallmake")
+public ResponseEntity<Set<String>> getAllManufacturers(){
+
+
+REQUEST PAYLOAD:NO PAYLOAD
+
+RESPONSE PAYLOAD:
+[
+    "Hyundai",
+    "Tata",
+    "Honda"
+]
+===========================================================================================================
+12)
+NAME: Get all models for specific manufacturer of vehicles
+
+API TYPE:GET 
+PATH:"/vehicles/getallmodels/{make}"
+PATH:http://localhost:8080/vehicles/getallmodels/Hyundai
+
+@GetMapping(path = "/vehicles/getallmodels/{make}")
+ResponseEntity<Set<String>> getAllModelsForManufacturer(@PathVariable("make") String make)
+
+
+REQUEST PAYLOAD:NO PAYLOAD
+
+RESPONSE PAYLOAD:
+[
+    "I20",
+    "I10",
+    "I10Grand",
+    "Verna"
+]
+
+================================================================================================================
+13)Notify Payment
+
+API TYPE:GET 
+PATH:"/notifypayment"
+PATH:http://localhost:8080/notifypayment
+
+REQUEST PAYLOAD:
+{
+    "paymentId":"pay_IqL787mH8u3TBE",
+    "bookingId":1
+}
+
+RESPONSE PAYLOAD:
+
+{
+    "paymentID": "pay_IqL787mH8u3TBE",
+    "status": true,
+    "comments": "Successful"
+}
+
+
+
+
+
+
+==================================================
+Using This Token:
+If added in Header Add Key =Authorization
+Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5NDAzMTM0OTc4IiwiZXhwIjoxNjQzNDg4Nzk2LCJpYXQiOjE2NDM0NzA3OTZ9.Iw9hr69X0zb1Ro7H_j1oa6SxXolTpYJ-xDRTgOS9Sgv7WCKuH6ZiesSaLTv__npeVKqOTw8Z8X0Zo3I5SS999g
+
+
+And if added in Authorization 
+
+Add only the token 
+eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI5NDAzMTM0OTc4IiwiZXhwIjoxNjQzNDg4Nzk2LCJpYXQiOjE2NDM0NzA3OTZ9.Iw9hr69X0zb1Ro7H_j1oa6SxXolTpYJ-xDRTgOS9Sgv7WCKuH6ZiesSaLTv__npeVKqOTw8Z8X0Zo3I5SS999g
+
+
+
+
+
+=============================================================================================================
+shutting down
+    @PostMapping(path = "/admin/systemshutdown")
+    
+    Current Server Link:
+    https://4d34-122-169-15-158.ngrok.io
+    public void systemShutdown() {     

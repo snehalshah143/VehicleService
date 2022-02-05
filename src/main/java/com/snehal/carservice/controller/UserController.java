@@ -32,6 +32,7 @@ import com.snehal.carservice.model.domain.LoginModel;
 import com.snehal.carservice.model.dto.AppUserJsonDto;
 import com.snehal.carservice.model.dto.BookingJsonDto;
 import com.snehal.carservice.model.dto.PaymentNotifyRequest;
+import com.snehal.carservice.model.dto.PaymentResponse;
 import com.snehal.carservice.model.dto.UserSignUpRequest;
 import com.snehal.carservice.model.dto.UserVehicleDetailJsonDto;
 import com.snehal.carservice.model.persistable.AppUserPersistable;
@@ -218,7 +219,7 @@ for(UserVehicleDetailPersistable p:vehicleDetails) {
     }
 
     @RequestMapping(value = "/notifypayment", method = RequestMethod.POST)
-    public ResponseEntity<Boolean> notifyPayment(@RequestBody PaymentNotifyRequest paymentNotifyRequest ,  BindingResult bindingResult) {
+    public ResponseEntity<PaymentResponse> notifyPayment(@RequestBody PaymentNotifyRequest paymentNotifyRequest ,  BindingResult bindingResult) {
     	//Populate Message and Response Body
 
 
@@ -229,7 +230,11 @@ for(UserVehicleDetailPersistable p:vehicleDetails) {
     	booking.setPaymentStatus(finalPersistable.getPaymentStatus());
     	bookingService.saveBooking(booking);
     
-        return new ResponseEntity (finalPersistable==null?false:true,HttpStatus.OK);
+    	PaymentResponse paymentResponse=new PaymentResponse();
+    	paymentResponse.setPaymentID(paymentNotifyRequest.getPaymentId());
+    	paymentResponse.setStatus(finalPersistable==null?false:true);
+    	paymentResponse.setComments(finalPersistable==null?"Error Occured During Notifying Payment":"Successful");
+        return new ResponseEntity (paymentResponse,HttpStatus.OK);
     }
 
     @GetMapping(path = "/admin/booking/getall/{userid}")
