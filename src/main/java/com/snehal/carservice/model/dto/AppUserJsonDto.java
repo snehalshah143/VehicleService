@@ -12,6 +12,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.snehal.carservice.jwt.JwtResponse;
 @JsonInclude(Include.NON_NULL)
 public class AppUserJsonDto extends AbstractJsonDto {
 
@@ -23,6 +24,7 @@ public class AppUserJsonDto extends AbstractJsonDto {
 	    private @NotBlank String mobileNumber;
 	    private @NotBlank String firstName;
 	    private @NotBlank String lastName;
+	    private String token;
 
 //	    private @NotBlank boolean loggedIn;
 	    
@@ -175,6 +177,15 @@ public class AppUserJsonDto extends AbstractJsonDto {
 			}
 		}
 
+		public String getToken() {
+			return token;
+		}
+
+		public void setToken(String token) {
+			this.token = token;
+		}
+
+	
 	    
 	    
 }

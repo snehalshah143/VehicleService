@@ -17,6 +17,8 @@ import com.snehal.carservice.jwt.JwtLoginRequest;
 import com.snehal.carservice.jwt.JwtResponse;
 import com.snehal.carservice.jwt.JwtTokenUtil;
 import com.snehal.carservice.jwt.JwtUserDetailsService;
+import com.snehal.carservice.model.persistable.AppUserPersistable;
+import com.snehal.carservice.service.UserService;
 
 @RestController
 @CrossOrigin
@@ -30,22 +32,39 @@ private JwtTokenUtil jwtTokenUtil;
 
 @Autowired
 private JwtUserDetailsService userDetailsService;
+@Autowired
+private UserService userService;
 
 //@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 @RequestMapping(value ="/userlogin", method = RequestMethod.POST)
-public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtLoginRequest authenticationRequest) throws Exception {
+public ResponseEntity<JwtResponse> createAuthenticationToken(@RequestBody JwtLoginRequest authenticationRequest) throws Exception {
 
-authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-
-final UserDetails userDetails = userDetailsService
-.loadUserByUsername(authenticationRequest.getUsername());
-
-final String token = jwtTokenUtil.generateToken(userDetails);
-
-return ResponseEntity.ok(new JwtResponse(token));
+return ResponseEntity.ok(login(authenticationRequest));
 }
 
-private void authenticate(String username, String password) throws Exception {
+public JwtResponse login(JwtLoginRequest authenticationRequest) {
+	
+	try {
+		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+
+	final UserDetails userDetails = userDetailsService
+	.loadUserByUsername(authenticationRequest.getUsername());
+
+
+		AppUserPersistable appUser=userService.findByUsername(authenticationRequest.getUsername());
+		
+		final String token = jwtTokenUtil.generateToken(userDetails);
+		
+		return new JwtResponse(appUser.getUserId(),token);
+}
+
+
+
+private  void authenticate(String username, String password) throws Exception {
 try {
 authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 } catch (DisabledException e) {

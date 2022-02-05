@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +27,10 @@ import com.snehal.carservice.common.status.Status;
 import com.snehal.carservice.common.util.DateTimeUtil;
 import com.snehal.carservice.common.util.UserValidator;
 import com.snehal.carservice.constants.AdminConstants;
+import com.snehal.carservice.jwt.JwtLoginRequest;
+import com.snehal.carservice.jwt.JwtResponse;
+import com.snehal.carservice.jwt.JwtTokenUtil;
+import com.snehal.carservice.jwt.JwtUserDetailsService;
 import com.snehal.carservice.mapper.AppuserMappers;
 import com.snehal.carservice.mapper.BookingMappers;
 import com.snehal.carservice.mapper.UserVehicleDetailMappers;
@@ -69,6 +75,10 @@ public class UserController {
     
     @Autowired
     private VehicleService vehicleService;
+    @Autowired
+    private JwtUserDetailsService userDetailsService;
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
 
     private UserVehicleDetailMappers userVehicleDetailMapper=UserVehicleDetailMappers.getUserVehicleDetailMappers();
     private BookingMappers bookingMapper=BookingMappers.getBookingMappers();
@@ -90,6 +100,19 @@ public class UserController {
         user.setUsername(user.getMobileNumber());
         AppUserPersistable appUser=userService.save(user);
         AppUserJsonDto jsonDto=AppuserMappers.getAppuserMappers().mapPersistableToJsonDto(appUser);
+        
+        
+    	UserDetails userDetails = userDetailsService
+    			.loadUserByUsername(request.getMobileNumber());
+
+
+    	
+    				
+    				String token = jwtTokenUtil.generateToken(userDetails);
+    				
+    
+
+        jsonDto.setToken(token);
         return new ResponseEntity<AppUserJsonDto> (jsonDto,HttpStatus.OK);
    
 
