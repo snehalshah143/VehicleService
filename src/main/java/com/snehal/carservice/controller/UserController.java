@@ -129,7 +129,7 @@ public class UserController {
     	userVehicleDetail.setVehicle(vehicle);
     	userVehicleDetail.setCreatedBy("USER");
     	userVehicleDetail.setCreatedOn(DateTimeUtil.getCurrentDate());
-    	userVehicleDetail.setAddress("Active");
+    	userVehicleDetail.setRecordStatus("Active");
        if (bindingResult.hasErrors()) {
     	   System.out.println(bindingResult.getAllErrors().toString());
            return new ResponseEntity (HttpStatus.BAD_REQUEST);
