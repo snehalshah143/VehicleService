@@ -2,5 +2,7 @@
 .project
 .settings/
 target/
-
+bin/
+carservice.iml
+sqlitewashweb.db
 .idea

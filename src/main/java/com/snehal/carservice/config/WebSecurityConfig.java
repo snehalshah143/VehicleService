@@ -7,15 +7,18 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.snehal.carservice.jwt.JwtAuthenticationEntryPoint;
 import com.snehal.carservice.jwt.JwtRequestFilter;
+import org.springframework.security.web.server.SecurityWebFilterChain;
 
 @Configuration
 @EnableWebSecurity
@@ -39,13 +42,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-   
+//    @Override
+//    public void configure(WebSecurity web) throws Exception {
+//        web.ignoring().antMatchers("/actuator/**");
+//
+//    }
+
+//    @Bean
+//    public SecurityWebFilterChain securityWebFilterChain(
+//            ServerHttpSecurity http) {
+//        return http.authorizeExchange()
+//                .pathMatchers("/actuator/**").permitAll()
+//                .anyExchange().authenticated()
+//                .and().build();
+//    }
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
     // We don't need CSRF for this example
     httpSecurity.csrf().disable()
     // dont authenticate this particular request
-    .authorizeRequests().antMatchers("/admin/*","/authenticate","/usersignup","/userlogin").permitAll().
+    .authorizeRequests().antMatchers("/actuator/**","/v3/api-docs/**","/admin/**","/authenticate","/usersignup","/userlogin").permitAll().
     // all other requests need to be authenticated
     anyRequest().authenticated().and().
     // make sure we use stateless session; session won't be used to
