@@ -9,6 +9,6 @@ import com.snehal.carservice.model.persistable.EmployeePersistable;
 public interface EmployeeRepository extends JpaRepository<EmployeePersistable, Long> {
 
 	EmployeePersistable findByUsername(String username);
-	EmployeePersistable findByUserId(Long userId);
+	EmployeePersistable findByEmpId(Long userId);
 	EmployeePersistable findByMobileNumber(String mobileNumber);
 }

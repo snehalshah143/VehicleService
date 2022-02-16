@@ -2,12 +2,14 @@ package com.snehal.carservice.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.snehal.carservice.dao.EmployeeRepository;
 import com.snehal.carservice.model.dto.EmployeeSignUpRequest;
 import com.snehal.carservice.model.persistable.EmployeePersistable;
 
+@Service
 public class EmployeeServiceImpl implements EmployeeService{
 
 	@Autowired
@@ -43,8 +45,8 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public EmployeePersistable findByUserId(Long userId) {
-		return employeeRepository.findByUserId(userId);
+	public EmployeePersistable findByUserId(Long empId) {
+		return employeeRepository.findByEmpId(empId);
 	}
 
 }
