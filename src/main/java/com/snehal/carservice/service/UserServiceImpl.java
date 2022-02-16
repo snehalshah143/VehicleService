@@ -4,6 +4,7 @@ package com.snehal.carservice.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -62,10 +63,14 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	public List<UserVehicleDetailPersistable> getUserVehicleDetailsForUserId(Long userId) {
-		AppUserPersistable appUser=  userRepository.findById(userId).get();
+		Optional<AppUserPersistable> appUser=  userRepository.findById(userId);
 		
-		
-		return new ArrayList(appUser.getVehicleDetails());
+		List<UserVehicleDetailPersistable> vehicleDetails=new ArrayList<UserVehicleDetailPersistable>();
+		if(appUser.isPresent()) {
+			vehicleDetails.addAll(appUser.get().getVehicleDetails());
+		}
+
+		return vehicleDetails;
 	}
 
 	@Override
