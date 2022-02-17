@@ -1,63 +1,55 @@
 package com.snehal.carservice.model.domain;
 
-
+import com.snehal.carservice.common.util.StringSetConverter;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.Convert;
 import javax.validation.constraints.NotBlank;
 
-import com.snehal.carservice.common.util.StringSetConverter;
-import com.snehal.carservice.model.dto.AppUserJsonDto;
-import com.snehal.carservice.model.dto.OrderJsonDto;
-
 public class Booking {
-	
-    private Long bookingId;
 
-    @Convert(converter = StringSetConverter.class)
-    private @NotBlank Set<Order> productCart=new HashSet<Order>();
-	
-    private @NotBlank Double finalAmount;
-      
-    private AppUser appUser;
-   
-	public Booking() {
-		super();
-	}
+  private Long bookingId;
 
-	public Long getBookingId() {
-		return bookingId;
-	}
+  @Convert(converter = StringSetConverter.class)
+  private @NotBlank Set<Order> productCart = new HashSet<Order>();
 
-	public void setBookingId(Long bookingId) {
-		this.bookingId = bookingId;
-	}
+  private @NotBlank Double finalAmount;
 
-	public Set<Order> getProductCart() {
-		return productCart;
-	}
+  private AppUser appUser;
 
-	public void setProductCart(Set<Order> productCart) {
-		this.productCart = productCart;
-	}
+  public Booking() {
+    super();
+  }
 
-	public Double getFinalAmount() {
-		return finalAmount;
-	}
+  public Long getBookingId() {
+    return bookingId;
+  }
 
-	public void setFinalAmount(Double finalAmount) {
-		this.finalAmount = finalAmount;
-	}
+  public void setBookingId(Long bookingId) {
+    this.bookingId = bookingId;
+  }
 
-	public AppUser getAppUser() {
-		return appUser;
-	}
+  public Set<Order> getProductCart() {
+    return productCart;
+  }
 
-	public void setAppUser(AppUser appUser) {
-		this.appUser = appUser;
-	}
+  public void setProductCart(Set<Order> productCart) {
+    this.productCart = productCart;
+  }
 
-    
-    
+  public Double getFinalAmount() {
+    return finalAmount;
+  }
+
+  public void setFinalAmount(Double finalAmount) {
+    this.finalAmount = finalAmount;
+  }
+
+  public AppUser getAppUser() {
+    return appUser;
+  }
+
+  public void setAppUser(AppUser appUser) {
+    this.appUser = appUser;
+  }
 }

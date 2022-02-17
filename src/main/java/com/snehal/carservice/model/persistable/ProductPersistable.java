@@ -1,9 +1,10 @@
 package com.snehal.carservice.model.persistable;
 
-import java.io.Serializable;
+import com.snehal.carservice.common.ProductType;
+import com.snehal.carservice.common.TimeSlot;
+import com.snehal.carservice.common.VehicleSegment;
 import java.util.Date;
 import java.util.Objects;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,101 +13,93 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import com.snehal.carservice.common.ProductType;
-import com.snehal.carservice.common.TimeSlot;
-import com.snehal.carservice.common.VehicleSegment;
-
 @Entity
 @Table(name = "product")
-public class ProductPersistable extends AbstractPerstistable{
+public class ProductPersistable extends AbstractPerstistable {
 
-	@Id  
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="product_sequence_generator")
-	@SequenceGenerator(name="product_sequence_generator" ,sequenceName = "product_seq")
- 	private Long productId;
+  @Id
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_sequence_generator")
+  @SequenceGenerator(name = "product_sequence_generator", sequenceName = "product_seq")
+  private Long productId;
 
+  private @NotBlank ProductType productType;
+  private @NotBlank VehicleSegment vehicleSegment;
+  private @NotBlank TimeSlot timeSlot;
+  private @NotBlank Double price;
 
-	private @NotBlank ProductType productType;
-	private @NotBlank VehicleSegment vehicleSegment;
-	private @NotBlank TimeSlot timeSlot;
-	private @NotBlank Double price;
+  public ProductPersistable() {}
 
+  public ProductPersistable(
+      ProductType productType,
+      VehicleSegment vehicleSegment,
+      TimeSlot timeSlot,
+      Double price,
+      Date createdOn,
+      String createdBy,
+      String recordStatus) {
 
-	public ProductPersistable() {
-	}
+    this.productType = productType;
+    this.vehicleSegment = vehicleSegment;
+    this.timeSlot = timeSlot;
+    this.price = price;
+    this.setCreatedOn(createdOn);
+    this.setCreatedBy(createdBy);
+    this.setRecordStatus(recordStatus);
+  }
 
-	public ProductPersistable(
-			ProductType productType, VehicleSegment vehicleSegment, TimeSlot timeSlot,Double price,Date createdOn,String createdBy,String recordStatus) {
+  public Long getProductId() {
+    return productId;
+  }
 
-		this.productType = productType;
-		this.vehicleSegment = vehicleSegment;
-		this.timeSlot = timeSlot;
-		this.price=price;
-		this.setCreatedOn(createdOn);
-		this.setCreatedBy(createdBy);
-		this.setRecordStatus(recordStatus);
+  public void setProductId(Long productId) {
+    this.productId = productId;
+  }
 
-	}
+  public ProductType getProductType() {
+    return productType;
+  }
 
-	public Long getProductId() {
-		return productId;
-	}
+  public void setProductType(ProductType productType) {
+    this.productType = productType;
+  }
 
-	public void setProductId(Long productId) {
-		this.productId = productId;
-	}
+  public VehicleSegment getVehicleSegment() {
+    return vehicleSegment;
+  }
 
-	public ProductType getProductType() {
-		return productType;
-	}
+  public void setVehicleSegment(VehicleSegment vehicleSegment) {
+    this.vehicleSegment = vehicleSegment;
+  }
 
-	public void setProductType(ProductType productType) {
-		this.productType = productType;
-	}
+  public TimeSlot getTimeSlot() {
+    return timeSlot;
+  }
 
-	public VehicleSegment getVehicleSegment() {
-		return vehicleSegment;
-	}
+  public void setTimeSlot(TimeSlot timeSlot) {
+    this.timeSlot = timeSlot;
+  }
 
-	public void setVehicleSegment(VehicleSegment vehicleSegment) {
-		this.vehicleSegment = vehicleSegment;
-	}
+  public Double getPrice() {
+    return price;
+  }
 
-	public TimeSlot getTimeSlot() {
-		return timeSlot;
-	}
+  public void setPrice(Double price) {
+    this.price = price;
+  }
 
-	public void setTimeSlot(TimeSlot timeSlot) {
-		this.timeSlot = timeSlot;
-	}
+  @Override
+  public int hashCode() {
+    return Objects.hash(productType, timeSlot, vehicleSegment);
+  }
 
-	public Double getPrice() {
-		return price;
-	}
-
-	public void setPrice(Double price) {
-		this.price = price;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(productType, timeSlot, vehicleSegment);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ProductPersistable other = (ProductPersistable) obj;
-		return productType == other.productType && timeSlot == other.timeSlot && vehicleSegment == other.vehicleSegment;
-	}
-
-
-
-	
-	
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (obj == null) return false;
+    if (getClass() != obj.getClass()) return false;
+    ProductPersistable other = (ProductPersistable) obj;
+    return productType == other.productType
+        && timeSlot == other.timeSlot
+        && vehicleSegment == other.vehicleSegment;
+  }
 }

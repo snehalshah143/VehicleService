@@ -1,25 +1,23 @@
 package com.snehal.carservice.service;
 
-import java.util.List;
-
 import com.snehal.carservice.model.persistable.VehiclePersistable;
+import java.util.List;
 
 public interface VehicleService {
 
-	VehiclePersistable saveVehicleInfo(VehiclePersistable vehicle);
+  VehiclePersistable saveVehicleInfo(VehiclePersistable vehicle);
 
-	List<VehiclePersistable> getAllVehicles();
+  List<VehiclePersistable> getAllVehicles();
 
-//	List<VehicleRawData> saveAllVehicleRawData(List<VehicleRawData> vehicles);
+  //	List<VehicleRawData> saveAllVehicleRawData(List<VehicleRawData> vehicles);
 
-//	List<VehicleRawData> getAllVehicleRawData();
+  //	List<VehicleRawData> getAllVehicleRawData();
 
-	void saveAllVehiclesForFirstTime();
+  void saveAllVehiclesForFirstTime();
 
-	void deleteAllVehicles();
+  void deleteAllVehicles();
 
-	List<VehiclePersistable> saveVehicles(List<VehiclePersistable> vehicles);
+  List<VehiclePersistable> saveVehicles(List<VehiclePersistable> vehicles);
 
-	VehiclePersistable getVehicle(Long vehicleId);
-
+  VehiclePersistable getVehicle(Long vehicleId);
 }
