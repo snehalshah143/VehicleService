@@ -4,49 +4,47 @@ import com.snehal.carservice.common.VehicleSegment;
 
 public class Vehicle {
 
+  private Long vehicleId;
 
-	private Long vehicleId;
-	
-	private String manufacturer;
-	
-	private String model;
-	
-	private VehicleSegment vehicleSegment;
+  private String manufacturer;
 
-	public Vehicle() {
-		super();
-	}
+  private String model;
 
-	public Long getVehicleId() {
-		return vehicleId;
-	}
+  private VehicleSegment vehicleSegment;
 
-	public void setVehicleId(Long vehicleId) {
-		this.vehicleId = vehicleId;
-	}
+  public Vehicle() {
+    super();
+  }
 
-	public String getManufacturer() {
-		return manufacturer;
-	}
+  public Long getVehicleId() {
+    return vehicleId;
+  }
 
-	public void setManufacturer(String manufacturer) {
-		this.manufacturer = manufacturer;
-	}
+  public void setVehicleId(Long vehicleId) {
+    this.vehicleId = vehicleId;
+  }
 
-	public String getModel() {
-		return model;
-	}
+  public String getManufacturer() {
+    return manufacturer;
+  }
 
-	public void setModel(String model) {
-		this.model = model;
-	}
+  public void setManufacturer(String manufacturer) {
+    this.manufacturer = manufacturer;
+  }
 
-	public VehicleSegment getVehicleSegment() {
-		return vehicleSegment;
-	}
+  public String getModel() {
+    return model;
+  }
 
-	public void setVehicleSegment(VehicleSegment vehicleSegment) {
-		this.vehicleSegment = vehicleSegment;
-	}
-	
+  public void setModel(String model) {
+    this.model = model;
+  }
+
+  public VehicleSegment getVehicleSegment() {
+    return vehicleSegment;
+  }
+
+  public void setVehicleSegment(VehicleSegment vehicleSegment) {
+    this.vehicleSegment = vehicleSegment;
+  }
 }

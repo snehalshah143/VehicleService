@@ -4,98 +4,95 @@ import java.util.Date;
 
 public class Assignment {
 
-	private Long assignmentId;
-	
-	private Date assignmentDate;
-	
-	private Integer priority;
-	
-	private String assignmentStatus;
-	
-	private Date assignmentStartTime;
-	private Date assignmentEndTime;
-	//This can be also the filename ofimage for less 
-	private byte[] imageBefore;
-	private byte[] imageAfter;
+  private Long assignmentId;
 
-    private Order order;
+  private Date assignmentDate;
 
-	public Assignment() {
-		super();
-	}
+  private Integer priority;
 
-	public Long getAssignmentId() {
-		return assignmentId;
-	}
+  private String assignmentStatus;
 
-	public void setAssignmentId(Long assignmentId) {
-		this.assignmentId = assignmentId;
-	}
+  private Date assignmentStartTime;
+  private Date assignmentEndTime;
+  // This can be also the filename ofimage for less
+  private byte[] imageBefore;
+  private byte[] imageAfter;
 
-	public Date getAssignmentDate() {
-		return assignmentDate;
-	}
+  private Order order;
 
-	public void setAssignmentDate(Date assignmentDate) {
-		this.assignmentDate = assignmentDate;
-	}
+  public Assignment() {
+    super();
+  }
 
-	public Integer getPriority() {
-		return priority;
-	}
+  public Long getAssignmentId() {
+    return assignmentId;
+  }
 
-	public void setPriority(Integer priority) {
-		this.priority = priority;
-	}
+  public void setAssignmentId(Long assignmentId) {
+    this.assignmentId = assignmentId;
+  }
 
-	public String getAssignmentStatus() {
-		return assignmentStatus;
-	}
+  public Date getAssignmentDate() {
+    return assignmentDate;
+  }
 
-	public void setAssignmentStatus(String assignmentStatus) {
-		this.assignmentStatus = assignmentStatus;
-	}
+  public void setAssignmentDate(Date assignmentDate) {
+    this.assignmentDate = assignmentDate;
+  }
 
-	public Date getAssignmentStartTime() {
-		return assignmentStartTime;
-	}
+  public Integer getPriority() {
+    return priority;
+  }
 
-	public void setAssignmentStartTime(Date assignmentStartTime) {
-		this.assignmentStartTime = assignmentStartTime;
-	}
+  public void setPriority(Integer priority) {
+    this.priority = priority;
+  }
 
-	public Date getAssignmentEndTime() {
-		return assignmentEndTime;
-	}
+  public String getAssignmentStatus() {
+    return assignmentStatus;
+  }
 
-	public void setAssignmentEndTime(Date assignmentEndTime) {
-		this.assignmentEndTime = assignmentEndTime;
-	}
+  public void setAssignmentStatus(String assignmentStatus) {
+    this.assignmentStatus = assignmentStatus;
+  }
 
-	public byte[] getImageBefore() {
-		return imageBefore;
-	}
+  public Date getAssignmentStartTime() {
+    return assignmentStartTime;
+  }
 
-	public void setImageBefore(byte[] imageBefore) {
-		this.imageBefore = imageBefore;
-	}
+  public void setAssignmentStartTime(Date assignmentStartTime) {
+    this.assignmentStartTime = assignmentStartTime;
+  }
 
-	public byte[] getImageAfter() {
-		return imageAfter;
-	}
+  public Date getAssignmentEndTime() {
+    return assignmentEndTime;
+  }
 
-	public void setImageAfter(byte[] imageAfter) {
-		this.imageAfter = imageAfter;
-	}
+  public void setAssignmentEndTime(Date assignmentEndTime) {
+    this.assignmentEndTime = assignmentEndTime;
+  }
 
-	public Order getOrder() {
-		return order;
-	}
+  public byte[] getImageBefore() {
+    return imageBefore;
+  }
 
-	public void setOrder(Order order) {
-		this.order = order;
-	}
-	
+  public void setImageBefore(byte[] imageBefore) {
+    this.imageBefore = imageBefore;
+  }
 
-	
+  public byte[] getImageAfter() {
+    return imageAfter;
+  }
+
+  public void setImageAfter(byte[] imageAfter) {
+    this.imageAfter = imageAfter;
+  }
+
+  public Order getOrder() {
+    return order;
+  }
+
+  public void setOrder(Order order) {
+    this.order = order;
+  }
 }

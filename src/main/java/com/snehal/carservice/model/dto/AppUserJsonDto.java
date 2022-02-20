@@ -1,191 +1,178 @@
 package com.snehal.carservice.model.dto;
 
-import java.io.IOException;
-import java.util.Date;
-import java.util.Set;
-
-import javax.validation.constraints.NotBlank;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.snehal.carservice.jwt.JwtResponse;
+import java.io.IOException;
+import java.util.Set;
+import javax.validation.constraints.NotBlank;
+
 @JsonInclude(Include.NON_NULL)
 public class AppUserJsonDto extends AbstractJsonDto {
 
-	    private Long userId;
-	    private @NotBlank String username;
-	    private @NotBlank String password;
-	    private @NotBlank String passwordConfirm;
-	    private @NotBlank String email;
-	    private @NotBlank String mobileNumber;
-	    private @NotBlank String firstName;
-	    private @NotBlank String lastName;
-	    private String token;
+  private Long userId;
+  private @NotBlank String username;
+  private @NotBlank String password;
+  private @NotBlank String passwordConfirm;
+  private @NotBlank String email;
+  private @NotBlank String mobileNumber;
+  private @NotBlank String firstName;
+  private @NotBlank String lastName;
+  private String token;
 
-//	    private @NotBlank boolean loggedIn;
-	    
+  //	    private @NotBlank boolean loggedIn;
 
-	    private String vehicleDetails;
-	    private String bookings;
-		public AppUserJsonDto() {
-			super();
-		}
+  private String vehicleDetails;
+  private String bookings;
 
-		public Long getUserId() {
-			return userId;
-		}
+  public AppUserJsonDto() {
+    super();
+  }
 
-		public void setUserId(Long userId) {
-			this.userId = userId;
-		}
+  public Long getUserId() {
+    return userId;
+  }
 
-		public String getUsername() {
-			return username;
-		}
+  public void setUserId(Long userId) {
+    this.userId = userId;
+  }
 
-		public void setUsername(String username) {
-			this.username = username;
-		}
+  public String getUsername() {
+    return username;
+  }
 
-		public String getPassword() {
-			return password;
-		}
+  public void setUsername(String username) {
+    this.username = username;
+  }
 
-		public void setPassword(String password) {
-			this.password = password;
-		}
+  public String getPassword() {
+    return password;
+  }
 
-		public String getPasswordConfirm() {
-			return passwordConfirm;
-		}
+  public void setPassword(String password) {
+    this.password = password;
+  }
 
-		public void setPasswordConfirm(String passwordConfirm) {
-			this.passwordConfirm = passwordConfirm;
-		}
+  public String getPasswordConfirm() {
+    return passwordConfirm;
+  }
 
-		public String getEmail() {
-			return email;
-		}
+  public void setPasswordConfirm(String passwordConfirm) {
+    this.passwordConfirm = passwordConfirm;
+  }
 
-		public void setEmail(String email) {
-			this.email = email;
-		}
+  public String getEmail() {
+    return email;
+  }
 
-		public String getMobileNumber() {
-			return mobileNumber;
-		}
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-		public void setMobileNumber(String mobileNumber) {
-			this.mobileNumber = mobileNumber;
-		}
+  public String getMobileNumber() {
+    return mobileNumber;
+  }
 
-		public String getFirstName() {
-			return firstName;
-		}
+  public void setMobileNumber(String mobileNumber) {
+    this.mobileNumber = mobileNumber;
+  }
 
-		public void setFirstName(String firstName) {
-			this.firstName = firstName;
-		}
+  public String getFirstName() {
+    return firstName;
+  }
 
-		public String getLastName() {
-			return lastName;
-		}
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
 
-		public void setLastName(String lastName) {
-			this.lastName = lastName;
-		}
+  public String getLastName() {
+    return lastName;
+  }
 
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
 
-		public Set<UserVehicleDetailJsonDto> getVehicleDetails() {
-			
-			ObjectMapper mapper = new ObjectMapper();
-			Set<UserVehicleDetailJsonDto> vehicleDetailsSet = null;
-			if(vehicleDetails!=null) {
-			try {
-				vehicleDetailsSet=mapper.readValue(vehicleDetails, new TypeReference<Set<UserVehicleDetailJsonDto>>() {});
-		
-			} catch (JsonMappingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (JsonProcessingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			}
+  public Set<UserVehicleDetailJsonDto> getVehicleDetails() {
 
+    ObjectMapper mapper = new ObjectMapper();
+    Set<UserVehicleDetailJsonDto> vehicleDetailsSet = null;
+    if (vehicleDetails != null) {
+      try {
+        vehicleDetailsSet =
+            mapper.readValue(vehicleDetails, new TypeReference<Set<UserVehicleDetailJsonDto>>() {});
 
-			
-			return vehicleDetailsSet;
-		}
+      } catch (JsonMappingException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      } catch (JsonProcessingException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    }
 
-		public void setVehicleDetails(Set<UserVehicleDetailJsonDto> vehicleDetailsJsonDtoSet) {
-			ObjectMapper mapper = new ObjectMapper();
-			if(vehicleDetailsJsonDtoSet!=null) {
-			try {
-				this.vehicleDetails = mapper.writeValueAsString(vehicleDetailsJsonDtoSet);
-			} catch (JsonProcessingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			}
-			}
+    return vehicleDetailsSet;
+  }
 
-		public Set<BookingJsonDto> getBookings() {
-			
-			ObjectMapper mapper = new ObjectMapper();
-			Set<BookingJsonDto> bookingJsonDtoSet = null;
-			if(bookings!=null) {
-			try {
-				bookingJsonDtoSet=mapper.readValue(bookings, new TypeReference<Set<BookingJsonDto>>() {});
-		
-			} catch (JsonMappingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (JsonProcessingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			}
+  public void setVehicleDetails(Set<UserVehicleDetailJsonDto> vehicleDetailsJsonDtoSet) {
+    ObjectMapper mapper = new ObjectMapper();
+    if (vehicleDetailsJsonDtoSet != null) {
+      try {
+        this.vehicleDetails = mapper.writeValueAsString(vehicleDetailsJsonDtoSet);
+      } catch (JsonProcessingException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    }
+  }
 
+  public Set<BookingJsonDto> getBookings() {
 
-			
-			return bookingJsonDtoSet;
+    ObjectMapper mapper = new ObjectMapper();
+    Set<BookingJsonDto> bookingJsonDtoSet = null;
+    if (bookings != null) {
+      try {
+        bookingJsonDtoSet = mapper.readValue(bookings, new TypeReference<Set<BookingJsonDto>>() {});
 
+      } catch (JsonMappingException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      } catch (JsonProcessingException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    }
 
-		}
+    return bookingJsonDtoSet;
+  }
 
-		public void setBookings(Set<BookingJsonDto> bookingsJsonDtoSet) {
-			
-			ObjectMapper mapper = new ObjectMapper();
-			if(bookingsJsonDtoSet!=null) {
-			try {
-				this.bookings = mapper.writeValueAsString(bookingsJsonDtoSet);
-			} catch (JsonProcessingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			}
-		}
+  public void setBookings(Set<BookingJsonDto> bookingsJsonDtoSet) {
 
-		public String getToken() {
-			return token;
-		}
+    ObjectMapper mapper = new ObjectMapper();
+    if (bookingsJsonDtoSet != null) {
+      try {
+        this.bookings = mapper.writeValueAsString(bookingsJsonDtoSet);
+      } catch (JsonProcessingException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    }
+  }
 
-		public void setToken(String token) {
-			this.token = token;
-		}
+  public String getToken() {
+    return token;
+  }
 
-	
-	    
-	    
+  public void setToken(String token) {
+    this.token = token;
+  }
 }

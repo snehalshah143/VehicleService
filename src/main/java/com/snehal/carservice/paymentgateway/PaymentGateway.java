@@ -4,5 +4,5 @@ import com.snehal.carservice.model.persistable.PaymentPersistable;
 
 public interface PaymentGateway {
 
-	public PaymentPersistable fetchPaymentInfo(String paymentId);
+  public PaymentPersistable fetchPaymentInfo(String paymentId);
 }

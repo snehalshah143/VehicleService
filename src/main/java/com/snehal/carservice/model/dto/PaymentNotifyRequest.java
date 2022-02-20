@@ -1,45 +1,33 @@
 package com.snehal.carservice.model.dto;
 
-import java.io.Serializable;
-import java.util.Date;
+public class PaymentNotifyRequest extends AbstractJsonDto {
 
-import javax.validation.constraints.NotBlank;
+  private static final long serialVersionUID = 5926468583005150707L;
 
-public class PaymentNotifyRequest extends AbstractJsonDto{
+  private String paymentId;
+  private Long bookingId;
 
-private static final long serialVersionUID = 5926468583005150707L;
+  // need default constructor for JSON Parsing
+  public PaymentNotifyRequest() {}
 
-private String paymentId;
-private Long bookingId;
+  public PaymentNotifyRequest(String paymentId, Long bookingId) {
+    this.paymentId = paymentId;
+    this.bookingId = bookingId;
+  }
 
-//need default constructor for JSON Parsing
-public PaymentNotifyRequest()
-{
+  public String getPaymentId() {
+    return paymentId;
+  }
 
-}
+  public void setPaymentId(String paymentId) {
+    this.paymentId = paymentId;
+  }
 
-public PaymentNotifyRequest(String paymentId, Long bookingId) {
-this.paymentId=paymentId;
-this.bookingId=bookingId;
-}
+  public Long getBookingId() {
+    return bookingId;
+  }
 
-public String getPaymentId() {
-	return paymentId;
-}
-
-public void setPaymentId(String paymentId) {
-	this.paymentId = paymentId;
-}
-
-public Long getBookingId() {
-	return bookingId;
-}
-
-public void setBookingId(Long bookingId) {
-	this.bookingId = bookingId;
-}
-
-
-
-
+  public void setBookingId(Long bookingId) {
+    this.bookingId = bookingId;
+  }
 }

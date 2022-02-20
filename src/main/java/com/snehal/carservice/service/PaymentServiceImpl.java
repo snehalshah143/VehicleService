@@ -1,44 +1,30 @@
 package com.snehal.carservice.service;
 
-import java.util.Optional;
-
+import com.snehal.carservice.dao.PaymentRepository;
+import com.snehal.carservice.model.persistable.PaymentPersistable;
+import com.snehal.carservice.paymentgateway.PaymentGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.snehal.carservice.dao.PaymentRepository;
-import com.snehal.carservice.model.dto.PaymentJsonDto;
-import com.snehal.carservice.model.persistable.PaymentPersistable;
-import com.snehal.carservice.paymentgateway.PaymentGateway;
 @Service
-public class PaymentServiceImpl implements PaymentService{
+public class PaymentServiceImpl implements PaymentService {
 
-	
-	@Autowired
-	private PaymentRepository paymentRepository;
-	@Autowired
-	private PaymentGateway paymentGateway;
-	
-	
-	public PaymentPersistable savePayment(PaymentPersistable persistable) {
-		
-		return paymentRepository.save(persistable);
-	
-	}
-	
-	
-	public PaymentPersistable fetchPaymentInfoFromPaymentGateway(String paymentId) {
-		
-		
-		return paymentGateway.fetchPaymentInfo(paymentId);
-		
-	}
+  @Autowired private PaymentRepository paymentRepository;
+  @Autowired private PaymentGateway paymentGateway;
 
+  public PaymentPersistable savePayment(PaymentPersistable persistable) {
 
-	@Override
-	public PaymentPersistable getPaymentInfo(String paymentId) {
+    return paymentRepository.save(persistable);
+  }
 
-		return paymentRepository.findById(paymentId).get();
-	}
-	
-	
+  public PaymentPersistable fetchPaymentInfoFromPaymentGateway(String paymentId) {
+
+    return paymentGateway.fetchPaymentInfo(paymentId);
+  }
+
+  @Override
+  public PaymentPersistable getPaymentInfo(String paymentId) {
+
+    return paymentRepository.findById(paymentId).get();
+  }
 }

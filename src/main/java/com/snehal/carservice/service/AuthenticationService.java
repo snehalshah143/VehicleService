@@ -5,5 +5,5 @@ import com.snehal.carservice.model.persistable.AppUserPersistable;
 
 public interface AuthenticationService {
 
-	AppUserPersistable authenticateUser(LoginModel login);
+  AppUserPersistable authenticateUser(LoginModel login);
 }

@@ -1,67 +1,53 @@
 package com.snehal.carservice.model.dto;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.Objects;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.snehal.carservice.common.VehicleSegment;
+
 @JsonInclude(Include.NON_NULL)
-public class VehicleJsonDto extends AbstractJsonDto{
+public class VehicleJsonDto extends AbstractJsonDto {
 
+  private Long vehicleId;
 
-	private Long vehicleId;
-	
-	private String manufacturer;
-	
-	private String model;
-	
-	private VehicleSegment vehicleSegment;
+  private String manufacturer;
 
-	public VehicleJsonDto() {
-		super();
-	}
+  private String model;
 
-	public Long getVehicleId() {
-		return vehicleId;
-	}
+  private VehicleSegment vehicleSegment;
 
-	public void setVehicleId(Long vehicleId) {
-		this.vehicleId = vehicleId;
-	}
+  public VehicleJsonDto() {
+    super();
+  }
 
-	public String getManufacturer() {
-		return manufacturer;
-	}
+  public Long getVehicleId() {
+    return vehicleId;
+  }
 
-	public void setManufacturer(String manufacturer) {
-		this.manufacturer = manufacturer;
-	}
+  public void setVehicleId(Long vehicleId) {
+    this.vehicleId = vehicleId;
+  }
 
-	public String getModel() {
-		return model;
-	}
+  public String getManufacturer() {
+    return manufacturer;
+  }
 
-	public void setModel(String model) {
-		this.model = model;
-	}
+  public void setManufacturer(String manufacturer) {
+    this.manufacturer = manufacturer;
+  }
 
-	public VehicleSegment getVehicleSegment() {
-		return vehicleSegment;
-	}
+  public String getModel() {
+    return model;
+  }
 
-	public void setVehicleSegment(VehicleSegment vehicleSegment) {
-		this.vehicleSegment = vehicleSegment;
-	}
+  public void setModel(String model) {
+    this.model = model;
+  }
 
-	
+  public VehicleSegment getVehicleSegment() {
+    return vehicleSegment;
+  }
+
+  public void setVehicleSegment(VehicleSegment vehicleSegment) {
+    this.vehicleSegment = vehicleSegment;
+  }
 }
